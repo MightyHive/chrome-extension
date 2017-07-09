@@ -2,4 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app/App';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+const fakeData = [
+  {
+    name: 'Google Tag Manager',
+  },
+  {
+    name: 'Tealium',
+  },
+];
+
+ReactDOM.render(<App layers={fakeData} />, document.getElementById('app'));
