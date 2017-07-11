@@ -9,14 +9,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: [
-    './src/index.jsx',
-    './styles/index.scss',
-  ],
+  entry: {
+    app: './src/index.jsx',
+    contentScript: './src/content-script/index.js',
+  },
   output: {
     publicPath: './',
     path: path.join(__dirname, 'dist'),
-    filename: '[chunkhash].js',
+    filename: '[name].js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -79,6 +79,7 @@ module.exports = {
         css: ['style.css'],
         js: ['bundle.js'],
       },
+      excludeChunks: [],
       filename: 'popup.html',
     }),
   ],

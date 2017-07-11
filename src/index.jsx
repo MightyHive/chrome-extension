@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app/App';
+import AppCSS from './styles/index.scss';
 
 const fakeData = [
   {
