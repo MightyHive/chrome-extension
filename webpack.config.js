@@ -6,6 +6,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -49,6 +50,16 @@ module.exports = {
         NODE_ENV: '"production"',
       },
     }),
+    new CopyWebpackPlugin([
+      {
+        from: 'img',
+        to: './img',
+      },
+      {
+        from: './src/manifest.json',
+        to: './',
+      },
+    ]),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -68,6 +79,7 @@ module.exports = {
         css: ['style.css'],
         js: ['bundle.js'],
       },
+      filename: 'popup.html',
     }),
   ],
 };

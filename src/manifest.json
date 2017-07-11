@@ -4,10 +4,20 @@
   "name": "MightyHive Analytics Tracker",
   "description": "Displays active trackers present on the page.",
   "version": "0.0.0",
-
+  "icons": {
+    "16": "./img/icon16.png",
+    "48": "./img/icon48.png",
+    "128": "./img/icon128.png",
+    "256": "./img/icon256.png"
+  },
   "browser_action": {
-    "default_icon": "icon.png",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./img/icon16.png",
+      "48": "./img/icon48.png",
+      "128": "./img/icon128.png",
+      "256": "./img/icon256.png"
+    }
   },
   "permissions": [
     "activeTab"
