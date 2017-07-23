@@ -20,6 +20,13 @@
     }
   },
   "permissions": [
-    "activeTab"
+    "tabs",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["contentScript.js"]
+    }
   ]
 }
