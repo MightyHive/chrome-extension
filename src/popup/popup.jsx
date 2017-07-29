@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app/App';
-import AppCSS from './styles/index.scss';
+import App from './components/App';
+import AppCSS from '../styles/index.scss';
 
 // Data Layer Importers
-import * as util from './utils';
+import * as util from '../utils';
 
 // Contact the active tab and load its data
 // util.sendActiveTabMessage({

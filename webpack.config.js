@@ -10,8 +10,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src/index.jsx',
-    contentScript: './src/content-script/index.js',
+    popupApp: './src/popup/popup.jsx',
+    contentScript: './src/content-script/content-script.js',
     injectedScript: './src/injected-script/injected.js',
   },
   output: {
@@ -75,7 +75,7 @@ module.exports = {
       allChunks: true,
     }),
     new HtmlWebpackPlugin({
-      template: './src/popup.html',
+      template: './src/popup/popup.html',
       files: {
         css: ['style.css'],
         js: ['bundle.js'],
