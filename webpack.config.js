@@ -12,6 +12,7 @@ module.exports = {
   entry: {
     app: './src/index.jsx',
     contentScript: './src/content-script/index.js',
+    injectedScript: './src/injected-script/injected.js',
   },
   output: {
     publicPath: './',
@@ -60,14 +61,14 @@ module.exports = {
         to: './',
       },
     ]),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false,
-        screw_ie8: true,
-        drop_console: true,
-        drop_debugger: true,
-      },
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     warnings: false,
+    //     screw_ie8: true,
+    //     drop_console: true,
+    //     drop_debugger: true,
+    //   },
+    // }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',

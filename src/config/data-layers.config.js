@@ -12,11 +12,5 @@ export default {
       type: 'windowProperty',
       key: 'utag_data',
     },
-    {
-      id: 'dtm',
-      displayName: 'Adobe Dynamic Tag Management',
-      type: 'windowProperty',
-      key: 'placeholderKey',
-    },
   ],
 };

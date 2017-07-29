@@ -1,4 +1,4 @@
-export function messageListener(callback) {
+export function messageListener(response, callback) {
   return chrome.runtime.onMessage.addListener(
     (request, sender, sendResponse) => {
       sendResponse({
@@ -15,6 +15,17 @@ export function sendActiveTabMessage(message, callback) {
   }, (tabs) => {
     chrome.tabs.sendMessage(tabs[0].id, message, (response) => {
       callback(response);
+    });
+  });
+}
+
+export function executeJSOnPage(script) {
+  chrome.tabs.query({
+    active: true,
+    currentWindow: true,
+  }, (tabs) => {
+    chrome.tabs.executeScript(tabs[0].id, {
+      file: script,
     });
   });
 }

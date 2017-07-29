@@ -1,13 +1,7 @@
-import dataLayerConfig from '../config/data-layers.config';
 import * as utils from './content-script-utils';
+// Listen for custom DOM event
+document.body.addEventListener('mh-data-layer-loaded', (event) => {
+  console.log('Event received by Content script:', JSON.parse(event.detail));
+}, false);
 
-// Listen for messages from the Popup script
-chrome.runtime.onMessage.addListener(
-  (request, sender, sendResponse) => {
-    if (request.type === 'dataLayers') {
-      // Load all potential data layers on the page
-      const loadedDataLayers = utils.getDataLayers(dataLayerConfig.layers);
-
-      sendResponse(loadedDataLayers);
-    }
-  });
+utils.injectJS(chrome.extension.getURL('injectedScript.js'));

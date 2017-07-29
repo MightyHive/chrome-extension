@@ -7,14 +7,16 @@ import AppCSS from './styles/index.scss';
 import * as util from './utils';
 
 // Contact the active tab and load its data
-util.sendActiveTabMessage({
-  type: 'dataLayers',
-}, (response) => {
-  console.log('Response received from client.', response);
-  let dataLayers = [];
-  if (response && response.data) {
-    dataLayers = response.data;
-  }
-  ReactDOM.render(<App layers={dataLayers} />, document.getElementById('app'));
-});
+// util.sendActiveTabMessage({
+//   type: 'dataLayers',
+// }, (response) => {
+//   console.log('Response received from client.', response);
+//   let dataLayers = [];
+//   if (response && response.data) {
+//     dataLayers = response.data;
+//   }
+// });
+
+const dataLayers = [];
+ReactDOM.render(<App layers={dataLayers} />, document.getElementById('app'));
 
