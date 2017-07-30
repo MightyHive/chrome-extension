@@ -42,6 +42,21 @@ module.exports = {
         }),
         exclude: ['node_modules'],
       },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'file-loader',
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'url-loader?prefix=font/&limit=5000',
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        exclude: /(node_modules|bower_components)/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+      },
     ],
   },
   plugins: [
@@ -53,22 +68,22 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
       {
-        from: 'img',
-        to: './img',
+        from: 'assets',
+        to: './assets',
       },
       {
         from: './src/manifest.json',
         to: './',
       },
     ]),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     screw_ie8: true,
-    //     drop_console: true,
-    //     drop_debugger: true,
-    //   },
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        drop_console: true,
+        drop_debugger: true,
+      },
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',

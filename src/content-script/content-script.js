@@ -5,7 +5,6 @@ let loadedDataLayers = [];
 // Listen for custom DOM event
 document.body.addEventListener('mh-data-layer-loaded', (event) => {
   loadedDataLayers = JSON.parse(event.detail);
-  console.log('Event received by Content script:', JSON.parse(event.detail));
 }, false);
 
 utils.injectJS(chrome.extension.getURL('injectedScript.js'));

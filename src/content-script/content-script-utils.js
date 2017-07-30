@@ -13,7 +13,7 @@ export function injectJS(url) {
 
 /**
  * Listens for a message from the Chrome extension.
- * @param {string} url - URL source of the script to inject.
+ * @param {function} callback - function called when listener is triggered.
  */
 export function messageListener(callback) {
   chrome.runtime.onMessage.addListener(callback);
