@@ -80,7 +80,7 @@ module.exports = {
         css: ['style.css'],
         js: ['bundle.js'],
       },
-      excludeChunks: [],
+      excludeChunks: ['contentScript', 'injectedScript'],
       filename: 'popup.html',
     }),
   ],
