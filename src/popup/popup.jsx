@@ -6,17 +6,20 @@ import AppCSS from '../styles/index.scss';
 // Data Layer Importers
 import * as util from '../utils';
 
+let dataLayers = [];
+
+function renderApp() {
+  ReactDOM.render(<App layers={dataLayers} />, document.getElementById('app'));
+}
+
 // Contact the active tab and load its data
-// util.sendActiveTabMessage({
-//   type: 'dataLayers',
-// }, (response) => {
-//   console.log('Response received from client.', response);
-//   let dataLayers = [];
-//   if (response && response.data) {
-//     dataLayers = response.data;
-//   }
-// });
+util.sendActiveTabMessage({
+  type: 'dataLayers',
+}, (response) => {
+  if (response) {
+    dataLayers = response;
+    renderApp();
+  }
+});
 
-const dataLayers = [];
-ReactDOM.render(<App layers={dataLayers} />, document.getElementById('app'));
-
+renderApp();

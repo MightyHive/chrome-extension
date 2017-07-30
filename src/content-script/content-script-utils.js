@@ -10,3 +10,11 @@ export function injectJS(url) {
   script.src = url;
   (document.head || document.body || document.documentElement).appendChild(script);
 }
+
+/**
+ * Listens for a message from the Chrome extension.
+ * @param {string} url - URL source of the script to inject.
+ */
+export function messageListener(callback) {
+  chrome.runtime.onMessage.addListener(callback);
+}
