@@ -7,7 +7,7 @@ class LayersList extends Component {
   render() {
     console.log('LAYERS RECEIVED AT LAYERSLIST->', this.props.layers);
     return (
-      <ul>
+      <ul className="layers-list">
         {this.props.layers.map(layer => <li>{layer.displayName}</li>)}
       </ul>
     );

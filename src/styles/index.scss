@@ -7,10 +7,13 @@ html, body {
   margin: 0;
   padding: 0;
   width: 400px;
+  min-height: 200px;
 }
 
 .top-menu {
-  background: #FFFFFF;
+  header {
+    background: #FFFFFF;
+  }
 }
 
 .dashboard {
