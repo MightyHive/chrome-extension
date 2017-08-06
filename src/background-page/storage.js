@@ -22,10 +22,16 @@ class Tab {
 export default class TabStorage {
   constructor() {
     this._storage = {};
+    this._size = 0;
   }
 
   createTab(tabData) {
     const tab = new Tab(tabData);
+
+    if (!this._storage[tabData.tabId]) {
+      this._size += 1;
+    }
+
     this._storage[tabData.tabId] = tab;
 
     return tab;
@@ -33,6 +39,11 @@ export default class TabStorage {
 
   deleteTab(id) {
     const deletedTab = this._storage[id];
+
+    if (this._storage[id]) {
+      this._size -= 1;
+    }
+
     delete this._storage[id];
 
     return deletedTab;
@@ -54,5 +65,9 @@ export default class TabStorage {
     if (tab) {
       tab.putDataLayer(dataLayer);
     }
+  }
+
+  get size() {
+    return this._size;
   }
 }
