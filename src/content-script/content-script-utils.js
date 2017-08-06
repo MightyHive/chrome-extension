@@ -26,6 +26,6 @@ export function messageListener(callback) {
 export function sendDataLayers(data) {
   chrome.runtime.sendMessage({
     endpoint: '/POST/data-layers',
-  },
-  data);
+    body: data,
+  });
 }

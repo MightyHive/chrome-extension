@@ -17,6 +17,9 @@ class Tab {
   putNetworkCall(networkCall) {
     this._data.networkCalls.push(networkCall);
   }
+  putDataLayer(dataLayers) {
+    this._data.dataLayers = dataLayers;
+  }
 }
 
 export default class TabStorage {
@@ -68,8 +71,8 @@ export default class TabStorage {
     }
   }
 
-  putDataLayer(dataLayer) {
-    const tab = this._storage[dataLayer.tabId];
+  putDataLayer(tabId, dataLayer) {
+    const tab = this._storage[tabId];
 
     if (tab) {
       tab.putDataLayer(dataLayer);

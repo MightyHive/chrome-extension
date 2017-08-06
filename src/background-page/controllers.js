@@ -20,7 +20,8 @@ function runtimeListener(endpoint, callback) {
  */
 export default function controllers(storage) {
   function addDataLayers(request, sender, sendResponse) {
-    storage.putDataLayer(request.body);
+    console.log('SENDER----->', sender);
+    storage.putDataLayer(sender.tab.id, request.body);
     sendResponse({ status: 200 });
   }
   function getTab(request, sender, sendResponse) {
