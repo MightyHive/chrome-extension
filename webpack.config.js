@@ -11,6 +11,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     popupApp: './src/popup/popup.jsx',
+    backgroundScript: './src/background-page/background.js',
     contentScript: './src/content-script/content-script.js',
     injectedScript: './src/injected-script/injected.js',
   },
@@ -38,7 +39,7 @@ module.exports = {
         test: /\.scss$/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=expanded',
+          use: 'css-loader?sourceMap&localIdentName=[local]___[hash:base64:5]!sass-loader?outputStyle=compressed',
         }),
         exclude: ['node_modules'],
       },
@@ -95,7 +96,7 @@ module.exports = {
         css: ['style.css'],
         js: ['bundle.js'],
       },
-      excludeChunks: ['contentScript', 'injectedScript'],
+      excludeChunks: ['contentScript', 'injectedScript', 'backgroundScript'],
       filename: 'popup.html',
     }),
   ],

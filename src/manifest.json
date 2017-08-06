@@ -19,8 +19,13 @@
       "256": "./assets/img/icon256.png"
     }
   },
+  "background": {
+      "scripts": ["backgroundScript.js"]
+    },
   "permissions": [
     "tabs",
+    "webRequest",
+    "webNavigation",
     "*://*/*"
   ],
   "content_scripts": [

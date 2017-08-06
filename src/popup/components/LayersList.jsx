@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class LayersList extends Component {
-  componentWillReceiveProps() {
-    console.log('LayerList received new props', this.props.layers);
+  static propTypes = {
+    layers: PropTypes.array.isRequired,
   }
+
   render() {
-    console.log('LAYERS RECEIVED AT LAYERSLIST->', this.props.layers);
-    return (
-      <ul className="layers-list">
-        {this.props.layers.map(layer => <li>{layer.displayName}</li>)}
-      </ul>
-    );
+    const layers = this.props.layers;
+
+    if (layers.length > 0) {
+      return (
+        <ul className="layers-list">
+          {layers.map(layer => <li>{layer.displayName}</li>)}
+        </ul>
+      );
+    }
+
+    return (<span>No data layers found.</span>);
   }
 }
 

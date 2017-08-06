@@ -6,7 +6,7 @@ import LayersList from './LayersList';
 
 class App extends Component {
   static propTypes = {
-    layers: PropTypes.array
+    layers: PropTypes.array.isRequired,
   }
 
   render() {
