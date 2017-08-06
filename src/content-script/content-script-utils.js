@@ -18,3 +18,14 @@ export function injectJS(url) {
 export function messageListener(callback) {
   chrome.runtime.onMessage.addListener(callback);
 }
+
+/**
+ * Sends a message to the Chrome extension runtime.
+ * @param {function} callback - function called when listener is triggered.
+ */
+export function sendDataLayers(data) {
+  chrome.runtime.sendMessage({
+    endpoint: '/POST/data-layers',
+  },
+  data);
+}

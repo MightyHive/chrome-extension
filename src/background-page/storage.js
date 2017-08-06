@@ -2,7 +2,7 @@ class Tab {
   constructor(tabData) {
     this.id = tabData.tabId;
     this._data = {
-      id: tabData.tabId,
+      tabId: tabData.tabId,
       currentURL: tabData.url,
       dataLayers: [],
       networkCalls: [],
@@ -37,24 +37,32 @@ export default class TabStorage {
     return tab;
   }
 
-  deleteTab(id) {
-    const deletedTab = this._storage[id];
+  deleteTab(tabId) {
+    const deletedTab = this._storage[tabId];
 
-    if (this._storage[id]) {
+    if (this._storage[tabId]) {
       this._size -= 1;
     }
 
-    delete this._storage[id];
+    delete this._storage[tabId];
 
     return deletedTab;
   }
 
-  getTab(id) {
-    return this._storage[id];
+  getTab(tabId) {
+    return this._storage[tabId];
+  }
+
+  getTabData(tabId) {
+    if (this._storage[tabId]) {
+      return this._storage[tabId].getAll();
+    }
+    return undefined;
   }
 
   putNetworkCall(networkCall) {
     const tab = this._storage[networkCall.tabId];
+
     if (tab) {
       tab.putNetworkCall(networkCall);
     }
@@ -62,6 +70,7 @@ export default class TabStorage {
 
   putDataLayer(dataLayer) {
     const tab = this._storage[dataLayer.tabId];
+
     if (tab) {
       tab.putDataLayer(dataLayer);
     }
