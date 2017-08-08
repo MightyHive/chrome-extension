@@ -4,10 +4,8 @@ export function initializeEventListeners(storage) {
       onCompleted: (details) => {
         try {
           // Targets tab content requests, rather than subframe requests.
-          if (details.frameId === 0) {
-            console.log(details);
-            storage.putNetworkCall(details);
-          }
+          console.log(details);
+          storage.putNetworkCall(details);
         } catch (e) {
           console.error('Request Listener Error', e);
         }

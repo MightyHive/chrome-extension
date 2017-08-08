@@ -12,6 +12,7 @@ module.exports = {
   entry: {
     popupApp: './src/popup/popup.jsx',
     backgroundScript: './src/background-page/background.js',
+    reportScript: './src/full-report/report.js',
     contentScript: './src/content-script/content-script.js',
     injectedScript: './src/injected-script/injected.js',
   },
@@ -96,8 +97,17 @@ module.exports = {
         css: ['style.css'],
         js: ['bundle.js'],
       },
-      excludeChunks: ['contentScript', 'injectedScript', 'backgroundScript'],
+      chunks: ['popupApp'],
       filename: 'popup.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/full-report/full-report.html',
+      files: {
+        css: ['style.css'],
+        js: ['bundle.js'],
+      },
+      chunks: ['reportScript'],
+      filename: 'full-report.html',
     }),
   ],
 };

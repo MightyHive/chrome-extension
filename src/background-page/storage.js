@@ -5,8 +5,17 @@ class Tab {
       tabId: tabData.tabId,
       currentURL: tabData.url,
       dataLayers: [],
-      networkCalls: [],
+      networkCalls: {
+        all: [],
+        tabContent: [],
+      },
     };
+  }
+  networkCalls(type) {
+    if (type === 'tabContent') {
+      return this._data.networkCalls.tabContent;
+    }
+    return this._data.networkCalls.all;
   }
   get(key) {
     return this._data[key];
@@ -15,7 +24,11 @@ class Tab {
     return this._data;
   }
   putNetworkCall(networkCall) {
-    this._data.networkCalls.push(networkCall);
+    // Targets tab content requests, rather than subframe requests.
+    if (networkCall.frameId === 0) {
+      this._data.networkCalls.tabContent.push(networkCall);
+    }
+    this._data.networkCalls.all.push(networkCall);
   }
   putDataLayer(dataLayers) {
     this._data.dataLayers = dataLayers;

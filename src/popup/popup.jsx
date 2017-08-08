@@ -5,22 +5,32 @@ import App from './components/App';
 import AppCSS from '../styles/index.scss';
 
 // Data Layer Importers
-import * as util from '../utils';
+import * as util from './utils';
 
-let dataLayers = [];
+let tab = {
+  tabId: null,
+  currentURL: null,
+  dataLayers: [],
+  networkCalls: {
+    all: [],
+    tabContent: [],
+  },
+};
 
 function renderApp() {
-  ReactDOM.render(<App layers={dataLayers} />, document.getElementById('app'));
+  ReactDOM.render(
+    <App
+      tabId={tab.tabId}
+      layers={tab.dataLayers}
+      network={tab.networkCalls}
+    />,
+    document.getElementById('app'));
 }
 
-// Contact the active tab and load its data
-util.sendActiveTabMessage({
-  type: 'dataLayers',
-}, (response) => {
-  if (response) {
-    dataLayers = response;
-    renderApp();
-  }
+// Pull tab data from Background
+util.getActiveTabData().then((data) => {
+  tab = data;
+  renderApp();
 });
 
 renderApp();

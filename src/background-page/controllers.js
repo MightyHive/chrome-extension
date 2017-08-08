@@ -20,11 +20,11 @@ function runtimeListener(endpoint, callback) {
  */
 export default function controllers(storage) {
   function addDataLayers(request, sender, sendResponse) {
-    console.log('SENDER----->', sender);
     storage.putDataLayer(sender.tab.id, request.body);
     sendResponse({ status: 200 });
   }
   function getTab(request, sender, sendResponse) {
+    console.log('Tab Request Received for tab ', request.body.tabId);
     const data = storage.getTabData(request.body.tabId);
     if (data) {
       sendResponse({ data, status: 200 });
