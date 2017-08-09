@@ -9,7 +9,8 @@
     "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-json-tree": "^0.10.9"
+    "react-json-tree": "^0.10.9",
+    "url-parse": "^1.1.9"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",

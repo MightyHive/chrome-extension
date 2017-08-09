@@ -23,13 +23,23 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h3>Data Layers</h3>
-        <LayersList layers={this.props.layers} />
+        <div className="mdl-cell mdl-cell--12-col">
+          <h3>Data Layers</h3>
+          <LayersList layers={this.props.layers} />
+        </div>
 
-        <h3>Total Network Requests:</h3>
-        <div>{this.props.network.all.length}</div>
+        <div className="mdl-card mdl-shadow--2dp network-card">
+          <h6>Total Network Requests</h6>
+          <h3>{this.props.network.all.length}</h3>
+        </div>
 
-        <button onClick={this.openReport}>View Full Report</button>
+        <div className="center">
+          <button
+            onClick={this.openReport}
+            className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
+          >View Full Report
+          </button>
+        </div>
       </div>
     );
   }

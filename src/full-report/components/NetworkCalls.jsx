@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import * as urlParse from 'url-parse';
+
 class NetworkCalls extends Component {
   static propTypes = {
     network: PropTypes.object.isRequired,
@@ -33,6 +35,11 @@ class NetworkCalls extends Component {
         </table>
       );
     }
+
+    //TODO: strip to just hostnames
+    // Object.keys(a).map(function(keyName, keyIndex) {
+
+    // })
 
     return (<span>No network data found.</span>);
   }
