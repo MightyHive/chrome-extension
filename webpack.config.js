@@ -12,7 +12,7 @@ module.exports = {
   entry: {
     popupApp: './src/popup/popup.jsx',
     backgroundScript: './src/background-page/background.js',
-    reportScript: './src/full-report/report.js',
+    reportScript: './src/full-report/report.jsx',
     contentScript: './src/content-script/content-script.js',
     injectedScript: './src/injected-script/injected.js',
   },

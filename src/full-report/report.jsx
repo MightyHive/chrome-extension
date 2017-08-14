@@ -1,5 +1,6 @@
 import * as queryString from 'query-string';
-import 'material-design-lite/material';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
@@ -19,19 +20,26 @@ let tab = {
   },
 };
 
+let successfulLoad = false;
+
 function renderApp() {
   ReactDOM.render(
-    <App
-      tabId={tab.tabId}
-      layers={tab.dataLayers}
-      network={tab.networkCalls}
-    />,
+    <MuiThemeProvider>
+      <App
+        tabId={tab.tabId}
+        layers={tab.dataLayers}
+        network={tab.networkCalls}
+        successfulLoad={successfulLoad}
+      />
+    </MuiThemeProvider>,
     document.getElementById('app'));
+  injectTapEventPlugin();
 }
 
 // Pull tab data from Background
 util.getTabData(parsedQuery.id).then((data) => {
   tab = data;
+  successfulLoad = true;
   renderApp();
 });
 
