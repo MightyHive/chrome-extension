@@ -1,0 +1,22 @@
+#popupAppHTML {
+  width: 400px;
+  min-height: 600px;
+}
+
+.popupApp {
+  .network-card {
+    width: 60%;
+    min-height: 100px;
+    margin: 20px auto;
+    text-align: center;
+
+    h3 {
+      margin-top: 0;
+    }
+  }
+}
+
+.dashboard {
+  background: #FFFFFF;
+  // box-shadow: 0px 0px 125px 0px rgba(169, 172, 189, 0.25); 
+}

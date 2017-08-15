@@ -1,38 +1,48 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 
-import * as urlParse from 'url-parse';
+const parse = require('url-parse');
 
 class NetworkCalls extends Component {
   static propTypes = {
     network: PropTypes.object.isRequired,
+    currentURL: PropTypes.string.isRequired,
   }
 
   render() {
+    console.log(parse(this.props.currentURL));
     const network = this.props.network;
 
     if (network.all.length > 0) {
       return (
-        <table className="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-          <thead>
-            <tr>
-              <th className="mdl-data-table__cell--non-numeric">Name</th>
-              <th className="mdl-data-table__cell--non-numeric">Method</th>
-              <th>Status</th>
-              <th className="mdl-data-table__cell--non-numeric">Type</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHeaderColumn>Name</TableHeaderColumn>
+              <TableHeaderColumn>Method</TableHeaderColumn>
+              <TableHeaderColumn>Status</TableHeaderColumn>
+              <TableHeaderColumn>Type</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {network.all.map(request => (
-              <tr>
-                <td className="mdl-data-table__cell--non-numeric">{request.url}</td>
-                <td className="mdl-data-table__cell--non-numeric">{request.method}</td>
-                <td>{request.statusCode}</td>
-                <td className="mdl-data-table__cell--non-numeric">{request.type}</td>
-              </tr>
+              <TableRow>
+                <TableRowColumn>{request.url}</TableRowColumn>
+                <TableRowColumn>{request.method}</TableRowColumn>
+                <TableRowColumn>{request.statusCode}</TableRowColumn>
+                <TableRowColumn>{request.type}</TableRowColumn>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       );
     }
 

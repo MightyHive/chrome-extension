@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import JSONTree from 'react-json-tree';
+import Divider from 'material-ui/Divider';
 
 const theme = {
   scheme: 'monokai',
@@ -36,7 +37,7 @@ class LayersList extends Component {
         <ul className="layers-list">
           {layers.map(layer => (
             <li>
-              {layer.displayName}
+              <span className="layer-label">{layer.displayName}</span>
               <JSONTree
                 data={layer.data}
                 theme={theme}

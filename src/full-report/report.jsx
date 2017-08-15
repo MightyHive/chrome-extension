@@ -20,27 +20,33 @@ let tab = {
   },
 };
 
+let loading = true;
 let successfulLoad = false;
 
 function renderApp() {
   ReactDOM.render(
     <MuiThemeProvider>
       <App
+        currentURL={tab.currentURL}
         tabId={tab.tabId}
         layers={tab.dataLayers}
         network={tab.networkCalls}
         successfulLoad={successfulLoad}
+        loading={loading}
       />
     </MuiThemeProvider>,
     document.getElementById('app'));
-  injectTapEventPlugin();
 }
 
 // Pull tab data from Background
 util.getTabData(parsedQuery.id).then((data) => {
   tab = data;
-  successfulLoad = true;
+  if (data) {
+    successfulLoad = true;
+  }
+  loading = false;
   renderApp();
 });
 
 renderApp();
+injectTapEventPlugin();
