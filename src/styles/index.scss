@@ -6,6 +6,9 @@
 html, body {
   margin: 0;
   padding: 0;
+}
+
+#popupAppHTML {
   width: 400px;
   min-height: 600px;
 }
@@ -28,7 +31,7 @@ html, body {
   }
 }
 
-.App {
+.popupApp {
   .network-card {
     width: 60%;
     min-height: 100px;

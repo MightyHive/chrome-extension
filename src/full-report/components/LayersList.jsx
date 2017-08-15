@@ -37,7 +37,12 @@ class LayersList extends Component {
           {layers.map(layer => (
             <li>
               {layer.displayName}
-              <JSONTree data={layer.data} theme={theme} invertTheme />
+              <JSONTree
+                data={layer.data}
+                theme={theme}
+                shouldExpandNode={() => false}
+                invertTheme
+              />
             </li>
           ))}
         </ul>
