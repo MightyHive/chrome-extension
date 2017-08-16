@@ -1,4 +1,5 @@
-import 'material-design-lite/material';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
@@ -19,11 +20,13 @@ let tab = {
 
 function renderApp() {
   ReactDOM.render(
-    <App
-      tabId={tab.tabId}
-      layers={tab.dataLayers}
-      network={tab.networkCalls}
-    />,
+    <MuiThemeProvider>
+      <App
+        tabId={tab.tabId}
+        layers={tab.dataLayers}
+        network={tab.networkCalls}
+      />
+    </MuiThemeProvider>,
     document.getElementById('app'));
 }
 
@@ -34,3 +37,4 @@ util.getActiveTabData().then((data) => {
 });
 
 renderApp();
+injectTapEventPlugin();

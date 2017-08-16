@@ -91,11 +91,14 @@ module.exports = {
       filename: 'style.css',
       allChunks: true,
     }),
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      allChunks: true,
+    }),
     new HtmlWebpackPlugin({
       template: './src/popup/popup.html',
       files: {
         css: ['style.css'],
-        js: ['bundle.js'],
       },
       chunks: ['popupApp'],
       filename: 'popup.html',
@@ -104,7 +107,6 @@ module.exports = {
       template: './src/full-report/full-report.html',
       files: {
         css: ['style.css'],
-        js: ['bundle.js'],
       },
       chunks: ['reportScript'],
       filename: 'full-report.html',

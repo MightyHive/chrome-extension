@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Card, CardHeader, CardText } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
 // Components
 import LayersList from './LayersList';
@@ -23,22 +25,26 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="mdl-cell mdl-cell--12-col">
-          <h3>Data Layers</h3>
+        <div className="container">
+          <h3 className="no-top-margin">Page Summary</h3>
           <LayersList layers={this.props.layers} />
-        </div>
 
-        <div className="mdl-card mdl-shadow--2dp network-card">
-          <h6>Total Network Requests</h6>
-          <h3>{this.props.network.all.length}</h3>
-        </div>
+          <Card
+            style={{
+              marginTop: '20px',
+            }}
+          >
+            <CardHeader title="Total Network Requests" />
+            <CardText>{this.props.network.all.length}</CardText>
+          </Card>
 
-        <div className="center">
-          <button
+          <RaisedButton
+            label="View Full Report"
+            fullWidth
+            primary
             onClick={this.openReport}
-            className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect"
-          >View Full Report
-          </button>
+            style={{ marginTop: '20px' }}
+          />
         </div>
       </div>
     );

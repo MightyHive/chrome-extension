@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { List, ListItem } from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
 
 class LayersList extends Component {
   static propTypes = {
@@ -11,9 +13,16 @@ class LayersList extends Component {
 
     if (layers.length > 0) {
       return (
-        <ul className="layers-list">
-          {layers.map(layer => <li>{layer.displayName}</li>)}
-        </ul>
+        <List
+          style={{
+            border: '1px solid rgb(217, 217, 217)',
+          }}
+        >
+          <Subheader>Data Layers</Subheader>
+          {layers.map(layer => (
+            <ListItem>{layer.displayName}</ListItem>
+          ))}
+        </List>
       );
     }
 

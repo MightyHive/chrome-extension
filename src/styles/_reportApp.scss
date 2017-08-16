@@ -1,0 +1,33 @@
+.fullReportContainer {
+  .fullReportHeader {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid rgb(217, 217, 217);
+    .logo {
+      height: 40px;
+    }
+  }
+}
+
+.reportApp {
+  .reportTitle {
+    padding: 24px 10px;
+    h4, h6 {
+      margin: 0;
+    }
+  }
+
+  .layers-list {
+    list-style-type: none;
+    padding: 10px;
+    li {
+      padding: 10px 0;
+    }
+    .layer-label {
+      font-size: 16px;
+      font-family: "Roboto", sans-serif;
+    }
+  }
+}
