@@ -1,3 +1,6 @@
+#fullReportPage {
+  background: #F5F5F6;
+}
 .fullReportContainer {
   .fullReportHeader {
     box-sizing: border-box;
@@ -5,9 +8,16 @@
     padding: 10px 0;
     text-align: center;
     border-bottom: 1px solid rgb(217, 217, 217);
+    background: #FFFFFF;
     .logo {
       height: 40px;
     }
+  }
+  .dashboard {
+    background: #E1E2E1;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
   }
 }
 

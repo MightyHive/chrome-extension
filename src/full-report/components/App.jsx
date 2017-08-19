@@ -50,11 +50,11 @@ class App extends Component {
           <Tab label="Network Activity">
             <div className="container">
               <h3 className="no-top-margin">Total Network Requests: {this.props.network.all.length}</h3>
+              <NetworkCalls
+                network={this.props.network}
+                currentURL={this.props.currentURL}
+              />
             </div>
-            <NetworkCalls
-              network={this.props.network}
-              currentURL={this.props.currentURL}
-            />
           </Tab>
         </Tabs>
       </div>

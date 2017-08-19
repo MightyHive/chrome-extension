@@ -4,6 +4,9 @@
 }
 
 .popupApp {
+  .dashboard {
+    background: #FFFFFF;
+  }
   .network-card {
     width: 60%;
     min-height: 100px;
@@ -14,9 +17,4 @@
       margin-top: 0;
     }
   }
-}
-
-.dashboard {
-  background: #FFFFFF;
-  // box-shadow: 0px 0px 125px 0px rgba(169, 172, 189, 0.25); 
 }
