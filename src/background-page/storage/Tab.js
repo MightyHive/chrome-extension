@@ -34,7 +34,7 @@ export default class Tab {
   }
   /**
    * Returns all network requests associated with the currently loaded URL.
-   * @param {string} type - Passing 'tabContent' doesn't return subframe requests.
+   * @param {string=} type - Passing 'tabContent' doesn't return subframe requests.
    */
   networkCalls(type) {
     if (type === 'tabContent') {
