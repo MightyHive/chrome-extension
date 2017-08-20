@@ -1,9 +1,5 @@
-import * as UrlPattern from 'url-pattern';
-
 import NetworkCallConfig from '../../config/network-call.config';
-
-// Set a detailed URL parser for grabbing the root domain
-const pattern = new UrlPattern('(http(s)\\://)(:subdomain.):domain.:tld(\\::port)(/*)');
+import NetworkCall from './NetworkCall';
 
 /**
  * Determines if the network call matches a pattern for
@@ -30,6 +26,7 @@ export default class Tab {
         tabContent: [],
       },
       trackers: {},
+      trackerSize: 0,
     };
   }
   /**
@@ -65,21 +62,16 @@ export default class Tab {
    * Parses and stores network calls and checks for known tracking origins.
    * @param {object} networkCall - A Google Chrome request object.
    */
-  putNetworkCall(networkCall) {
+  putNetworkCall(requestData) {
+    const networkCall = new NetworkCall(requestData);
     // Targets tab content requests, rather than subframe requests.
-    if (networkCall.frameId === 0) {
+    if (networkCall.isTabContent) {
       this._data.networkCalls.tabContent.push(networkCall);
     }
     this._data.networkCalls.all.push(networkCall);
 
-    // Check for known tracker hosts
-    let parsedURL;
-    let rootHost;
     try {
-      parsedURL = pattern(networkCall.url);
-      // Gives us something like google.com
-      rootHost = parsedURL.domain + parsedURL.tld;
-      if (isTrackedHost(rootHost)) {
+      if (isTrackedHost(networkCall.rootHost)) {
         this.putPotentialTracker(networkCall);
       }
     } catch (e) {
@@ -100,7 +92,8 @@ export default class Tab {
    * @param {object} networkCall - A Google Chrome request object.
    */
   putPotentialTracker(networkCall) {
-    // TODO: verify network calls against potential strings
+    // If tracker has endpoints
+     // Iterate through them, attempting to match with the Call.
   }
 }
 
