@@ -9,8 +9,6 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
-const parse = require('url-parse');
-
 class NetworkCalls extends Component {
   static propTypes = {
     network: PropTypes.object.isRequired,
@@ -18,7 +16,6 @@ class NetworkCalls extends Component {
   }
 
   render() {
-    console.log(parse(this.props.currentURL));
     const network = this.props.network;
 
     if (network.all.length > 0) {
@@ -35,21 +32,16 @@ class NetworkCalls extends Component {
           <TableBody>
             {network.all.map(request => (
               <TableRow>
-                <TableRowColumn>{request.url}</TableRowColumn>
-                <TableRowColumn>{request.method}</TableRowColumn>
-                <TableRowColumn>{request.statusCode}</TableRowColumn>
-                <TableRowColumn>{request.type}</TableRowColumn>
+                <TableRowColumn>{request.data.url}</TableRowColumn>
+                <TableRowColumn>{request.data.method}</TableRowColumn>
+                <TableRowColumn>{request.data.statusCode}</TableRowColumn>
+                <TableRowColumn>{request.data.type}</TableRowColumn>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       );
     }
-
-    //TODO: strip to just hostnames
-    // Object.keys(a).map(function(keyName, keyIndex) {
-
-    // })
 
     return (<span>No network data found.</span>);
   }

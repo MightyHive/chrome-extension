@@ -1,5 +1,5 @@
-import * as UrlPattern from 'url-pattern';
-import * as parseDomain from 'parse-domain';
+import UrlPattern from 'url-pattern';
+import parseDomain from 'parse-domain';
 import * as url from 'url';
 
 /**
@@ -13,7 +13,7 @@ import * as url from 'url';
 export default class NetworkCall {
   constructor(networkCall) {
     // Place the most common data as a direct property
-    this.tabId = tabData.tabId;
+    this.tabId = networkCall.tabId;
     this.url = networkCall.url;
     // All other details placed under the data property
     this.data = Object.assign({}, networkCall);
@@ -25,9 +25,9 @@ export default class NetworkCall {
       {
         domain: parsedDomain.domain,
         tld: parsedDomain.tld,
-        rootHost: parsedDomain.domain + parsedDomain.tld,
+        rootHost: `${parsedDomain.domain}.${parsedDomain.tld}`,
       },
-      parsedUrl
+      parsedUrl,
     );
   }
   /**
@@ -58,7 +58,8 @@ export default class NetworkCall {
    * @return {boolean} - match
    */
   match(pattern) {
-    return !!(new UrlPattern(pattern).match(this.parsedUrl.pathname));
+    const parser = new UrlPattern(pattern);
+    return !!parser.match(this.parsedUrl.pathname);
   }
   /**
    * Determines if the network call came from the Tab content

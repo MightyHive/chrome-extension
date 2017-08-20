@@ -71,7 +71,8 @@ export default class Tab {
     this._data.networkCalls.all.push(networkCall);
 
     try {
-      if (isTrackedHost(networkCall.rootHost)) {
+      console.log('Is tracked host?', networkCall.parsedUrl.rootHost, isTrackedHost(networkCall.parsedUrl.rootHost));
+      if (isTrackedHost(networkCall.parsedUrl.rootHost)) {
         this.putPotentialTracker(networkCall);
       }
     } catch (e) {
@@ -92,8 +93,29 @@ export default class Tab {
    * @param {object} networkCall - A Google Chrome request object.
    */
   putPotentialTracker(networkCall) {
-    // If tracker has endpoints
-     // Iterate through them, attempting to match with the Call.
+    try {
+      const tabTrackers = this._data.trackers;
+      const rootHost = networkCall.parsedUrl.rootHost;
+      const trackedHost = NetworkCallConfig.trackers[rootHost];
+      const trackerId = trackedHost.trackerId;
+      // Iterate through them, attempting to match with the Call.
+      trackedHost.endpoints.forEach((endpoint) => {
+        // Verify the network call is one that is a tracker
+        console.log(`Testing endpoint ${endpoint} for host ${trackedHost}`);
+        console.log('Did test succeed?', networkCall.match(endpoint));
+        if (networkCall.match(endpoint)) {
+          // Place in the trackers if existing
+          if (tabTrackers[trackerId]) {
+            tabTrackers[trackerId].push(networkCall);
+          } else {
+            tabTrackers[trackerId] = [networkCall];
+          }
+          this._data.trackerSize += 1;
+        }
+      });
+    } catch (e) {
+      console.error('Error parsing potential tracker', e);
+    }
   }
 }
 
