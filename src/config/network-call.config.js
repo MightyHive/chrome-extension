@@ -27,13 +27,14 @@ export default {
     'google.com': {
       trackerId: 'ga_audiences',
       endpoints: [
-        '/*',
+        '/ads/ga-audiences',
       ],
     },
     'google-analytics.com': {
       trackerId: 'google_analytics',
       endpoints: [
-        '/ads/ga-audiences',
+        '/collect',
+        '/*.js',
       ],
     },
     '2o7.net': {
