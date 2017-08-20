@@ -1,5 +1,5 @@
 import { initializeEventListeners } from './events';
-import TabStorage from './storage';
+import TabStorage from './storage/TabStorage';
 import controllers from './controllers';
 
 const storage = new TabStorage();
