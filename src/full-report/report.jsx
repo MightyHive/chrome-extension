@@ -18,6 +18,8 @@ let tab = {
     all: [],
     tabContent: [],
   },
+  trackers: {},
+  trackerSize: 0,
 };
 
 let loading = true;
@@ -31,6 +33,8 @@ function renderApp() {
         tabId={tab.tabId}
         layers={tab.dataLayers}
         network={tab.networkCalls}
+        trackers={tab.trackers}
+        trackerSize={tab.trackerSize}
         successfulLoad={successfulLoad}
         loading={loading}
       />

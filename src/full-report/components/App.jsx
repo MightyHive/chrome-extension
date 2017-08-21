@@ -5,6 +5,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 import Paper from 'material-ui/Paper';
 
 // Components
+import TrackerList from './TrackerList';
 import LayersList from './LayersList';
 import NetworkCalls from './NetworkCalls';
 
@@ -14,6 +15,8 @@ class App extends Component {
     layers: PropTypes.array.isRequired,
     loading: PropTypes.bool.isRequired,
     network: PropTypes.object.isRequired,
+    trackers: PropTypes.object.isRequired,
+    trackerSize: PropTypes.number.isRequired,
     successfulLoad: PropTypes.bool.isRequired,
   }
 
@@ -39,6 +42,16 @@ class App extends Component {
           <h6>{this.props.currentURL}</h6>
         </div>
         <Tabs>
+          <Tab label="Trackers">
+            <div className="container">
+              <h3 className="no-top-margin">Trackers</h3>
+              <h6>Total Network Requests: {this.props.network.all.length}</h6>
+              <TrackerList
+                trackers={this.props.trackers}
+                trackerSize={this.props.trackerSize}
+              />
+            </div>
+          </Tab>
           <Tab label="Data Layers">
             <div className="container">
               <h3 className="no-margin">Data Layers</h3>
