@@ -1,11 +1,50 @@
 #popupAppHTML {
-  width: 400px;
-  min-height: 600px;
+  width: 350px;
+  // min-height: 600px;
 }
 
 .popupApp {
+  .popupHeader {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid rgb(217, 217, 217);
+    background: #FFFFFF;
+    .logo {
+      height: 40px;
+    }
+  }
   .dashboard {
     background: #FFFFFF;
+  }
+  .trackerCount {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin: 20px auto;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+    text-align: center;
+    .heading {
+      height: 30px;
+      line-height: 50px;
+      h3 {
+        margin: 0;
+      }
+    }
+    .content {
+      height: 120px;
+      line-height: 120px;
+      font-family: 'Roboto Thin';
+      font-size: 75px;
+    }
+  }
+  .subData {
+    text-align: center;
+    .data {
+      font-family: 'Roboto Thin';
+      font-size: 42px;
+    }
   }
   .network-card {
     width: 60%;

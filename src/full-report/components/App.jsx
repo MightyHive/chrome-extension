@@ -16,7 +16,7 @@ class App extends Component {
     loading: PropTypes.bool.isRequired,
     network: PropTypes.object.isRequired,
     trackers: PropTypes.object.isRequired,
-    trackerSize: PropTypes.number.isRequired,
+    trackerCount: PropTypes.number.isRequired,
     successfulLoad: PropTypes.bool.isRequired,
   }
 
@@ -48,7 +48,7 @@ class App extends Component {
               <h6>Total Network Requests: {this.props.network.all.length}</h6>
               <TrackerList
                 trackers={this.props.trackers}
-                trackerSize={this.props.trackerSize}
+                trackerCount={this.props.trackerCount}
               />
             </div>
           </Tab>

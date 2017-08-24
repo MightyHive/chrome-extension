@@ -16,6 +16,8 @@ let tab = {
     all: [],
     tabContent: [],
   },
+  trackers: {},
+  trackerCount: 0,
 };
 
 function renderApp() {
@@ -23,8 +25,11 @@ function renderApp() {
     <MuiThemeProvider>
       <App
         tabId={tab.tabId}
+        tab={tab}
+        currentURL={tab.currentURL}
         layers={tab.dataLayers}
         network={tab.networkCalls}
+        trackerCount={tab.trackerCount}
       />
     </MuiThemeProvider>,
     document.getElementById('app'));

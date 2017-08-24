@@ -8,13 +8,13 @@ import TrackerListItem from './TrackerListItem';
 export default class NetworkCalls extends Component {
   static propTypes = {
     trackers: PropTypes.object.isRequired,
-    trackerSize: PropTypes.number.isRequired,
+    trackerCount: PropTypes.number.isRequired,
   }
 
   render() {
-    const { trackers, trackerSize } = this.props;
+    const { trackers, trackerCount } = this.props;
 
-    if (trackerSize > 0) {
+    if (trackerCount > 0) {
       return (
         <List>
           <Subheader>Trackers</Subheader>

@@ -17,6 +17,9 @@ export default {
     adobe_analytics: {
       displayName: 'Adobe Analytics',
     },
+    doubleclick: {
+      displayName: 'DoubleClick',
+    },
   },
   // NOTE: Endpoints are compared using URL matching,
   // thus you can use wildcards to capture calls.
@@ -41,6 +44,14 @@ export default {
       trackerId: 'adobe_analytics',
       endpoints: [
         '/*',
+      ],
+    },
+    'doubleclick.net': {
+      trackerId: 'doubleclick',
+      endpoints: [
+        '/r/collect',
+        '/*.js',
+        '/*.gif',
       ],
     },
   },

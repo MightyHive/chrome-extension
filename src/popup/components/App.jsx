@@ -9,8 +9,11 @@ import LayersList from './LayersList';
 class App extends Component {
   static propTypes = {
     layers: PropTypes.array.isRequired,
+    currentUrl: PropTypes.string.isRequired,
+    tab: PropTypes.object.isRequired,
     network: PropTypes.object.isRequired,
     tabId: PropTypes.number.isRequired,
+    trackerCount: PropTypes.number.isRequired,
   }
 
   constructor(props) {
@@ -23,20 +26,26 @@ class App extends Component {
   }
 
   render() {
+    const { tab } = this.props;
     return (
       <div className="App">
         <div className="container">
-          <h3 className="no-top-margin">Page Summary</h3>
-          <LayersList layers={this.props.layers} />
-
-          <Card
-            style={{
-              marginTop: '20px',
-            }}
-          >
-            <CardHeader title="Total Network Requests" />
-            <CardText>{this.props.network.all.length}</CardText>
-          </Card>
+          <div className="trackerCount">
+            <div className="heading">
+              <h3>Trackers</h3>
+            </div>
+            <div className="content">
+              {this.props.trackerCount}
+            </div>
+          </div>
+          <div className="halfColumn subData">
+            <h3>Data Layers</h3>
+            <span className="data">{this.props.layers.length}</span>
+          </div>
+          <div className="halfColumn subData">
+            <h3>Network Calls</h3>
+            <span className="data">{this.props.network.all.length}</span>
+          </div>
 
           <RaisedButton
             label="View Full Report"

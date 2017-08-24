@@ -1,12 +1,8 @@
-@import '~material-design-lite/src/color-definitions';
 @import 'font';
-@import '~material-design-lite/src/material-design-lite-grid.scss';
-@import '~material-design-lite/src/material-design-lite.scss';
 
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
 }
 
 .center {
@@ -17,6 +13,13 @@ html, body {
 .container {
   padding: 10px;
   box-sizing: border-box;
+}
+
+.halfColumn {
+  width: 50%;
+  box-sizing: border-box;
+  float: left;
+  display: inline-block;
 }
 
 .no-margin {

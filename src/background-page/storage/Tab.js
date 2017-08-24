@@ -26,7 +26,7 @@ export default class Tab {
         tabContent: [],
       },
       trackers: {},
-      trackerSize: 0,
+      trackerCount: 0,
     };
   }
   /**
@@ -99,9 +99,9 @@ export default class Tab {
       const trackedHost = NetworkCallConfig.trackers[rootHost];
       const trackerId = trackedHost.trackerId;
       // Iterate through them, attempting to match with the Call.
-      trackedHost.endpoints.forEach((endpoint) => {
+      trackedHost.endpoints.some((endpoint) => {
         // Verify the network call is one that is a tracker
-        console.log(`Testing endpoint ${endpoint} for host ${trackedHost}`);
+        console.log(`Testing endpoint ${endpoint} for against call path ${networkCall.parsedUrl.pathname}`);
         console.log('Did test succeed?', networkCall.match(endpoint));
         if (networkCall.match(endpoint)) {
           // Place in the trackers if existing
@@ -110,8 +110,10 @@ export default class Tab {
           } else {
             tabTrackers[trackerId] = [networkCall];
           }
-          this._data.trackerSize += 1;
+          this._data.trackerCount += 1;
+          return true;
         }
+        return false;
       });
     } catch (e) {
       console.error('Error parsing potential tracker', e);

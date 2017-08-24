@@ -3,7 +3,7 @@ export function initializeEventListeners(storage) {
     webRequest: {
       onCompleted: (details) => {
         try {
-          // Targets tab content requests, rather than subframe requests.
+          console.log('NETWORK->', details);
           storage.putNetworkCall(details);
         } catch (e) {
           console.error('Request Listener Error', e);
