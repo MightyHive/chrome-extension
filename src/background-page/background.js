@@ -1,4 +1,4 @@
-import { initializeEventListeners } from './events';
+import initializeEventListeners from './events';
 import TabStorage from './storage/TabStorage';
 import controllers from './controllers';
 

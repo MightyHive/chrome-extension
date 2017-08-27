@@ -1,6 +1,14 @@
-export function initializeEventListeners(storage) {
+export default function initializeEventListeners(storage) {
   const events = {
     webRequest: {
+      onBeforeRedirect: (details) => {
+        try {
+          console.log('REDIRECT->', details);
+          storage.putNetworkCall(details);
+        } catch (e) {
+          console.error('Request Listener Error', e);
+        }
+      },
       onCompleted: (details) => {
         try {
           console.log('NETWORK->', details);
@@ -38,6 +46,7 @@ export function initializeEventListeners(storage) {
   };
 
   chrome.webRequest.onCompleted.addListener(events.webRequest.onCompleted, { urls: ['*://*/*'] });
+  chrome.webRequest.onBeforeRedirect.addListener(events.webRequest.onBeforeRedirect, { urls: ['*://*/*'] });
   chrome.webNavigation.onBeforeNavigate.addListener(events.webNavigation.onBeforeNavigate);
   chrome.tabs.onRemoved.addListener(events.tabs.onRemoved);
 }
