@@ -58,6 +58,14 @@ export default class NetworkCall {
    * @return {boolean} - match
    */
   match(pattern) {
+    const hostAndPath = this.parsedUrl.hostname + this.parsedUrl.pathname;
+    return minimatch(hostAndPath, pattern);
+  }
+  /**
+   * Determines if the network call pathname matches a given pattern.
+   * @return {boolean} - match
+   */
+  matchPathname(pattern) {
     return minimatch(this.parsedUrl.pathname, pattern);
   }
   /**

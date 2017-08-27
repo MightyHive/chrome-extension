@@ -97,23 +97,25 @@ export default class Tab {
       const tabTrackers = this._data.trackers;
       const rootHost = networkCall.parsedUrl.rootHost;
       const trackedHost = NetworkCallConfig.trackers[rootHost];
-      const trackerId = trackedHost.trackerId;
       // Iterate through them, attempting to match with the Call.
-      trackedHost.endpoints.some((endpoint) => {
-        // Verify the network call is one that is a tracker
-        console.log(`Testing endpoint ${endpoint} for against call path ${networkCall.parsedUrl.pathname}`);
-        console.log('Did test succeed?', networkCall.match(endpoint));
-        if (networkCall.match(endpoint)) {
-          // Place in the trackers if existing
-          if (tabTrackers[trackerId]) {
-            tabTrackers[trackerId].push(networkCall);
-          } else {
-            tabTrackers[trackerId] = [networkCall];
+      trackedHost.forEach((tracker) => {
+        const trackerId = tracker.trackerId;
+        tracker.matches.some((pattern) => {
+          // Verify the network call is one that is a tracker
+          console.log(`Testing endpoint ${pattern} for against call path ${networkCall.parsedUrl.hostname + networkCall.parsedUrl.pathname}`);
+          console.log('Did test succeed?', networkCall.match(pattern));
+          if (networkCall.match(pattern)) {
+            // Place in the trackers if existing
+            if (tabTrackers[trackerId]) {
+              tabTrackers[trackerId].push(networkCall);
+            } else {
+              tabTrackers[trackerId] = [networkCall];
+            }
+            this._data.trackerCount += 1;
+            return true;
           }
-          this._data.trackerCount += 1;
-          return true;
-        }
-        return false;
+          return false;
+        });
       });
     } catch (e) {
       console.error('Error parsing potential tracker', e);
