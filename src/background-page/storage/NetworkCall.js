@@ -1,4 +1,4 @@
-import UrlPattern from 'url-pattern';
+import minimatch from 'minimatch';
 import parseDomain from 'parse-domain';
 import * as url from 'url';
 
@@ -58,8 +58,7 @@ export default class NetworkCall {
    * @return {boolean} - match
    */
   match(pattern) {
-    const parser = new UrlPattern(pattern);
-    return !!parser.match(this.parsedUrl.pathname);
+    return minimatch(this.parsedUrl.pathname, pattern);
   }
   /**
    * Determines if the network call came from the Tab content

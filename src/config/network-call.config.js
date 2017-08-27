@@ -43,7 +43,7 @@ export default {
     '2o7.net': {
       trackerId: 'adobe_analytics',
       endpoints: [
-        '/*',
+        '/**',
       ],
     },
     'doubleclick.net': {
