@@ -110,8 +110,8 @@ export default class Tab {
               tabTrackers[trackerId].push(networkCall);
             } else {
               tabTrackers[trackerId] = [networkCall];
+              this._data.trackerCount += 1;
             }
-            this._data.trackerCount += 1;
             return true;
           }
           return false;
