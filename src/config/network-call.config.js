@@ -2,17 +2,50 @@ export default {
   // Can be extended to offer a variety of metadata, such as
   // tracker homepages, descriptions, ect.
   trackerData: {
+    adobe_analytics: {
+      displayName: 'Adobe Analytics',
+    },
+    adelphic: {
+      displayName: 'Adelphic',
+    },
+    adroll: {
+      displayName: 'AdRoll',
+    },
+    amazon: {
+      displayName: 'Amazon',
+    },
+    brightroll: {
+      displayName: 'BrightRoll (Yahoo)',
+    },
+    crimtan: {
+      displayName: 'CrimTan',
+    },
+    doubleclick: {
+      displayName: 'DoubleClick',
+    },
     ga_audiences: {
       displayName: 'GA Audiences',
     },
     google_analytics: {
       displayName: 'Google Analytics',
     },
-    adobe_analytics: {
-      displayName: 'Adobe Analytics',
+    krux: {
+      displayName: 'Krux',
     },
-    doubleclick: {
-      displayName: 'DoubleClick',
+    pinsight: {
+      displayName: 'Pinsight',
+    },
+    rocketfuel: {
+      displayName: 'RocketFuel',
+    },
+    the_trade_desk: {
+      displayName: 'The Trade Desk',
+    },
+    twitter: {
+      displayName: 'Twitter',
+    },
+    facebook: {
+      displayName: 'Facebook',
     },
   },
   /**
@@ -38,6 +71,81 @@ export default {
    * ]
    */
   trackers: {
+    '0b1011.net': [
+      {
+        trackerId: 'pinsight',
+        matches: [
+          'f11e.0b1011.net/**',
+        ],
+      },
+    ],
+    '2o7.net': [
+      {
+        trackerId: 'adobe_analytics',
+        matches: [
+          '**2o7.net/**',
+        ],
+      },
+    ],
+    'adroll.com': [
+      {
+        trackerId: 'adroll',
+        matches: [
+          's.adroll.com/**',
+          'a.adroll.com/**',
+        ],
+      },
+    ],
+    'adsrvr.org': [
+      {
+        trackerId: 'the_trade_desk',
+        matches: [
+          'insight.adsrvr.org/**',
+        ],
+      },
+    ],
+    'ads-twitter.com': [
+      {
+        trackerId: 'twitter',
+        matches: [
+          '**ads-twitter.com/**',
+        ],
+      },
+    ],
+    'amazon-adsystem.com': [
+      {
+        trackerId: 'amazon',
+        matches: [
+          '**amazon-adsystem.com/**',
+        ],
+      },
+    ],
+    'ctnsnet.com': [
+      {
+        trackerId: 'crimtan',
+        matches: [
+          'ipac.ctnsnet.com/**',
+        ],
+      },
+    ],
+    'doubleclick.net': [
+      {
+        trackerId: 'doubleclick',
+        matches: [
+          '**doubleclick.net/r/collect',
+          '**doubleclick.net/*.js',
+          '**doubleclick.net/*.gif',
+        ],
+      },
+    ],
+    'facebook.com': [
+      {
+        trackerId: 'facebook',
+        matches: [
+          '**facebook.com/tr',
+        ],
+      },
+    ],
     'google.com': [
       {
         trackerId: 'ga_audiences',
@@ -55,21 +163,35 @@ export default {
         ],
       },
     ],
-    '2o7.net': [
+    'ipredictive.com': [
       {
-        trackerId: 'adobe_analytics',
+        trackerId: 'adelphic',
         matches: [
-          '**2o7.net/**',
+          'ad.ipredictive.com/**',
         ],
       },
     ],
-    'doubleclick.net': [
+    'krxd.net': [
       {
-        trackerId: 'doubleclick',
+        trackerId: 'krux',
         matches: [
-          '**doubleclick.net/r/collect',
-          '**doubleclick.net/*.js',
-          '**doubleclick.net/*.gif',
+          '**krxd.net/**',
+        ],
+      },
+    ],
+    'rfihub.com': [
+      {
+        trackerId: 'rocketfuel',
+        matches: [
+          '**rfihub.com/**',
+        ],
+      },
+    ],
+    'yahoo.com': [
+      {
+        trackerId: 'brightroll',
+        matches: [
+          'sp.analytics.yahoo.com/**',
         ],
       },
     ],
