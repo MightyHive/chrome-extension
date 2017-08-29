@@ -31,11 +31,11 @@ class App extends Component {
       <div className="App">
         <div className="container">
           <div className="trackerCount">
-            <div className="heading">
-              <h3>Trackers</h3>
-            </div>
             <div className="content">
               {this.props.trackerCount}
+            </div>
+            <div className="heading">
+              <h3>Trackers</h3>
             </div>
           </div>
           <div className="halfColumn subData">
@@ -49,9 +49,11 @@ class App extends Component {
 
           <RaisedButton
             label="View Full Report"
+            backgroundColor="#183063"
+            labelColor="#ffb50b"
             fullWidth
-            primary
             onClick={this.openReport}
+            labelStyle={{ fontFamily: 'Roboto Bold' }}
             style={{ marginTop: '20px' }}
           />
         </div>
