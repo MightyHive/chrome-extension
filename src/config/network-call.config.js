@@ -135,6 +135,7 @@ export default {
           '**doubleclick.net/r/collect',
           '**doubleclick.net/*.js',
           '**doubleclick.net/*.gif',
+          '**fls.doubleclick.net/**',
         ],
       },
     ],
