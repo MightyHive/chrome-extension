@@ -6,7 +6,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 // Components
 import DataLayers from './DataLayers';
 import TrackerList from './TrackerList';
-import NetworkCalls from './NetworkCalls';
+import Network from './Network';
 
 class App extends Component {
   static propTypes = {
@@ -55,13 +55,10 @@ class App extends Component {
             <DataLayers layers={this.props.layers} />
           </Tab>
           <Tab label="Network Activity">
-            <div className="container">
-              <h3 className="no-top-margin">Total Network Requests: {this.props.network.all.length}</h3>
-              <NetworkCalls
-                network={this.props.network}
-                currentURL={this.props.currentURL}
-              />
-            </div>
+            <Network
+              currentURL={this.props.currentURL}
+              network={this.props.network}
+            />
           </Tab>
         </Tabs>
       </div>

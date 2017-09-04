@@ -4,7 +4,7 @@ import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import LayersList from './LayersList';
-import { downloadData } from '../../chrome.utils';
+import * as chromeUtils from '../../chrome.utils';
 
 class DataLayers extends Component {
   static propTypes = {
@@ -21,7 +21,7 @@ class DataLayers extends Component {
     const layersString = JSON.stringify(this.layers);
     const layersB64 = new Buffer(layersString).toString('base64');
 
-    downloadData(
+    chromeUtils.downloadData(
       layersB64,
       {
         mediatype: 'application/json',
