@@ -58,6 +58,24 @@ export function getTabData(tabId) {
     });
   });
 }
+/**
+ * Initiates a Chrome user download from data.
+ * @param {function} callback - called with the id of the new DownloadItem.
+ * See: https://developer.chrome.com/extensions/downloads#method-download
+ */
+export function downloadData(data, options = {}) {
+  return new Promise((resolve) => {
+    const base64Token = options.isBase64 ? ';base64,' : '';
+    const mediatype = options.mediatype || 'text/plain,';
+    const url = `data:${mediatype + base64Token + data}`;
+    chrome.downloads.download({
+      url,
+      saveAs: options.saveAs || false,
+    }, (response) => {
+      resolve(response.data);
+    });
+  });
+}
 
 export function executeJSOnPage(script) {
   chrome.tabs.query({

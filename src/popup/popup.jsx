@@ -6,7 +6,7 @@ import App from './components/App';
 import AppCSS from '../styles/index.scss';
 
 // Data Layer Importers
-import * as util from './utils';
+import * as util from '../chrome.utils';
 
 let tab = {
   tabId: null,

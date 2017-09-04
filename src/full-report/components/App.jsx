@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import CircularProgress from 'material-ui/CircularProgress';
-import Paper from 'material-ui/Paper';
 
 // Components
+import DataLayers from './DataLayers';
 import TrackerList from './TrackerList';
-import LayersList from './LayersList';
 import NetworkCalls from './NetworkCalls';
 
 class App extends Component {
@@ -53,12 +52,7 @@ class App extends Component {
             </div>
           </Tab>
           <Tab label="Data Layers">
-            <div className="container">
-              <h3 className="no-margin">Data Layers</h3>
-              <Paper zDepth={1}>
-                <LayersList layers={this.props.layers} />
-              </Paper>
-            </div>
+            <DataLayers layers={this.props.layers} />
           </Tab>
           <Tab label="Network Activity">
             <div className="container">

@@ -23,6 +23,7 @@
       "scripts": ["backgroundScript.js"]
     },
   "permissions": [
+    "downloads",
     "tabs",
     "webRequest",
     "webNavigation",

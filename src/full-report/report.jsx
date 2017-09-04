@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import AppCSS from '../styles/index.scss';
 
-import * as util from '../popup/utils';
+import * as util from '../chrome.utils';
 
 const parsedQuery = queryString.parse(window.location.search);
 
