@@ -37,7 +37,7 @@
     .heading {
       height: 30px;
       line-height: 30px;
-      h3 {
+      h4 {
         margin: 0;
         color: #a9acbd;
       }
@@ -45,8 +45,9 @@
   }
   .subData {
     text-align: center;
-    h3 {
+    h5 {
       color: #ffb50b;
+      margin-bottom: 10px;
     }
     .data {
       font-family: 'Roboto Thin';

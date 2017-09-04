@@ -35,15 +35,15 @@ class App extends Component {
               {this.props.trackerCount}
             </div>
             <div className="heading">
-              <h3>Trackers</h3>
+              <h4 className="thin">Trackers</h4>
             </div>
           </div>
           <div className="halfColumn subData">
-            <h3>Data Layers</h3>
+            <h5>Data Layers</h5>
             <span className="data">{this.props.layers.length}</span>
           </div>
           <div className="halfColumn subData">
-            <h3>Network Calls</h3>
+            <h5>Network Calls</h5>
             <span className="data">{this.props.network.all.length}</span>
           </div>
 
