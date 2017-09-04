@@ -24,7 +24,7 @@ export function sendActiveTabMessage(message, callback) {
  * @param {function} callback - function called when listener is triggered.
  */
 export function getActiveTabData() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     chrome.tabs.query({
       active: true,
       currentWindow: true,
@@ -36,7 +36,11 @@ export function getActiveTabData() {
         },
       }, (response) => {
         console.log(response);
-        resolve(response.data);
+        if (response.status === 200) {
+          resolve(response.data);
+        } else {
+          reject(response);
+        }
       });
     });
   });

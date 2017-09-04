@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Card, CardHeader, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
+import CircularProgress from 'material-ui/CircularProgress';
 
 // Components
 import LayersList from './LayersList';
 
 class App extends Component {
   static propTypes = {
-    layers: PropTypes.array.isRequired,
-    currentUrl: PropTypes.string.isRequired,
+    loading: PropTypes.bool.isRequired,
+    successfulLoad: PropTypes.bool.isRequired,
     tab: PropTypes.object.isRequired,
-    network: PropTypes.object.isRequired,
-    tabId: PropTypes.number.isRequired,
-    trackerCount: PropTypes.number.isRequired,
   }
 
   constructor(props) {
@@ -22,17 +19,34 @@ class App extends Component {
   }
 
   openReport() {
-    chrome.tabs.create({ url: `/full-report.html?id=${this.props.tabId}` });
+    chrome.tabs.create({ url: `/full-report.html?id=${this.props.tab.tabId}` });
   }
 
   render() {
-    const { tab } = this.props;
+    const { loading, successfulLoad, tab } = this.props;
+
+    if (loading) {
+      return (
+        <div className="center">
+          <CircularProgress size={80} />
+        </div>
+      );
+    }
+
+    if (!successfulLoad || !tab) {
+      return (
+        <div className="center">
+          <i className="icon icon-ic_play-circle_outline_black_24dp" /> Unable to load site data.
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <div className="container">
           <div className="trackerCount">
             <div className="content">
-              {this.props.trackerCount}
+              {tab.trackerCount}
             </div>
             <div className="heading">
               <h4 className="thin">Trackers</h4>
@@ -40,11 +54,11 @@ class App extends Component {
           </div>
           <div className="halfColumn subData">
             <h5>Data Layers</h5>
-            <span className="data">{this.props.layers.length}</span>
+            <span className="data">{tab.dataLayers.length}</span>
           </div>
           <div className="halfColumn subData">
             <h5>Network Calls</h5>
-            <span className="data">{this.props.network.all.length}</span>
+            <span className="data">{tab.networkCalls.all.length}</span>
           </div>
 
           <RaisedButton
