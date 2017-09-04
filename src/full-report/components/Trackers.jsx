@@ -53,21 +53,28 @@ class Datatrackers extends Component {
   }
 
   render() {
-    const { trackers, trackerCount, network } = this.props;
+    const { trackers, trackerCount } = this.props;
 
     return (
-      <div className="container">
-        <h3 className="no-top-margin">Trackers</h3>
-        <RaisedButton
-          onClick={this.downloadJson}
-          label="Download JSON"
-          secondary
-        />
-        <h6>Total Network Requests: {network.all.length}</h6>
-        <TrackerList
-          trackers={trackers}
-          trackerCount={trackerCount}
-        />
+      <div>
+        <div className="container">
+          <div className="halfColumn" style={{ height: '75px', lineHeight: '75px' }}>
+            <h3 className="no-margin tabTitle">Trackers</h3>
+          </div>
+          <div className="halfColumn" style={{ height: '75px', paddingTop: '19.5px', textAlign: 'right' }}>
+            <RaisedButton
+              onClick={this.downloadJson}
+              label="Download JSON"
+              secondary
+            />
+          </div>
+        </div>
+        <div className="container">
+          <TrackerList
+            trackers={trackers}
+            trackerCount={trackerCount}
+          />
+        </div>
       </div>
     );
   }

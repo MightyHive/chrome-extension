@@ -51,17 +51,26 @@ class DataLayers extends Component {
 
   render() {
     return (
-      <div className="container">
-        <h3 className="no-top-margin">Total Network Requests: {this.props.network.all.length}</h3>
-        <RaisedButton
-          onClick={this.downloadCsv}
-          label="Download CSV"
-          secondary
-        />
-        <NetworkCalls
-          network={this.props.network}
-          currentURL={this.props.currentURL}
-        />
+      <div>
+        <div className="container">
+          <div className="halfColumn" style={{ height: '75px', lineHeight: '75px' }}>
+            <h3 className="no-margin tabTitle">Network Activity</h3>
+          </div>
+          <div className="halfColumn" style={{ height: '75px', paddingTop: '19.5px', textAlign: 'right' }}>
+            <RaisedButton
+              onClick={this.downloadCsv}
+              label="Download CSV"
+              secondary
+            />
+          </div>
+        </div>
+        <div className="container">
+          <h5 className="no-top-margin">Total Network Requests: {this.props.network.all.length}</h5>
+          <NetworkCalls
+            network={this.props.network}
+            currentURL={this.props.currentURL}
+          />
+        </div>
       </div>
     );
   }

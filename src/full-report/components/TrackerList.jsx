@@ -17,7 +17,6 @@ export default class NetworkCalls extends Component {
     if (trackerCount > 0) {
       return (
         <List>
-          <Subheader>Trackers</Subheader>
           {Object.keys(trackers).map((trackerId) => {
             const trackerCalls = trackers[trackerId];
             return (

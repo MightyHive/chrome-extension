@@ -21,18 +21,22 @@ class NetworkCalls extends Component {
     if (network.all.length > 0) {
       return (
         <Table>
-          <TableHeader>
+          <TableHeader
+            displaySelectAll={false}
+            adjustForCheckbox={false}
+            selectable={false}
+          >
             <TableRow>
-              <TableHeaderColumn>Name</TableHeaderColumn>
+              <TableHeaderColumn style={{ width: '450px' }}>Name</TableHeaderColumn>
               <TableHeaderColumn>Method</TableHeaderColumn>
               <TableHeaderColumn>Status</TableHeaderColumn>
               <TableHeaderColumn>Type</TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody displayRowCheckbox={false}>
             {network.all.map(request => (
               <TableRow>
-                <TableRowColumn>{request.data.url}</TableRowColumn>
+                <TableRowColumn style={{ width: '450px' }}>{request.data.url}</TableRowColumn>
                 <TableRowColumn>{request.data.method}</TableRowColumn>
                 <TableRowColumn>{request.data.statusCode}</TableRowColumn>
                 <TableRowColumn>{request.data.type}</TableRowColumn>

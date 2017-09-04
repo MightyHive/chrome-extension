@@ -32,16 +32,24 @@ class DataLayers extends Component {
 
   render() {
     return (
-      <div className="container">
-        <h3 className="no-margin">Data Layers</h3>
-        <RaisedButton
-          onClick={this.downloadJson}
-          label="Download JSON"
-          secondary
-        />
-        <Paper zDepth={1}>
-          <LayersList layers={this.layers} />
-        </Paper>
+      <div>
+        <div className="container">
+          <div className="halfColumn" style={{ height: '75px', lineHeight: '75px' }}>
+            <h3 className="no-margin tabTitle">Data Layers</h3>
+          </div>
+          <div className="halfColumn" style={{ height: '75px', paddingTop: '19.5px', textAlign: 'right' }}>
+            <RaisedButton
+              onClick={this.downloadJson}
+              label="Download JSON"
+              secondary
+            />
+          </div>
+        </div>
+        <div className="container">
+          <Paper zDepth={1}>
+            <LayersList layers={this.layers} />
+          </Paper>
+        </div>
       </div>
     );
   }
