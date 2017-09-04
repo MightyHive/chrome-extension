@@ -5,7 +5,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 // Components
 import DataLayers from './DataLayers';
-import TrackerList from './TrackerList';
+import Trackers from './Trackers';
 import Network from './Network';
 
 class App extends Component {
@@ -42,14 +42,11 @@ class App extends Component {
         </div>
         <Tabs>
           <Tab label="Trackers">
-            <div className="container">
-              <h3 className="no-top-margin">Trackers</h3>
-              <h6>Total Network Requests: {tab.networkCalls.all.length}</h6>
-              <TrackerList
-                trackers={tab.trackers}
-                trackerCount={tab.trackerCount}
-              />
-            </div>
+            <Trackers
+              trackers={tab.trackers}
+              trackerCount={tab.trackerCount}
+              network={tab.networkCalls}
+            />
           </Tab>
           <Tab label="Data Layers">
             <DataLayers layers={tab.dataLayers} />
