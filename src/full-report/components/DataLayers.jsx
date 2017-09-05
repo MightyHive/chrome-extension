@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import LayersList from './LayersList';
 import * as chromeUtils from '../../chrome.utils';
 
-class DataLayers extends Component {
+export default class DataLayers extends Component {
   static propTypes = {
     layers: PropTypes.array.isRequired,
   }
@@ -54,5 +54,3 @@ class DataLayers extends Component {
     );
   }
 }
-
-export default DataLayers;

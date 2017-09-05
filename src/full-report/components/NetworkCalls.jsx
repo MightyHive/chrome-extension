@@ -9,7 +9,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
-class NetworkCalls extends Component {
+export default class NetworkCalls extends Component {
   static propTypes = {
     network: PropTypes.object.isRequired,
     currentURL: PropTypes.string.isRequired,
@@ -35,7 +35,7 @@ class NetworkCalls extends Component {
           </TableHeader>
           <TableBody displayRowCheckbox={false}>
             {network.all.map(request => (
-              <TableRow>
+              <TableRow key={`${request.data.requestId}-${request.data.timeStamp}`}>
                 <TableRowColumn style={{ width: '450px' }}>{request.data.url}</TableRowColumn>
                 <TableRowColumn>{request.data.method}</TableRowColumn>
                 <TableRowColumn>{request.data.statusCode}</TableRowColumn>
@@ -50,5 +50,3 @@ class NetworkCalls extends Component {
     return (<span>No network data found.</span>);
   }
 }
-
-export default NetworkCalls;

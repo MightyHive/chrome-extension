@@ -5,7 +5,7 @@ import Subheader from 'material-ui/Subheader';
 
 import TrackerListItem from './TrackerListItem';
 
-export default class NetworkCalls extends Component {
+export default class TrackerList extends Component {
   static propTypes = {
     trackers: PropTypes.object.isRequired,
     trackerCount: PropTypes.number.isRequired,
@@ -23,6 +23,7 @@ export default class NetworkCalls extends Component {
               <TrackerListItem
                 trackerCalls={trackerCalls}
                 trackerId={trackerId}
+                key={trackerId}
               />
             );
           })}

@@ -6,7 +6,7 @@ import json2csv from 'json2csv';
 import NetworkCalls from './NetworkCalls';
 import * as chromeUtils from '../../chrome.utils';
 
-class DataLayers extends Component {
+export default class Network extends Component {
   static propTypes = {
     currentURL: PropTypes.string.isRequired,
     network: PropTypes.object.isRequired,
@@ -75,5 +75,3 @@ class DataLayers extends Component {
     );
   }
 }
-
-export default DataLayers;

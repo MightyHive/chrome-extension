@@ -24,7 +24,7 @@ const theme = {
   base0F: '#cc6633',
 };
 
-class LayersList extends Component {
+export default class LayersList extends Component {
   static propTypes = {
     layers: PropTypes.array.isRequired,
   }
@@ -36,7 +36,7 @@ class LayersList extends Component {
       return (
         <ul className="layers-list">
           {layers.map(layer => (
-            <li>
+            <li key={layer.id}>
               <span className="layer-label">{layer.displayName}</span>
               <JSONTree
                 data={layer.data}
@@ -53,5 +53,3 @@ class LayersList extends Component {
     return (<span>No data layers found.</span>);
   }
 }
-
-export default LayersList;

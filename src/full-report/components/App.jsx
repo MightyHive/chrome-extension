@@ -8,11 +8,11 @@ import DataLayers from './DataLayers';
 import Trackers from './Trackers';
 import Network from './Network';
 
-class App extends Component {
+export default class App extends Component {
   static propTypes = {
     loading: PropTypes.bool.isRequired,
     successfulLoad: PropTypes.bool.isRequired,
-    tab: PropTypes.object.isRequired,
+    tab: PropTypes.object,
   }
 
   render() {
@@ -62,5 +62,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

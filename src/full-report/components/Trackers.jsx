@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
 import TrackerList from './TrackerList';
 import NetworkCallConfig from '../../config/network-call.config';
 import * as chromeUtils from '../../chrome.utils';
 
-class Datatrackers extends Component {
+export default class Trackers extends Component {
   static propTypes = {
-    trackers: PropTypes.array.isRequired,
+    trackers: PropTypes.object.isRequired,
     trackerCount: PropTypes.number.isRequired,
     network: PropTypes.object.isRequired,
   }
@@ -70,14 +71,14 @@ class Datatrackers extends Component {
           </div>
         </div>
         <div className="container">
-          <TrackerList
-            trackers={trackers}
-            trackerCount={trackerCount}
-          />
+          <Paper zDepth={1}>
+            <TrackerList
+              trackers={trackers}
+              trackerCount={trackerCount}
+            />
+          </Paper>
         </div>
       </div>
     );
   }
 }
-
-export default Datatrackers;

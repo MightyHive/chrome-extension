@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListItem } from 'material-ui/List';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+import { List, ListItem } from 'material-ui/List';
 
 import NetworkCallConfig from '../../config/network-call.config';
+import TrackerCallDetails from './TrackerCallDetails';
 
-export default class NetworkCalls extends Component {
+export default class TrackerListItem extends Component {
   static propTypes = {
     trackerCalls: PropTypes.array.isRequired,
     trackerId: PropTypes.string.isRequired,
@@ -28,32 +21,29 @@ export default class NetworkCalls extends Component {
           primaryText={`${trackerData.displayName} (${trackerCalls.length})`}
           primaryTogglesNestedList
           nestedItems={[
-            (<div style={{ marginLeft: '10px' }}>
-              <Table>
-                <TableHeader
-                  displaySelectAll={false}
-                  adjustForCheckbox={false}
-                  selectable={false}
-                >
-                  <TableRow>
-                    <TableHeaderColumn style={{ width: '450px' }}>URL</TableHeaderColumn>
-                    <TableHeaderColumn>Method</TableHeaderColumn>
-                    <TableHeaderColumn>Status</TableHeaderColumn>
-                    <TableHeaderColumn>Type</TableHeaderColumn>
-                  </TableRow>
-                </TableHeader>
-                <TableBody displayRowCheckbox={false}>
-                  {trackerCalls.map(tracker => (
-                    <TableRow>
-                      <TableRowColumn style={{ width: '450px' }}>{tracker.data.url}</TableRowColumn>
-                      <TableRowColumn>{tracker.data.method}</TableRowColumn>
-                      <TableRowColumn>{tracker.data.statusCode}</TableRowColumn>
-                      <TableRowColumn>{tracker.data.type}</TableRowColumn>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>),
+            (trackerCalls.map(tracker => (
+              <ListItem
+                primaryText={(
+                  <div
+                    style={{
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {tracker.data.url}
+                  </div>
+                )}
+                primaryTogglesNestedList
+                nestedItems={[(
+                  <TrackerCallDetails
+                    trackerCall={tracker}
+                    key={`${tracker.data.requestId}-details`}
+                  />
+                )]}
+                key={tracker.data.requestId}
+              />
+              ))),
           ]}
         />
       );

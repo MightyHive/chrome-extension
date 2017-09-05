@@ -3,7 +3,6 @@ export default function initializeEventListeners(storage) {
     webRequest: {
       onBeforeRedirect: (details) => {
         try {
-          console.log('REDIRECT->', details);
           storage.putNetworkCall(details);
         } catch (e) {
           console.error('Request Listener Error', e);
@@ -11,7 +10,6 @@ export default function initializeEventListeners(storage) {
       },
       onCompleted: (details) => {
         try {
-          console.log('NETWORK->', details);
           storage.putNetworkCall(details);
         } catch (e) {
           console.error('Request Listener Error', e);
