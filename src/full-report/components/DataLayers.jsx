@@ -31,6 +31,18 @@ export default class DataLayers extends Component {
   }
 
   render() {
+    let downloadButton = '';
+
+    if (this.layers.length > 0) {
+      downloadButton = (
+        <RaisedButton
+          onClick={this.downloadJson}
+          label="Download JSON"
+          secondary
+        />
+      );
+    }
+
     return (
       <div>
         <div className="container">
@@ -38,11 +50,7 @@ export default class DataLayers extends Component {
             <h3 className="no-margin tabTitle">Data Layers</h3>
           </div>
           <div className="halfColumn" style={{ height: '75px', paddingTop: '19.5px', textAlign: 'right' }}>
-            <RaisedButton
-              onClick={this.downloadJson}
-              label="Download JSON"
-              secondary
-            />
+            {downloadButton}
           </div>
         </div>
         <div className="container">

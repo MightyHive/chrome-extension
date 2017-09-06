@@ -50,6 +50,18 @@ export default class Network extends Component {
   }
 
   render() {
+    let downloadButton = '';
+
+    if (this.props.network.all.length > 0) {
+      downloadButton = (
+        <RaisedButton
+          onClick={this.downloadCsv}
+          label="Download CSV"
+          secondary
+        />
+      );
+    }
+
     return (
       <div>
         <div className="container">
@@ -57,17 +69,13 @@ export default class Network extends Component {
             <h3 className="no-margin tabTitle">Network Activity</h3>
           </div>
           <div className="halfColumn" style={{ height: '75px', paddingTop: '19.5px', textAlign: 'right' }}>
-            <RaisedButton
-              onClick={this.downloadCsv}
-              label="Download CSV"
-              secondary
-            />
+            {downloadButton}
           </div>
         </div>
         <div className="container">
-          <h5 className="no-top-margin">Total Network Requests: {this.props.network.all.length}</h5>
+          <h5 className="no-top-margin">Total Network Requests: {this.network.all.length}</h5>
           <NetworkCalls
-            network={this.props.network}
+            network={this.network}
             currentURL={this.props.currentURL}
           />
         </div>

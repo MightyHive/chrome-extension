@@ -50,6 +50,15 @@ export default class LayersList extends Component {
       );
     }
 
-    return (<span>No data layers found.</span>);
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          padding: '20px',
+        }}
+      >
+        <h3>No data layers found.</h3>
+      </div>
+    );
   }
 }

@@ -31,6 +31,15 @@ export default class TrackerList extends Component {
       );
     }
 
-    return (<span>No trackers found.</span>);
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          padding: '20px',
+        }}
+      >
+        <h3>No trackers found.</h3>
+      </div>
+    );
   }
 }

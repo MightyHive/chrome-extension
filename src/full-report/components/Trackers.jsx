@@ -55,6 +55,17 @@ export default class Trackers extends Component {
 
   render() {
     const { trackers, trackerCount } = this.props;
+    let downloadButton = '';
+
+    if (trackerCount > 0) {
+      downloadButton = (
+        <RaisedButton
+          onClick={this.downloadJson}
+          label="Download JSON"
+          secondary
+        />
+      );
+    }
 
     return (
       <div>
@@ -63,11 +74,7 @@ export default class Trackers extends Component {
             <h3 className="no-margin tabTitle">Trackers</h3>
           </div>
           <div className="halfColumn" style={{ height: '75px', paddingTop: '19.5px', textAlign: 'right' }}>
-            <RaisedButton
-              onClick={this.downloadJson}
-              label="Download JSON"
-              secondary
-            />
+            {downloadButton}
           </div>
         </div>
         <div className="container">
