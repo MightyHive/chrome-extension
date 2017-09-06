@@ -3,27 +3,86 @@ import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 
-// Components
-import LayersList from './LayersList';
-
 class App extends Component {
   static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    successfulLoad: PropTypes.bool.isRequired,
-    tab: PropTypes.object.isRequired,
+    getActiveTabData: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props);
+    this.state = {
+      tab: undefined,
+      loading: true,
+      successfulLoad: false,
+    };
     this.openReport = this.openReport.bind(this);
+
+    // Cache helpers to reduce rendering
+    this.timesCheckedForUpdate = 0;
+    this.lastModifiedTimestamp = null;
+  }
+
+  componentDidMount() {
+    this.props.getActiveTabData()
+      .then((data) => {
+        if (data) {
+          this.setState({
+            tab: data,
+            successfulLoad: true,
+            loading: false,
+          });
+          this.lastModifiedTimestamp = data._lastModified;
+          setTimeout(this.checkForUpdate.bind(this), 100);
+        } else {
+          this.setState({
+            loading: false,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error('Error retrieving tab data', error);
+        this.setState({
+          loading: false,
+        });
+      });
+  }
+
+  checkForUpdate() {
+    let timeoutDuration = 100;
+
+    // If it's been open 6 seconds
+    if (this.timesToCheckForUpdate > 60) {
+      timeoutDuration = 250;
+    }
+
+    // If it's been open 30 seconds
+    if (this.timesToCheckForUpdate > 60) {
+      timeoutDuration = 500;
+    }
+
+    this.props.getActiveTabData(this.lastModifiedTimestamp)
+      .then((data) => {
+        if (data) {
+          this.setState({
+            tab: data,
+          });
+          this.lastModifiedTimestamp = data._lastModified;
+        }
+
+        this.timesCheckedForUpdate += 1;
+        setTimeout(this.checkForUpdate.bind(this), timeoutDuration);
+      })
+      .catch((error) => {
+        console.error('Error retrieving tab data', error);
+      });
   }
 
   openReport() {
-    chrome.tabs.create({ url: `/full-report.html?id=${this.props.tab.tabId}` });
+    chrome.tabs.create({ url: `/full-report.html?id=${this.state.tab.tabId}` });
   }
 
   render() {
-    const { loading, successfulLoad, tab } = this.props;
+    const { loading, successfulLoad, tab } = this.state;
 
     if (loading) {
       return (

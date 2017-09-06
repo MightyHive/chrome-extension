@@ -8,37 +8,12 @@ import AppCSS from '../styles/index.scss';
 // Data Layer Importers
 import * as util from '../chrome.utils';
 
-let tab;
-let loading = true;
-let successfulLoad = false;
+ReactDOM.render(
+  <MuiThemeProvider>
+    <App
+      getActiveTabData={util.getActiveTabData}
+    />
+  </MuiThemeProvider>,
+  document.getElementById('app'));
 
-function renderApp() {
-  ReactDOM.render(
-    <MuiThemeProvider>
-      <App
-        tab={tab}
-        successfulLoad={successfulLoad}
-        loading={loading}
-      />
-    </MuiThemeProvider>,
-    document.getElementById('app'));
-}
-
-// Pull tab data from Background
-util.getActiveTabData()
-  .then((data) => {
-    tab = data;
-    if (data) {
-      successfulLoad = true;
-    }
-    loading = false;
-    renderApp();
-  })
-  .catch((error) => {
-    console.error('Error retrieving tab data', error);
-    loading = false;
-    renderApp();
-  });
-
-renderApp();
 injectTapEventPlugin();

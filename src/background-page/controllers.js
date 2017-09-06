@@ -26,11 +26,18 @@ export default function controllers(storage) {
   function getTab(request, sender, sendResponse) {
     console.log('Tab Request Received for tab ', request.body.tabId);
     const data = storage.getTabData(request.body.tabId);
-    if (data) {
-      sendResponse({ data, status: 200 });
-    } else {
-      sendResponse({ status: 404, error: 'Tab data not found.' });
+    // Check if data has been modified
+    const tabTimestamp = data._lastModified;
+    if (request.body.timestamp && request.body.timestamp === tabTimestamp) {
+      console.log('Tab data not modified since last transmition');
+      return sendResponse({ status: 304 });
     }
+
+    if (data) {
+      return sendResponse({ data, status: 200 });
+    }
+
+    return sendResponse({ status: 404, error: 'Tab data not found.' });
   }
 
   // Data Layers Controller

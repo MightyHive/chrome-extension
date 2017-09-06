@@ -27,6 +27,7 @@ export default class Tab {
       },
       trackers: {},
       trackerCount: 0,
+      _lastModified: new Date().getTime(),
     };
   }
   /**
@@ -38,6 +39,12 @@ export default class Tab {
       return this._data.networkCalls.tabContent;
     }
     return this._data.networkCalls.all;
+  }
+  /**
+   * Updates last modified timestamp
+   */
+  registerUpdate() {
+    this._data._lastModified = new Date().getTime();
   }
   /**
    * Returns only the requested Tab property.
@@ -69,6 +76,7 @@ export default class Tab {
       this._data.networkCalls.tabContent.push(networkCall);
     }
     this._data.networkCalls.all.push(networkCall);
+    this.registerUpdate();
 
     try {
       console.log('Is tracked host?', networkCall.parsedUrl.rootHost, isTrackedHost(networkCall.parsedUrl.rootHost));
@@ -86,6 +94,7 @@ export default class Tab {
    */
   putDataLayer(dataLayers) {
     this._data.dataLayers = dataLayers;
+    this.registerUpdate();
   }
   /**
    * Verifies if a network call is a tracker, and appends it separately under the
@@ -120,6 +129,7 @@ export default class Tab {
     } catch (e) {
       console.error('Error parsing potential tracker', e);
     }
+    this.registerUpdate();
   }
 }
 

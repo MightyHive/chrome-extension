@@ -23,7 +23,7 @@ export function sendActiveTabMessage(message, callback) {
  * Requests data from the current active tab from the Background page.
  * @param {function} callback - function called when listener is triggered.
  */
-export function getActiveTabData() {
+export function getActiveTabData(timestamp = null) {
   return new Promise((resolve, reject) => {
     chrome.tabs.query({
       active: true,
@@ -33,11 +33,16 @@ export function getActiveTabData() {
         endpoint: '/GET/tab',
         body: {
           tabId: tabs[0].id,
+          timestamp,
         },
       }, (response) => {
-        console.log(response);
+        console.log(response.status);
         if (response.status === 200) {
           resolve(response.data);
+        // 304 indicates data hasn't been modified since last request
+        } else if (response.status === 304) {
+          console.log('data cached via server');
+          resolve(null, response.status);
         } else {
           reject(response);
         }
