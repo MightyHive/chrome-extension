@@ -1,3 +1,5 @@
+import Rx from 'rxjs/Rx';
+
 export function messageListener(response, callback) {
   return chrome.runtime.onMessage.addListener(
     (request, sender, sendResponse) => {
@@ -6,6 +8,20 @@ export function messageListener(response, callback) {
       });
       callback(request.data);
     });
+}
+
+/**
+ * Get active tab ID.
+ */
+export function getActiveTab() {
+  return new Promise((resolve) => {
+    chrome.tabs.query({
+      active: true,
+      currentWindow: true,
+    }, (tabs) => {
+      resolve(tabs[0].id);
+    });
+  });
 }
 
 export function sendActiveTabMessage(message, callback) {
@@ -36,17 +52,29 @@ export function getActiveTabData(timestamp = null) {
           timestamp,
         },
       }, (response) => {
-        console.log(response.status);
         if (response.status === 200) {
           resolve(response.data);
         // 304 indicates data hasn't been modified since last request
         } else if (response.status === 304) {
-          console.log('data cached via server');
           resolve(null, response.status);
         } else {
           reject(response);
         }
       });
+    });
+  });
+}
+
+/**
+ * Requests data from the current active tab from the Background page.
+ */
+export function activeTabConnection(callback) {
+  getActiveTab()
+  .then((activeTabId) => {
+    const port = chrome.runtime.connect({ name: activeTabId.toString() });
+    port.onMessage.addListener((message) => {
+      console.log('message', message);
+      callback(message.data);
     });
   });
 }

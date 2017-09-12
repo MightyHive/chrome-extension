@@ -24,12 +24,10 @@ export default function controllers(storage) {
     sendResponse({ status: 200 });
   }
   function getTab(request, sender, sendResponse) {
-    console.log('Tab Request Received for tab ', request.body.tabId);
     const data = storage.getTabData(request.body.tabId);
     // Check if data has been modified
     const tabTimestamp = data._lastModified;
     if (request.body.timestamp && request.body.timestamp === tabTimestamp) {
-      console.log('Tab data not modified since last transmition');
       return sendResponse({ status: 304 });
     }
 
@@ -43,4 +41,26 @@ export default function controllers(storage) {
   // Data Layers Controller
   runtimeListener('/POST/data-layers', addDataLayers);
   runtimeListener('/GET/tab', getTab);
+
+  chrome.runtime.onConnect.addListener((port) => {
+    // Due to API restrictions, this is the only way to send this data
+    let listener;
+    const tabId = Number(port.name);
+    console.log('Port connection-->', port);
+    storage.addListener(tabId, (data, listenerId) => {
+      port.postMessage({ data });
+      listener = listenerId;
+    });
+    // Remove the listener when the connection closes
+    port.onDisconnect.addListener((event) => {
+      if (event.error) {
+        console.log(`Disconnected due to an error: ${event.error.message}`);
+      }
+      console.log(`Closing connection for Tab ${tabId}`);
+      storage.removeListener(tabId, listener);
+    });
+    port.onMessage.addListener((msg) => {
+      console.log('Message from port-->', msg);
+    });
+  });
 }

@@ -79,7 +79,6 @@ export default class Tab {
     this.registerUpdate();
 
     try {
-      console.log('Is tracked host?', networkCall.parsedUrl.rootHost, isTrackedHost(networkCall.parsedUrl.rootHost));
       if (isTrackedHost(networkCall.parsedUrl.rootHost)) {
         this.putPotentialTracker(networkCall);
       }
@@ -111,8 +110,6 @@ export default class Tab {
         const trackerId = tracker.trackerId;
         tracker.matches.some((pattern) => {
           // Verify the network call is one that is a tracker
-          console.log(`Testing endpoint ${pattern} for against call path ${networkCall.parsedUrl.hostname + networkCall.parsedUrl.pathname}`);
-          console.log('Did test succeed?', networkCall.match(pattern));
           if (networkCall.match(pattern)) {
             // Place in the trackers if existing
             if (tabTrackers[trackerId]) {

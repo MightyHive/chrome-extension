@@ -5,7 +5,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 class App extends Component {
   static propTypes = {
-    getActiveTabData: PropTypes.func.isRequired,
+    activeTabConnection: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -16,65 +16,22 @@ class App extends Component {
       successfulLoad: false,
     };
     this.openReport = this.openReport.bind(this);
-
-    // Cache helpers to reduce rendering
-    this.timesCheckedForUpdate = 0;
-    this.lastModifiedTimestamp = null;
   }
 
   componentDidMount() {
-    this.props.getActiveTabData()
-      .then((data) => {
+    try {
+      this.props.activeTabConnection((data) => {
         if (data) {
           this.setState({
             tab: data,
             successfulLoad: true,
             loading: false,
           });
-          this.lastModifiedTimestamp = data._lastModified;
-          setTimeout(this.checkForUpdate.bind(this), 100);
-        } else {
-          this.setState({
-            loading: false,
-          });
         }
-      })
-      .catch((error) => {
-        console.error('Error retrieving tab data', error);
-        this.setState({
-          loading: false,
-        });
       });
-  }
-
-  checkForUpdate() {
-    let timeoutDuration = 100;
-
-    // If it's been open 6 seconds
-    if (this.timesToCheckForUpdate > 60) {
-      timeoutDuration = 250;
+    } catch (e) {
+      console.error('Error initiating UI: ', e);
     }
-
-    // If it's been open 30 seconds
-    if (this.timesToCheckForUpdate > 60) {
-      timeoutDuration = 500;
-    }
-
-    this.props.getActiveTabData(this.lastModifiedTimestamp)
-      .then((data) => {
-        if (data) {
-          this.setState({
-            tab: data,
-          });
-          this.lastModifiedTimestamp = data._lastModified;
-        }
-
-        this.timesCheckedForUpdate += 1;
-        setTimeout(this.checkForUpdate.bind(this), timeoutDuration);
-      })
-      .catch((error) => {
-        console.error('Error retrieving tab data', error);
-      });
   }
 
   openReport() {
@@ -83,7 +40,6 @@ class App extends Component {
 
   render() {
     const { loading, successfulLoad, tab } = this.state;
-
     if (loading) {
       return (
         <div className="center">

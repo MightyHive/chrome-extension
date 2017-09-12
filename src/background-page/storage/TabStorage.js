@@ -8,7 +8,69 @@ import Tab from './Tab';
 export default class TabStorage {
   constructor() {
     this._storage = {};
+    this._listeners = {};
+    this._listenerId = 0;
     this._size = 0;
+  }
+  /**
+   * Adds a listener that emits Tab data when an update is registered with that Tab.
+   * @param {number} tabId - Unique Chrome Tab ID number. Not based on tab order.
+   */
+  addListener(tabId, callback) {
+    // Deny undefined tabs to avoid memory leaks
+    if (!this._storage[tabId]) {
+      console.error(`Tab ${tabId} not found. No listener added.`);
+      return;
+    }
+    // Check if the tabId exists in the listeners storage
+    if (!this._listeners[tabId]) {
+      this._listeners[tabId] = [];
+    }
+
+    this._listeners[tabId].push({
+      listenerId: this._listenerId,
+      callback,
+    });
+    this._listenerId += 1;
+    // Send the initial data so the listener has that and the listenerId;
+    this.registerUpdate(tabId);
+  }
+  /**
+   * Removes an existing listener
+   * @param {number} tabId - Unique Chrome Tab ID number. Not based on tab order.
+   * @param {number} listenerId - Unique listener Id.
+   */
+  removeListener(tabId, targetListenerId) {
+    if (this._listeners[tabId] && this._listeners[tabId].length > 0) {
+      const index = this._listeners[tabId]
+          .findIndex(({ listenerId }) => listenerId === targetListenerId);
+
+      if (index === -1) {
+        console.warn(`Listener ${targetListenerId} not found for tab ${tabId}`);
+        return;
+      }
+      // Remove the listener
+      this._listeners[tabId].splice(index, 1);
+
+      if (this._listeners[tabId].length <= 0) {
+        delete this._listeners[tabId];
+      }
+    }
+  }
+  /**
+   * Registers an update to a tabId.
+   * @param {number} tabId - Unique Chrome Tab ID number. Not based on tab order.
+   */
+  registerUpdate(tabId) {
+    try {
+      if (this._listeners[tabId] && this._listeners[tabId].length > 0) {
+        this._listeners[tabId].forEach(({ listenerId, callback }) => {
+          callback(this.getTabData(tabId), listenerId);
+        });
+      }
+    } catch (e) {
+      console.error('Error registering update: ', e);
+    }
   }
   /**
    * Creates a record of a Chrome Tab. Note that this method overrides the existing
@@ -40,6 +102,10 @@ export default class TabStorage {
       delete this._storage[tabId];
     }
 
+    if (this._listeners[tabId]) {
+      delete this._listeners[tabId];
+    }
+
     return deletedTab;
   }
   /**
@@ -63,6 +129,7 @@ export default class TabStorage {
 
     if (tab) {
       tab.putNetworkCall(networkCall);
+      this.registerUpdate(networkCall.tabId);
     }
   }
   /**
@@ -75,6 +142,7 @@ export default class TabStorage {
 
     if (tab) {
       tab.putDataLayer(dataLayer);
+      this.registerUpdate(tabId);
     }
   }
   /**

@@ -12,6 +12,7 @@ ReactDOM.render(
   <MuiThemeProvider>
     <App
       getActiveTabData={util.getActiveTabData}
+      activeTabConnection={util.activeTabConnection}
     />
   </MuiThemeProvider>,
   document.getElementById('app'));
