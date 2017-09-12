@@ -68,6 +68,11 @@ export default class TabStorage {
           callback(this.getTabData(tabId), listenerId);
         });
       }
+
+      chrome.browserAction.setBadgeText({
+        text: this._storage[tabId]._data.trackerCount.toString(),
+        tabId,
+      });
     } catch (e) {
       console.error('Error registering update: ', e);
     }
