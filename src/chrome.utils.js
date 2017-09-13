@@ -1,5 +1,3 @@
-import Rx from 'rxjs/Rx';
-
 export function messageListener(response, callback) {
   return chrome.runtime.onMessage.addListener(
     (request, sender, sendResponse) => {
@@ -67,15 +65,13 @@ export function getActiveTabData(timestamp = null) {
 
 /**
  * Requests data from the current active tab from the Background page.
+ * This function uses a long-term stream rather than a one-time connection.
  */
 export function activeTabConnection(callback) {
   getActiveTab()
   .then((activeTabId) => {
     const port = chrome.runtime.connect({ name: activeTabId.toString() });
-    port.onMessage.addListener((message) => {
-      console.log('message', message);
-      callback(message.data);
-    });
+    port.onMessage.addListener(message => callback(message));
   });
 }
 
@@ -122,5 +118,33 @@ export function executeJSOnPage(script) {
     chrome.tabs.executeScript(tabs[0].id, {
       file: script,
     });
+  });
+}
+
+/**
+ * Saves key/value pairs to Chrome Sync storage.
+ * @param {object} data
+ * See: https://developer.chrome.com/extensions/storage
+ */
+export function saveToStorage(data) {
+  return new Promise((resolve, reject) => {
+    if (typeof data !== 'object' || data === null) {
+      reject(new Error('Incorrect data type. Storage data must be an object'));
+    }
+
+    chrome.storage.sync.set(data, () => resolve());
+  });
+}
+
+/**
+ * Retrieves key(s) from Chrome Sync storage.
+ * @param {string|array|object} key(s) - A single key to get, list of keys to get,
+ * or a dictionary specifying default values.
+ *
+ * See: https://developer.chrome.com/extensions/storage
+ */
+export function getFromStorage(key) {
+  return new Promise((resolve) => {
+    chrome.storage.sync.get(key, data => resolve(data));
   });
 }

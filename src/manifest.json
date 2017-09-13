@@ -27,6 +27,7 @@
     "tabs",
     "webRequest",
     "webNavigation",
+    "storage",
     "*://*/*"
   ],
   "content_scripts": [

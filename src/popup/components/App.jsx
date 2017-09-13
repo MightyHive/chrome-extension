@@ -20,11 +20,18 @@ class App extends Component {
 
   componentDidMount() {
     try {
-      this.props.activeTabConnection((data) => {
-        if (data) {
+      this.props.activeTabConnection((message) => {
+        if (message.data && !message.error) {
           this.setState({
-            tab: data,
+            tab: message.data,
             successfulLoad: true,
+            loading: false,
+          });
+        }
+
+        if (message.error) {
+          this.setState({
+            successfulLoad: false,
             loading: false,
           });
         }
@@ -61,7 +68,7 @@ class App extends Component {
         <div className="container">
           <div className="trackerCount">
             <div className="content">
-              {tab.trackerCount}
+              {tab.trackerCount || 0}
             </div>
             <div className="heading">
               <h4 className="thin">Trackers</h4>

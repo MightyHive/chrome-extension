@@ -65,7 +65,12 @@ export default class TabStorage {
     try {
       if (this._listeners[tabId] && this._listeners[tabId].length > 0) {
         this._listeners[tabId].forEach(({ listenerId, callback }) => {
-          callback(this.getTabData(tabId), listenerId);
+          let tabData = this.getTabData(tabId);
+
+          if (!tabData) {
+            tabData = { error: new Error('Tab data not found.') };
+          }
+          callback(tabData, listenerId);
         });
       }
 

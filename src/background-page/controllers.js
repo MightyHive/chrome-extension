@@ -46,7 +46,11 @@ export default function controllers(storage) {
     // Due to API restrictions, this is the only way to send this data
     let listener;
     const tabId = Number(port.name);
-    console.log('Port connection-->', port);
+
+    if (!storage.getTabData(tabId)) {
+      port.postMessage({ error: new Error('Tab data not found.') });
+    }
+
     storage.addListener(tabId, (data, listenerId) => {
       port.postMessage({ data });
       listener = listenerId;

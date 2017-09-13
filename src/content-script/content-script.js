@@ -1,4 +1,5 @@
 import * as utils from './content-script-utils';
+import * as chromeUtils from '../chrome.utils';
 
 let loadedDataLayers = [];
 
@@ -8,7 +9,17 @@ document.body.addEventListener('mh-data-layer-loaded', (event) => {
   utils.sendDataLayers(loadedDataLayers);
 }, false);
 
-utils.injectJS(chrome.extension.getURL('injectedScript.js'));
+try {
+  chromeUtils.saveToStorage({ userLayerList: ['test', 'other'] })
+  .then(() => chromeUtils.getFromStorage('userLayerList'))
+  .then((data) => {
+    const script = document.createElement('script');
+    script.innerHTML = `window._userLayerList = ${JSON.stringify(data || [])};`;
+    document.head.appendChild(script);
+
+    utils.injectJS(chrome.extension.getURL('injectedScript.js'));
+  });
+} catch (e) {}
 
 // Respond to Extension requests for Data Layers
 utils.messageListener((request, sender, sendResponse) => {
