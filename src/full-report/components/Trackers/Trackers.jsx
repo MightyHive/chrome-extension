@@ -69,7 +69,7 @@ export default class Trackers extends Component {
 
     return (
       <div>
-        <div className="container">
+        <div className="custom-container">
           <div className="halfColumn" style={{ height: '75px', lineHeight: '75px' }}>
             <h3 className="no-margin tabTitle">Trackers</h3>
           </div>
@@ -77,7 +77,7 @@ export default class Trackers extends Component {
             {downloadButton}
           </div>
         </div>
-        <div className="container">
+        <div className="custom-container">
           <Paper zDepth={1}>
             <TrackerList
               trackers={trackers}

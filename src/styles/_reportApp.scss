@@ -27,6 +27,12 @@
     h4, h6 {
       margin: 0;
     }
+
+    h6 {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 
   .tabTitle {
@@ -43,6 +49,36 @@
     .layer-label {
       font-size: 16px;
       font-family: "Roboto", sans-serif;
+    }
+  }
+
+  .trackerTitle {
+    font-family: 'Roboto Bold'; 
+  }
+
+  .trackerCallDetails {
+    padding-left: 40px;
+
+    .trackerMeta {
+      text-align: center;
+      padding-bottom: 20px;
+
+      .trackerMetaItem {
+        border-right: 1px solid rgba(0, 0, 0, .06);
+      }
+
+      .trackerMetaItem:last-child {
+        border-right: none;
+      }
+      
+      .trackerMetaTitle {
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+    }
+
+    .trackerQuery {
+      border-top: 1px solid rgba(0, 0, 0, .06);
     }
   }
 }

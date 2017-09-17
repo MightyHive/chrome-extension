@@ -18,7 +18,11 @@ export default class TrackerListItem extends Component {
     if (trackerData) {
       return (
         <ListItem
-          primaryText={`${trackerData.displayName} (${trackerCalls.length})`}
+          primaryText={(
+            <div className="trackerTitle">
+              {`${trackerData.displayName} (${trackerCalls.length})`}
+            </div>
+          )}
           primaryTogglesNestedList
           nestedItems={[
             (trackerCalls.map(tracker => (

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListItem } from 'material-ui/List';
 import * as url from 'url';
 import JSONTree from 'react-json-tree';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 
 const theme = {
   scheme: 'monokai',
@@ -37,26 +37,41 @@ export default class TrackerCallDetails extends Component {
 
     if (Object.keys(query).length !== 0 && query.constructor === Object) {
       querySection = (
-        <span>
-          <h3>Query Parameters</h3>
+        <div className="trackerQuery">
+          <h4>Query Parameters</h4>
           <JSONTree
             data={query}
             theme={theme}
             shouldExpandNode={() => false}
             invertTheme
           />
-        </span>
+        </div>
       );
     }
 
     if (tracker) {
       return (
-        <div style={{ paddingLeft: '40px' }}>
-          <h5 className="no-margin">Method: {tracker.method}</h5>
-          <h5 className="no-margin">Status: {tracker.statusCode}</h5>
-          <h5 className="no-margin">Type: {tracker.type}</h5>
-          {querySection}
-        </div>
+        <Grid fluid className="trackerCallDetails">
+          <Row className="trackerMeta">
+            <Col xs className="trackerMetaItem">
+              <h5 className="trackerMetaTitle">Method:</h5>
+              <span>{tracker.method}</span>
+            </Col>
+            <Col xs className="trackerMetaItem">
+              <h5 className="trackerMetaTitle">Status:</h5>
+              <span>{tracker.statusCode}</span>
+            </Col>
+            <Col xs className="trackerMetaItem">
+              <h5 className="trackerMetaTitle">Type:</h5>
+              <span>{tracker.type}</span>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs>
+              {querySection}
+            </Col>
+          </Row>
+        </Grid>
       );
     }
     return (<span>No tracker details found.</span>);
