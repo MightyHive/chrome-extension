@@ -4,7 +4,7 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import CircularProgress from 'material-ui/CircularProgress';
 
 // Components
-import DataLayers from './DataLayers';
+import DataLayers from './DataLayers/DataLayers';
 import Trackers from './Trackers';
 import Network from './Network';
 

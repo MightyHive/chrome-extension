@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import LayersList from './LayersList';
-import * as chromeUtils from '../../chrome.utils';
+import DefaultLayers from './DefaultLayers';
+import CustomLayers from './CustomLayers';
+import * as chromeUtils from '../../../chrome.utils';
 
 export default class DataLayers extends Component {
   static propTypes = {
@@ -31,6 +32,28 @@ export default class DataLayers extends Component {
   }
 
   render() {
+    const defaultLayers = this.layers.filter(layer => layer.type !== 'userDefined');
+    const userLayers = this.layers.filter(layer => layer.type === 'userDefined');
+    const theme = {
+      scheme: 'monokai',
+      author: 'wimer hazenberg (http://www.monokai.nl)',
+      base00: '#272822',
+      base01: '#383830',
+      base02: '#49483e',
+      base03: '#75715e',
+      base04: '#a59f85',
+      base05: '#f8f8f2',
+      base06: '#f5f4f1',
+      base07: '#f9f8f5',
+      base08: '#f92672',
+      base09: '#fd971f',
+      base0A: '#f4bf75',
+      base0B: '#a6e22e',
+      base0C: '#a1efe4',
+      base0D: '#66d9ef',
+      base0E: '#ae81ff',
+      base0F: '#cc6633',
+    };
     let downloadButton = '';
 
     if (this.layers.length > 0) {
@@ -54,8 +77,9 @@ export default class DataLayers extends Component {
           </div>
         </div>
         <div className="container">
-          <Paper zDepth={1}>
-            <LayersList layers={this.layers} />
+          <Paper zDepth={1} style={{ padding: '20px' }}>
+            <DefaultLayers layers={defaultLayers} theme={theme} />
+            <CustomLayers layers={userLayers} theme={theme} />
           </Paper>
         </div>
       </div>
