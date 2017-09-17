@@ -22,15 +22,15 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    chromeUtils.getFromStorage('userLayerList')
+    chromeUtils.getFromStorage('customLayerList')
     .then((data) => {
-      if (data && data.userLayerList) {
+      if (data && data.customLayerList) {
         this.setState({
-          customDataLayers: data.userLayerList.map(({ key }) => key),
+          customDataLayers: data.customLayerList.map(({ key }) => key),
         });
       }
     })
-    .catch(e => console.error('Error getting userLayerList: ', e));
+    .catch(e => console.error('Error getting customLayerList: ', e));
   }
 
   addCustomDataLayer(layer) {
@@ -69,7 +69,7 @@ export default class App extends Component {
 
   saveDataLayers() {
     chromeUtils.saveToStorage({
-      userLayerList: this.state.customDataLayers.map((key) => {
+      customLayerList: this.state.customDataLayers.map((key) => {
         return { key, type: 'userDefined' };
       }),
     })

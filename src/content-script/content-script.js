@@ -10,11 +10,11 @@ document.body.addEventListener('mh-data-layer-loaded', (event) => {
 }, false);
 
 try {
-  chromeUtils.getFromStorage('userLayerList')
+  chromeUtils.getFromStorage('customLayerList')
   .then((data) => {
-    if (data && data.userLayerList) {
+    if (data && data.customLayerList) {
       const script = document.createElement('script');
-      script.innerHTML = `window._userLayerList = ${JSON.stringify(data.userLayerList || [])};`;
+      script.innerHTML = `window._customLayerList = ${JSON.stringify(data.customLayerList || [])};`;
       document.head.appendChild(script);
     }
     utils.injectJS(chrome.extension.getURL('injectedScript.js'));

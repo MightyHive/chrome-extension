@@ -22,13 +22,13 @@ function getDataLayers() {
     return result;
   }
 
-  let userLayerList = [];
+  let customLayerList = [];
   // Look for user-defined data layers
-  if (window._userLayerList) {
-    userLayerList = window._userLayerList;
+  if (window._customLayerList) {
+    customLayerList = window._customLayerList;
   }
 
-  const combinedLayerConfig = dataLayerConfig.layers.concat(userLayerList);
+  const combinedLayerConfig = dataLayerConfig.layers.concat(customLayerList);
   const loadedDataLayers = searchForDataLayers(combinedLayerConfig);
 
 
