@@ -23,7 +23,10 @@ Due to the isolated runtime design of Chrome's extensions, there are multiple se
   - The primary UI of the application, the Popup page is displayed when the user clicks on the Browser Action button (the Mighty Hive icon) in the corner of their browser. The Popup page requests data from the Background Script and hydrates itself when received. 
 
 **Full Report Page (w/ Report Script)**
-  - Opened via a button from the Popup page, the Full Report fetches tab data from the Background Script and populates a more verbose UI that allows users a more intricate look at their page's activity. 
+  - Opened via a button from the Popup page, the Full Report fetches tab data from the Background Script and populates a more verbose UI that allows users a more intricate look at their page's activity.
+
+**Options Page**
+  - Displays a basic UI that enables users to change their options from the Chrome Extensions management page. This page is actually opened in a modal on that page, not as a new tab. This is to accomodate Chrome's [planned deprecation](https://developer.chrome.com/extensions/optionsV2) of the "new tab" functionality. 
 
 ## Setup
 **Requirements:**
