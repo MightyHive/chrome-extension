@@ -14,6 +14,7 @@
     "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "react-flexbox-grid": "^1.1.5",
     "react-json-tree": "^0.10.9",
     "react-tap-event-plugin": "^2.0.1",
     "rxjs": "^5.4.3",

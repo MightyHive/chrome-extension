@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem } from 'material-ui/List';
 
-import NetworkCallConfig from '../../config/network-call.config';
+import NetworkCallConfig from '../../../config/network-call.config';
 import TrackerCallDetails from './TrackerCallDetails';
 
 export default class TrackerListItem extends Component {

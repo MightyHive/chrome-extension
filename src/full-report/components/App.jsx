@@ -5,7 +5,7 @@ import CircularProgress from 'material-ui/CircularProgress';
 
 // Components
 import DataLayers from './DataLayers/DataLayers';
-import Trackers from './Trackers';
+import Trackers from './Trackers/Trackers';
 import Network from './Network';
 
 export default class App extends Component {

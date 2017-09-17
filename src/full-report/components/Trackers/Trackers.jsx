@@ -4,8 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
 
 import TrackerList from './TrackerList';
-import NetworkCallConfig from '../../config/network-call.config';
-import * as chromeUtils from '../../chrome.utils';
+import NetworkCallConfig from '../../../config/network-call.config';
+import * as chromeUtils from '../../../chrome.utils';
 
 export default class Trackers extends Component {
   static propTypes = {
