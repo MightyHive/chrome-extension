@@ -23,6 +23,12 @@ html, body {
   float: left;
 }
 
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .no-margin {
   margin: 0;
 }
@@ -49,4 +55,4 @@ html, body {
 }
 
 // Import individual app SCSS
-@import 'popupApp', 'reportApp';
+@import 'popupApp', 'reportApp', 'optionsApp';

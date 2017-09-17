@@ -38,6 +38,10 @@ class App extends Component {
       });
     } catch (e) {
       console.error('Error initiating UI: ', e);
+      this.setState({
+        successfulLoad: false,
+        loading: false,
+      });
     }
   }
 

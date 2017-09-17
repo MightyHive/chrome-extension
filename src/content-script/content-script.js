@@ -10,13 +10,13 @@ document.body.addEventListener('mh-data-layer-loaded', (event) => {
 }, false);
 
 try {
-  chromeUtils.saveToStorage({ userLayerList: ['test', 'other'] })
-  .then(() => chromeUtils.getFromStorage('userLayerList'))
+  chromeUtils.getFromStorage('userLayerList')
   .then((data) => {
-    const script = document.createElement('script');
-    script.innerHTML = `window._userLayerList = ${JSON.stringify(data || [])};`;
-    document.head.appendChild(script);
-
+    if (data && data.userLayerList) {
+      const script = document.createElement('script');
+      script.innerHTML = `window._userLayerList = ${JSON.stringify(data.userLayerList || [])};`;
+      document.head.appendChild(script);
+    }
     utils.injectJS(chrome.extension.getURL('injectedScript.js'));
   });
 } catch (e) {}

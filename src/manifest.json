@@ -20,8 +20,12 @@
     }
   },
   "background": {
-      "scripts": ["backgroundScript.js"]
-    },
+    "scripts": ["backgroundScript.js"]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
   "permissions": [
     "downloads",
     "tabs",

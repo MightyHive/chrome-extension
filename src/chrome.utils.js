@@ -132,7 +132,11 @@ export function saveToStorage(data) {
       reject(new Error('Incorrect data type. Storage data must be an object'));
     }
 
-    chrome.storage.sync.set(data, () => resolve());
+    try {
+      chrome.storage.sync.set(data, () => resolve());
+    } catch (e) {
+      reject(e);
+    }
   });
 }
 
@@ -144,7 +148,11 @@ export function saveToStorage(data) {
  * See: https://developer.chrome.com/extensions/storage
  */
 export function getFromStorage(key) {
-  return new Promise((resolve) => {
-    chrome.storage.sync.get(key, data => resolve(data));
+  return new Promise((resolve, reject) => {
+    try {
+      chrome.storage.sync.get(key, data => resolve(data));
+    } catch (e) {
+      reject(e);
+    }
   });
 }

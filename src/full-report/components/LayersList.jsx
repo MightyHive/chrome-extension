@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import JSONTree from 'react-json-tree';
-import Divider from 'material-ui/Divider';
+import FlatButton from 'material-ui/FlatButton';
 
 const theme = {
   scheme: 'monokai',
@@ -33,20 +33,86 @@ export default class LayersList extends Component {
     const layers = this.props.layers;
 
     if (layers.length > 0) {
+      const defaultLayers = layers.filter(layer => layer.type !== 'userDefined');
+      const userLayers = layers.filter(layer => layer.type === 'userDefined');
+      let defaultLayersElement = (<div>No layers found.</div>);
+      let userLayersElement = (
+        <div
+          style={{
+            textAlign: 'center',
+            padding: '20px',
+          }}
+        >
+          <h4>Custom data layers</h4>
+          No custom data layers found. Add custom data layers <a href="#" onClick={() => chrome.runtime.openOptionsPage()}>in the options.</a>
+        </div>
+        );
+
+      if (defaultLayers.length > 0) {
+        defaultLayersElement = (
+          <ul className="layers-list">
+            {defaultLayers.map(layer => (
+              <li key={layer.id}>
+                <span className="layer-label">{layer.displayName}</span>
+                <JSONTree
+                  data={layer.data}
+                  theme={theme}
+                  shouldExpandNode={() => false}
+                  invertTheme
+                />
+              </li>
+            ))}
+          </ul>
+        );
+      }
+
+      if (userLayers.length > 0) {
+        userLayersElement = (
+          <div>
+            <div
+              className="clearfix"
+              style={{
+                height: '40px',
+                lineHeight: '40px',
+              }}
+            >
+              <div className="halfColumn">
+                <h4>Custom data layers</h4>
+              </div>
+              <div
+                className="halfColumn"
+                style={{
+                  textAlign: 'right',
+                }}
+              >
+                <FlatButton
+                  label="Options"
+                  onClick={() => chrome.runtime.openOptionsPage()}
+                />
+              </div>
+            </div>
+            <ul className="layers-list">
+              {userLayers.map(layer => (
+                <li key={layer.key}>
+                  <span className="layer-label">{layer.key}</span>
+                  <JSONTree
+                    data={layer.data}
+                    theme={theme}
+                    shouldExpandNode={() => false}
+                    invertTheme
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        );
+      }
+
       return (
-        <ul className="layers-list">
-          {layers.map(layer => (
-            <li key={layer.id}>
-              <span className="layer-label">{layer.displayName}</span>
-              <JSONTree
-                data={layer.data}
-                theme={theme}
-                shouldExpandNode={() => false}
-                invertTheme
-              />
-            </li>
-          ))}
-        </ul>
+        <div className="container">
+          {defaultLayersElement}
+          {userLayersElement}
+        </div>
       );
     }
 

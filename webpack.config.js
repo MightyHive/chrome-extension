@@ -13,6 +13,7 @@ module.exports = {
     popupApp: './src/popup/popup.jsx',
     backgroundScript: './src/background-page/background.js',
     reportScript: './src/full-report/report.jsx',
+    optionsScript: './src/options/options.jsx',
     contentScript: './src/content-script/content-script.js',
     injectedScript: './src/injected-script/injected.js',
   },
@@ -24,6 +25,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  devtool: 'source-map',
   module: {
     loaders: [
       {
@@ -62,7 +64,7 @@ module.exports = {
     ],
   },
   plugins: [
-    // new WebpackCleanupPlugin(),
+    new WebpackCleanupPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
@@ -78,14 +80,14 @@ module.exports = {
         to: './',
       },
     ]),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   compress: {
-    //     warnings: false,
-    //     screw_ie8: true,
-    //     drop_console: true,
-    //     drop_debugger: true,
-    //   },
-    // }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false,
+        screw_ie8: true,
+        drop_console: true,
+        drop_debugger: true,
+      },
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',
@@ -110,6 +112,14 @@ module.exports = {
       },
       chunks: ['reportScript'],
       filename: 'full-report.html',
+    }),
+    new HtmlWebpackPlugin({
+      template: './src/options/options.html',
+      files: {
+        css: ['style.css'],
+      },
+      chunks: ['optionsScript'],
+      filename: 'options.html',
     }),
   ],
 };
