@@ -25,7 +25,6 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  devtool: 'source-map',
   module: {
     loaders: [
       {
@@ -74,10 +73,12 @@ module.exports = {
       {
         from: 'assets',
         to: './assets',
+        ignore: ['.DS_Store', '/**/.DS_Store'],
       },
       {
         from: './src/manifest.json',
         to: './',
+        ignore: ['.DS_Store', '/**/.DS_Store'],
       },
     ]),
     new webpack.optimize.UglifyJsPlugin({
