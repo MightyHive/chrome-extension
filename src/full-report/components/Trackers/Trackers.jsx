@@ -1,46 +1,30 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
+import json2csv from 'json2csv';
 
 import TrackerList from './TrackerList';
-import NetworkCallConfig from '../../../config/network-call.config';
 import * as chromeUtils from '../../../chrome.utils';
+import * as downloadUtils from './downloadUtils';
 
 export default class Trackers extends Component {
   static propTypes = {
     trackers: PropTypes.object.isRequired,
     trackerCount: PropTypes.number.isRequired,
-    network: PropTypes.object.isRequired,
   }
 
   constructor(props) {
     super(props);
     this.downloadJson = this.downloadJson.bind(this);
+    this.downloadCsv = this.downloadCsv.bind(this);
     this.trackers = this.props.trackers;
   }
 
-  // Tracker data needs to be parsed prior to download, to include the tracker
-  // metadata as well as clean out internal Chrome properties from the tracker network
-  // calls.
   downloadJson() {
-    const parsedTrackerData = Object.keys(this.trackers).map((trackerId) => {
-      const trackerCalls = this.trackers[trackerId];
-      const trackerData = NetworkCallConfig.trackerData[trackerId];
-      return {
-        id: trackerId,
-        displayName: trackerData.displayName,
-        trackerCalls: trackerCalls.map(tracker =>
-          ({
-            url: tracker.url,
-            method: tracker.data.method,
-            status: tracker.data.statusCode,
-            type: tracker.data.type,
-            timeStamp: tracker.data.timeStamp,
-          }),
-        ),
-      };
-    });
+    const parsedTrackerData = downloadUtils.parseTrackers(this.trackers);
     const trackersString = JSON.stringify(parsedTrackerData);
     const trackersB64 = new Buffer(trackersString).toString('base64');
 
@@ -53,17 +37,71 @@ export default class Trackers extends Component {
       });
   }
 
+  downloadCsv() {
+    const fields = [
+      {
+        label: 'Tracker ID',
+        value: 'trackerId',
+      },
+      {
+        label: 'Tracker Name',
+        value: 'displayName',
+      },
+      {
+        label: 'URL',
+        value: 'url',
+      },
+      {
+        label: 'Method',
+        value: 'method',
+      },
+      {
+        label: 'Status',
+        value: 'status',
+      },
+      {
+        label: 'Type',
+        value: 'type',
+      },
+      {
+        label: 'Timestamp',
+        value: 'timeStamp',
+      },
+    ];
+    const parsedTrackerData = downloadUtils.parseTrackers(this.trackers);
+    const flattenedTrackerData = downloadUtils.flattenForCSV(parsedTrackerData);
+    const csv = json2csv({
+      data: flattenedTrackerData,
+      fields,
+    });
+    const trackerB64 = new Buffer(csv).toString('base64');
+
+    chromeUtils.downloadData(
+      trackerB64,
+      {
+        mediatype: 'text/csv',
+        isBase64: true,
+        saveAs: true,
+      });
+  }
+
   render() {
     const { trackers, trackerCount } = this.props;
     let downloadButton = '';
 
     if (trackerCount > 0) {
       downloadButton = (
-        <RaisedButton
-          onClick={this.downloadJson}
-          label="Download JSON"
-          secondary
-        />
+        <IconMenu
+          iconButtonElement={(
+            <RaisedButton
+              label="Download as..."
+              secondary
+            />
+          )}
+        >
+          <MenuItem onClick={this.downloadJson} primaryText="Download JSON" />
+          <MenuItem onClick={this.downloadCsv} primaryText="Download CSV" />
+        </IconMenu>
       );
     }
 
