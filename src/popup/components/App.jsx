@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
+import IconErrorOutline from 'material-ui/svg-icons/alert/error-outline';
 
 class App extends Component {
   static propTypes = {
@@ -61,8 +62,12 @@ class App extends Component {
 
     if (!successfulLoad || !tab) {
       return (
-        <div className="center">
-          <i className="icon icon-ic_play-circle_outline_black_24dp" /> Unable to load site data.
+        <div className="errorLoading">
+          <IconErrorOutline style={{ height: '48px', width: '48px' }} />
+          <h5>
+            Unable to load site data.
+          </h5>
+          <p>So sorry. Try refreshing the page.</p>
         </div>
       );
     }
