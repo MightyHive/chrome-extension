@@ -10,6 +10,7 @@ import IconCode from 'material-ui/svg-icons/action/code';
 
 // Components
 import Home from './Home';
+import DataLayers from './DataLayers';
 
 class App extends Component {
   static propTypes = {
@@ -39,13 +40,13 @@ class App extends Component {
 
           // Hack for a known Chrome extension bug:
           // https://bugs.chromium.org/p/chromium/issues/detail?id=428044
-          const { height } = document.body.getBoundingClientRect();
+          // const { height } = document.body.getBoundingClientRect();
           // Basically, the issue stems from rapid changes in the sizing of the Popup during
           // initialization. Forcing a redraw fixes the issue, forcing the Popup window to
           // realize it's at the wrong size. Because Chrome's rendering engine checks diffs
           // on sizing changes to avoid unnecessary redraws, we have to make it a different size
           // than its previous state.
-          document.body.style.minHeight = `${(height + 1)}px`;
+          // document.body.style.minHeight = `${(height + 1)}px`;
         }
 
         if (message.error) {
@@ -74,7 +75,7 @@ class App extends Component {
     const { loading, successfulLoad, tab } = this.state;
     if (loading) {
       return (
-        <div className="center">
+        <div className="center mainView">
           <CircularProgress size={80} />
         </div>
       );
@@ -96,9 +97,7 @@ class App extends Component {
       // Experience 1
       <Home tab={tab} />,
       // Experience 2
-      (<div>
-        <span>Test</span>
-      </div>),
+      <DataLayers tab={tab} />,
       // Experience 3
       (<div>
         <span>Test two</span>
@@ -110,6 +109,15 @@ class App extends Component {
         <div className="mainView">
           {views[this.state.menuSelectedIndex]}
         </div>
+        <RaisedButton
+          label="View Full Report"
+          backgroundColor="#183063"
+          labelColor="#ffb50b"
+          fullWidth
+          onClick={this.openReport}
+          labelStyle={{ fontFamily: 'Roboto Bold' }}
+          style={{ marginTop: '20px' }}
+        />
         <BottomNavigation
           selectedIndex={this.state.selectedIndex}
           className="bottomNavigation"

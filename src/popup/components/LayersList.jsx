@@ -9,7 +9,7 @@ class LayersList extends Component {
   }
 
   render() {
-    const layers = this.props.layers;
+    const { layers } = this.props;
 
     if (layers.length > 0) {
       return (
@@ -18,7 +18,7 @@ class LayersList extends Component {
             border: '1px solid rgb(217, 217, 217)',
           }}
         >
-          <Subheader>Data Layers</Subheader>
+          <Subheader>Standard data layers</Subheader>
           {layers.map(layer => (
             <ListItem>{layer.displayName}</ListItem>
           ))}
