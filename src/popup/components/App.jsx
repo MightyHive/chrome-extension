@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
+import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
 import IconErrorOutline from 'material-ui/svg-icons/alert/error-outline';
+import IconHome from 'material-ui/svg-icons/action/home';
+import IconTimeline from 'material-ui/svg-icons/action/timeline';
+import IconCode from 'material-ui/svg-icons/action/code';
+
+// Components
+import Home from './Home';
 
 class App extends Component {
   static propTypes = {
@@ -15,6 +22,7 @@ class App extends Component {
       tab: undefined,
       loading: true,
       successfulLoad: false,
+      menuSelectedIndex: 0,
     };
     this.openReport = this.openReport.bind(this);
   }
@@ -28,6 +36,16 @@ class App extends Component {
             successfulLoad: true,
             loading: false,
           });
+
+          // Hack for a known Chrome extension bug:
+          // https://bugs.chromium.org/p/chromium/issues/detail?id=428044
+          const { height } = document.body.getBoundingClientRect();
+          // Basically, the issue stems from rapid changes in the sizing of the Popup during
+          // initialization. Forcing a redraw fixes the issue, forcing the Popup window to
+          // realize it's at the wrong size. Because Chrome's rendering engine checks diffs
+          // on sizing changes to avoid unnecessary redraws, we have to make it a different size
+          // than its previous state.
+          document.body.style.minHeight = `${(height + 1)}px`;
         }
 
         if (message.error) {
@@ -49,6 +67,8 @@ class App extends Component {
   openReport() {
     chrome.tabs.create({ url: `/full-report.html?id=${this.state.tab.tabId}` });
   }
+
+  select = index => this.setState({ menuSelectedIndex: index });
 
   render() {
     const { loading, successfulLoad, tab } = this.state;
@@ -72,36 +92,41 @@ class App extends Component {
       );
     }
 
+    const views = [
+      // Experience 1
+      <Home tab={tab} />,
+      // Experience 2
+      (<div>
+        <span>Test</span>
+      </div>),
+      // Experience 3
+      (<div>
+        <span>Test two</span>
+      </div>),
+    ];
+
     return (
       <div className="App">
-        <div className="container">
-          <div className="trackerCount">
-            <div className="content">
-              {tab.trackerCount || 0}
-            </div>
-            <div className="heading">
-              <h4 className="thin">Trackers</h4>
-            </div>
-          </div>
-          <div className="halfColumn subData">
-            <h5>Data Layers</h5>
-            <span className="data">{tab.dataLayers.length}</span>
-          </div>
-          <div className="halfColumn subData">
-            <h5>Network Calls</h5>
-            <span className="data">{tab.networkCalls.all.length}</span>
-          </div>
-
-          <RaisedButton
-            label="View Full Report"
-            backgroundColor="#183063"
-            labelColor="#ffb50b"
-            fullWidth
-            onClick={this.openReport}
-            labelStyle={{ fontFamily: 'Roboto Bold' }}
-            style={{ marginTop: '20px' }}
-          />
+        <div className="mainView">
+          {views[this.state.menuSelectedIndex]}
         </div>
+        <BottomNavigation
+          selectedIndex={this.state.selectedIndex}
+          className="bottomNavigation"
+        >
+          <BottomNavigationItem
+            icon={<IconHome />}
+            onClick={() => this.select(0)}
+          />
+          <BottomNavigationItem
+            icon={<IconCode />}
+            onClick={() => this.select(1)}
+          />
+          <BottomNavigationItem
+            icon={<IconTimeline />}
+            onClick={() => this.select(2)}
+          />
+        </BottomNavigation>
       </div>
     );
   }

@@ -19,6 +19,9 @@
     text-align: center;
     padding: 30px 0;
   }
+  .mainView {
+    min-height: 390px;
+  }
   .trackerCount {
     background: #FFFFFF;
     border-radius: 50%;
@@ -55,14 +58,7 @@
       font-size: 42px;
     }
   }
-  .network-card {
-    width: 60%;
-    min-height: 100px;
-    margin: 20px auto;
-    text-align: center;
+  .bottomNavigation {
 
-    h3 {
-      margin-top: 0;
-    }
   }
 }
