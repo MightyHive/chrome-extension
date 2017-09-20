@@ -11,6 +11,7 @@ import IconCode from 'material-ui/svg-icons/action/code';
 // Components
 import Home from './Home';
 import DataLayers from './DataLayers';
+import TrackersAndNetwork from './TrackersAndNetwork';
 
 class App extends Component {
   static propTypes = {
@@ -99,9 +100,7 @@ class App extends Component {
       // Experience 2
       <DataLayers tab={tab} />,
       // Experience 3
-      (<div>
-        <span>Test two</span>
-      </div>),
+      <TrackersAndNetwork tab={tab} />,
     ];
 
     return (

@@ -20,7 +20,8 @@
     padding: 30px 0;
   }
   .mainView {
-    min-height: 345px;
+    height: 345px;
+    overflow-y: scroll;
   }
   .trackerCount {
     background: #FFFFFF;

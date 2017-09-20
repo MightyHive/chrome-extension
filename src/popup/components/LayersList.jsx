@@ -26,7 +26,16 @@ class LayersList extends Component {
       );
     }
 
-    return (<span>No data layers found.</span>);
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          // padding: '20px',
+        }}
+      >
+        <h3 className="no-top-margin">No data layers found.</h3>
+      </div>
+    );
   }
 }
 
