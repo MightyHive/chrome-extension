@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import CircularProgress from 'material-ui/CircularProgress';
+import * as url from 'url';
 
 // Components
 import DataLayers from './DataLayers/DataLayers';
@@ -34,24 +35,29 @@ export default class App extends Component {
       );
     }
 
+    const parsedUrl = url.parse(tab.currentURL);
+    const pathname = parsedUrl.pathname === '/' ? '' : parsedUrl.pathname;
+
     return (
       <div className="reportApp">
-        <div className="reportTitle">
-          <h4>Full report for:</h4>
-          <h6>{tab.currentURL}</h6>
+        <div className="heroContainer">
+          <div className="hero">
+            <h3 className="reportTitle">Full report</h3>
+            <h5 className="reportUrl">{parsedUrl.host + pathname}</h5>
+          </div>
         </div>
-        <Tabs>
-          <Tab label="Trackers">
+        <Tabs className="dashboard">
+          <Tab label="Trackers" className="reportTab">
             <Trackers
               trackers={tab.trackers}
               trackerCount={tab.trackerCount}
               network={tab.networkCalls}
             />
           </Tab>
-          <Tab label="Data Layers">
+          <Tab label="Data Layers" className="reportTab">
             <DataLayers layers={tab.dataLayers} />
           </Tab>
-          <Tab label="Network Activity">
+          <Tab label="Network Activity" className="reportTab">
             <Network
               currentURL={tab.currentURL}
               network={tab.networkCalls}

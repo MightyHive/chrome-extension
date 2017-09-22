@@ -31,8 +31,9 @@ export default class TrackerCallDetails extends Component {
   }
 
   render() {
-    const tracker = this.props.trackerCall.data;
-    const query = url.parse(tracker.url, true).query;
+    const { trackerCall } = this.props;
+    const tracker = trackerCall.data;
+    const query = trackerCall.parsedUrl.query;
     let querySection = '';
 
     if (Object.keys(query).length !== 0 && query.constructor === Object) {

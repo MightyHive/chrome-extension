@@ -1,3 +1,7 @@
+$page-width: 1000px;
+$mh-blue: #183063;
+$mh-yellow: #ffc72a;
+
 #fullReportPage {
   background: #F5F5F6;
 }
@@ -13,28 +17,68 @@
       height: 40px;
     }
   }
-  .dashboard {
-    background: #E1E2E1;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px 0;
-  }
 }
 
 .reportApp {
-  .reportTitle {
-    padding: 24px 10px;
-    h4, h6 {
-      margin: 0;
+  .heroContainer {
+    background: $mh-blue;
+    padding: 30px 0;
+    color: #FFFFFF;
+  }
+  .hero {
+    box-sizing: border-box;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+
+    .reportTitle {
+      font-family: 'Roboto Bold';
+      font-size: 20px;
+      border-top: 1px solid #FFFFFF;
+      display: inline-block;
+      border-bottom: 1px solid #FFFFFF;
+      padding: 3px 30px;
+      text-transform: uppercase;
+      margin: 0 0 10px 0;
+      letter-spacing: 2px;
     }
 
-    h6 {
+    .reportUrl {
+      font-size: 26px;
+      font-family: 'Roboto Thin';
+      margin: 0;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
     }
   }
+  .dashboard {
+    max-width: $page-width;
+    margin: 0 auto;
+    padding: 0 0 20px 0;
+    background-color: #E1E2E1;
 
+    // Tab bar background
+    > div:first-child {
+      background-color: #FFFFFF !important;
+    }
+
+    // Sliding color bar under tabs
+    > div:nth-child(2) {
+      div {
+        background-color: $mh-yellow !important;
+      }
+    }
+  }
+  .reportTab {
+    color: rgba(0, 0, 0, 1) !important;
+  }
+  .yellowMhButton {
+    color: $mh-blue;
+    :hover {
+      color: $mh-yellow;
+    }
+  }
   .tabTitle {
     font-family: 'Roboto Thin', Arial, sans-serif;
     font-size: 30px;

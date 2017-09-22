@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import json2csv from 'json2csv';
 
 import NetworkCalls from './NetworkCalls';
@@ -54,10 +54,12 @@ export default class Network extends Component {
 
     if (this.props.network.all.length > 0) {
       downloadButton = (
-        <RaisedButton
+        <FlatButton
           onClick={this.downloadCsv}
           label="Download CSV"
-          secondary
+          backgroundColor="#ffc72a"
+          hoverColor="#183063"
+          className="yellowMhButton"
         />
       );
     }

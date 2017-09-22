@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 
 import DefaultLayers from './DefaultLayers';
 import CustomLayers from './CustomLayers';
@@ -58,10 +58,12 @@ export default class DataLayers extends Component {
 
     if (this.layers.length > 0) {
       downloadButton = (
-        <RaisedButton
+        <FlatButton
           onClick={this.downloadJson}
           label="Download JSON"
-          secondary
+          backgroundColor="#ffc72a"
+          hoverColor="#183063"
+          className="yellowMhButton"
         />
       );
     }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import json2csv from 'json2csv';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 import TrackerList from './TrackerList';
 import * as chromeUtils from '../../../chrome.utils';
@@ -93,9 +94,11 @@ export default class Trackers extends Component {
       downloadButton = (
         <IconMenu
           iconButtonElement={(
-            <RaisedButton
-              label="Download as..."
-              secondary
+            <FlatButton
+              backgroundColor="#ffc72a"
+              hoverColor="#183063"
+              label={<span>Download as...</span>}
+              className="yellowMhButton"
             />
           )}
         >
