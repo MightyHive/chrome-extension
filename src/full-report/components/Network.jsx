@@ -66,7 +66,7 @@ export default class Network extends Component {
 
     return (
       <div>
-        <div className="custom-container">
+        <div className="tabHeader">
           <div className="halfColumn" style={{ height: '75px', lineHeight: '75px' }}>
             <h3 className="no-margin tabTitle">Network Activity</h3>
           </div>
@@ -74,13 +74,11 @@ export default class Network extends Component {
             {downloadButton}
           </div>
         </div>
-        <div className="custom-container">
-          <h5 className="no-top-margin">Total Network Requests: {this.network.all.length}</h5>
-          <NetworkCalls
-            network={this.network}
-            currentURL={this.props.currentURL}
-          />
-        </div>
+        <h5 className="no-top-margin">Total Network Requests: {this.network.all.length}</h5>
+        <NetworkCalls
+          network={this.network}
+          currentURL={this.props.currentURL}
+        />
       </div>
     );
   }

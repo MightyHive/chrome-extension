@@ -56,7 +56,6 @@ $mh-yellow: #ffc72a;
     max-width: $page-width;
     margin: 0 auto;
     padding: 0 0 20px 0;
-    background-color: #E1E2E1;
 
     // Tab bar background
     > div:first-child {
@@ -73,15 +72,26 @@ $mh-yellow: #ffc72a;
   .reportTab {
     color: rgba(0, 0, 0, 1) !important;
   }
+
   .yellowMhButton {
     color: $mh-blue;
     :hover {
       color: $mh-yellow;
     }
   }
-  .tabTitle {
-    font-family: 'Roboto Thin', Arial, sans-serif;
-    font-size: 30px;
+
+  .tabHeader {
+    padding: 10px 0;
+    &:after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .tabTitle {
+      font-family: 'Roboto Thin', Arial, sans-serif;
+      font-size: 30px;
+    }
   }
 
   .layers-list {

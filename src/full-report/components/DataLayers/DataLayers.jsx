@@ -70,7 +70,7 @@ export default class DataLayers extends Component {
 
     return (
       <div>
-        <div className="custom-container">
+        <div className="tabHeader">
           <div className="halfColumn" style={{ height: '75px', lineHeight: '75px' }}>
             <h3 className="no-margin tabTitle">Data Layers</h3>
           </div>
@@ -78,12 +78,10 @@ export default class DataLayers extends Component {
             {downloadButton}
           </div>
         </div>
-        <div className="custom-container">
-          <Paper zDepth={1} style={{ padding: '20px' }}>
-            <DefaultLayers layers={defaultLayers} theme={theme} />
-            <CustomLayers layers={userLayers} theme={theme} />
-          </Paper>
-        </div>
+        <Paper zDepth={1} style={{ padding: '20px' }}>
+          <DefaultLayers layers={defaultLayers} theme={theme} />
+          <CustomLayers layers={userLayers} theme={theme} />
+        </Paper>
       </div>
     );
   }
