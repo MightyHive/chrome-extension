@@ -1,12 +1,21 @@
 import NetworkCallConfig from '../../config/network-call.config';
+import ContainerConfig from '../../config/container.config';
 import NetworkCall from './NetworkCall';
 
 /**
  * Determines if the network call matches a pattern for
  * a known tracker. Stored by host for constant-time access.
  */
-function isTrackedHost(host) {
-  return !!NetworkCallConfig.trackers[host];
+function isTrackedHost(host, type) {
+  if (type === 'tracker') {
+    return !!NetworkCallConfig.trackers[host];
+  }
+
+  if (type === 'container') {
+    return !!ContainerConfig.containers[host];
+  }
+
+  throw new Error('No tracked host type');
 }
 /**
  * Represents a Google Chrome tab. Keeps track of relevant network activity,
@@ -27,6 +36,7 @@ export default class Tab {
       },
       trackers: {},
       trackerCount: 0,
+      containers: [],
       _lastModified: new Date().getTime(),
     };
   }
@@ -79,8 +89,12 @@ export default class Tab {
     this.registerUpdate();
 
     try {
-      if (isTrackedHost(networkCall.parsedUrl.rootHost)) {
+      const { rootHost } = networkCall.parsedUrl;
+      if (isTrackedHost(rootHost, 'tracker')) {
         this.putPotentialTracker(networkCall);
+      }
+      if (isTrackedHost(rootHost, 'container')) {
+        this.putPotentialContainer(networkCall);
       }
     } catch (e) {
       console.error('Failed to parse Network Call', e);
@@ -125,6 +139,34 @@ export default class Tab {
       });
     } catch (e) {
       console.error('Error parsing potential tracker', e);
+    }
+    this.registerUpdate();
+  }
+  /**
+   * Verifies if a network call has a container.
+   * @param {object} networkCall - A Google Chrome request object.
+   */
+  putPotentialContainer(networkCall) {
+    try {
+      const rootHost = networkCall.parsedUrl.rootHost;
+      const trackedHost = ContainerConfig.containers[rootHost];
+      // Iterate through them, attempting to match with the Call.
+      trackedHost.forEach((container) => {
+        const containerId = container.containerId;
+        container.matches.some((pattern) => {
+          // Verify the network call is one that is a container
+          if (networkCall.match(pattern)) {
+            this._data.containers.push({
+              containerId,
+              id: networkCall.parsedUrl.query.id,
+            });
+            return true;
+          }
+          return false;
+        });
+      });
+    } catch (e) {
+      console.error('Error parsing potential container', e);
     }
     this.registerUpdate();
   }
