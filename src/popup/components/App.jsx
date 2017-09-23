@@ -11,7 +11,8 @@ import IconCode from 'material-ui/svg-icons/action/code';
 // Components
 import Home from './Home';
 import DataLayers from './DataLayers';
-import TrackersAndNetwork from './TrackersAndNetwork';
+import Containers from './Containers';
+import TrackersAndNetwork from './TrackersAndNetwork/TrackersAndNetwork';
 
 class App extends Component {
   static propTypes = {
@@ -38,16 +39,6 @@ class App extends Component {
             successfulLoad: true,
             loading: false,
           });
-
-          // Hack for a known Chrome extension bug:
-          // https://bugs.chromium.org/p/chromium/issues/detail?id=428044
-          // const { height } = document.body.getBoundingClientRect();
-          // Basically, the issue stems from rapid changes in the sizing of the Popup during
-          // initialization. Forcing a redraw fixes the issue, forcing the Popup window to
-          // realize it's at the wrong size. Because Chrome's rendering engine checks diffs
-          // on sizing changes to avoid unnecessary redraws, we have to make it a different size
-          // than its previous state.
-          // document.body.style.minHeight = `${(height + 1)}px`;
         }
 
         if (message.error) {
@@ -98,7 +89,7 @@ class App extends Component {
       // Experience 1
       <Home tab={tab} />,
       // Experience 2
-      <DataLayers tab={tab} />,
+      <Containers tab={tab} />,
       // Experience 3
       <TrackersAndNetwork tab={tab} />,
     ];
