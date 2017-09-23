@@ -109,7 +109,7 @@ class App extends Component {
           style={{ marginTop: '20px' }}
         />
         <BottomNavigation
-          selectedIndex={this.state.selectedIndex}
+          selectedIndex={this.state.menuSelectedIndex}
           className="bottomNavigation"
         >
           <BottomNavigationItem
