@@ -2,6 +2,8 @@ import minimatch from 'minimatch';
 import parseDomain from 'parse-domain';
 import * as url from 'url';
 
+import QueryParserConfig from '../../config/query-parsers.config';
+
 /**
  * Represents a Network Event in Chrome. Contains the given network data while also
  * parsing to allow for easy matching.
@@ -20,7 +22,7 @@ export default class NetworkCall {
     // Combine two separate data sources.
     // parseDomain gives more advanced domain-specific data
     const parsedDomain = parseDomain(this.url);
-    const parsedUrl = url.parse(this.url);
+    const parsedUrl = url.parse(this.url, true);
     this.parsedUrl = Object.assign(
       {
         domain: parsedDomain.domain,
@@ -29,6 +31,8 @@ export default class NetworkCall {
       },
       parsedUrl,
     );
+    // Check for custom query parser
+    this.customQueryParser();
   }
   /**
    * Returns a single value from the network call data.
@@ -43,7 +47,7 @@ export default class NetworkCall {
    * Note: Subdomains are NOT included.
    */
   get rootHost() {
-    return this.data.rootHost;
+    return this.parsedUrl.rootHost;
   }
   /**
    * Determines if the network call came from the Tab content
@@ -52,6 +56,21 @@ export default class NetworkCall {
    */
   get isTabContent() {
     return this.data.frameId === 0;
+  }
+  /**
+   * Determines if the network call is configured to use a custom parser.
+   */
+  customQueryParser() {
+    const trackedHost = QueryParserConfig.parsers[this.parsedUrl.rootHost];
+
+    if (trackedHost) {
+      trackedHost.forEach((trackedParser) => {
+        // Verify the match
+        if (this.match(trackedParser.pattern)) {
+          this.parsedUrl.query = trackedParser.parser(this.parsedUrl.path);
+        }
+      });
+    }
   }
   /**
    * Determines if the network call pathname matches a given pattern.
@@ -67,15 +86,6 @@ export default class NetworkCall {
    */
   matchPathname(pattern) {
     return minimatch(this.parsedUrl.pathname, pattern);
-  }
-  /**
-   * Determines if the network call came from the Tab content
-   * itself or a subframe.
-   * @return {object} - queryString - Object with key/value pairs representing
-   * the query string of the request.
-   */
-  getParsedQuery() {
-    return url.parse(this.url, true).query;
   }
 }
 
