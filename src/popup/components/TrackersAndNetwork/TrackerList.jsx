@@ -16,7 +16,6 @@ export default class TrackerList extends Component {
     if (trackerCount > 0) {
       return (
         <div>
-          <h4 className="no-margin">Trackers</h4>
           <List>
             {Object.keys(trackers).map((trackerId) => {
               const trackerCalls = trackers[trackerId];

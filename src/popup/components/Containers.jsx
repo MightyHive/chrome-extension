@@ -34,7 +34,7 @@ class Containers extends Component {
           textAlign: 'center',
         }}
       >
-        <h3 className="no-top-margin">No trackers found.</h3>
+        <h3 className="no-top-margin">No containers found.</h3>
       </div>
     );
   }

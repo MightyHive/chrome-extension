@@ -22,6 +22,10 @@
   .mainView {
     height: 345px;
     overflow-y: scroll;
+    .tabContent {
+      height: 297px;
+      overflow-y: scroll;
+    }
   }
   .trackerCount {
     background: #FFFFFF;
