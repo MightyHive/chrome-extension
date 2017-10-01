@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem } from 'material-ui/List';
 
-import ContainerConfig from '../../config/container.config';
-
 class Containers extends Component {
   static propTypes = {
     tab: PropTypes.object.isRequired,
@@ -18,10 +16,25 @@ class Containers extends Component {
           <h4 className="no-margin">Containers</h4>
           <List>
             {containers.map((container) => {
-              // The is the internal ID for finding metadata, not the actual container ID
-              const containerId = container.containerId;
-              const displayName = ContainerConfig.containerData[containerId].displayName;
-              return (<ListItem>{`${displayName}: ${container.id}`}</ListItem>);
+              let containerData;
+
+              if (container.data) {
+                containerData = (
+                [<ul>
+                  {Object.keys(container.data).map(key => (
+                    <li>{`${key}: ${container.data[key]}`}</li>
+                  ))}
+                </ul>]
+                );
+              }
+
+              return (
+                <ListItem
+                  primaryText={container.displayName}
+                  primaryTogglesNestedList
+                  nestedItems={containerData}
+                />
+              );
             })}
           </List>
         </div>

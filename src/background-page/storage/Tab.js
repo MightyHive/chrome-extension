@@ -152,14 +152,10 @@ export default class Tab {
       const trackedHost = ContainerConfig.containers[rootHost];
       // Iterate through them, attempting to match with the Call.
       trackedHost.forEach((container) => {
-        const containerId = container.containerId;
         container.matches.some((pattern) => {
           // Verify the network call is one that is a container
           if (networkCall.match(pattern)) {
-            this._data.containers.push({
-              containerId,
-              id: networkCall.parsedUrl.query.id,
-            });
+            this._data.containers.push(container.parser(networkCall));
             return true;
           }
           return false;
