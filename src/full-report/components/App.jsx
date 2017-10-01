@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'material-ui/Tabs';
 import CircularProgress from 'material-ui/CircularProgress';
+import IconErrorOutline from 'material-ui/svg-icons/alert/error-outline';
 import * as url from 'url';
 
 // Components
@@ -12,17 +13,59 @@ import Network from './Network/Network';
 
 export default class App extends Component {
   static propTypes = {
-    loading: PropTypes.bool.isRequired,
-    successfulLoad: PropTypes.bool.isRequired,
-    tab: PropTypes.object,
+    tabConnection: PropTypes.func.isRequired,
+    tabId: PropTypes.string.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      tab: undefined,
+      loading: true,
+      successfulLoad: false,
+      menuSelectedIndex: 0,
+    };
+  }
+
+  componentDidMount() {
+    const { tabConnection, tabId } = this.props;
+
+    try {
+      tabConnection(tabId, (message, disconnect) => {
+        if (message.navigationChange) {
+          return disconnect();
+        }
+
+        if (message.data && !message.error) {
+          this.setState({
+            tab: message.data,
+            successfulLoad: true,
+            loading: false,
+          });
+        }
+
+        if (message.error) {
+          this.setState({
+            successfulLoad: false,
+            loading: false,
+          });
+        }
+      });
+    } catch (e) {
+      console.error('Error initiating UI: ', e);
+      this.setState({
+        successfulLoad: false,
+        loading: false,
+      });
+    }
   }
 
   render() {
-    const { loading, successfulLoad, tab } = this.props;
+    const { loading, successfulLoad, tab } = this.state;
 
     if (loading) {
       return (
-        <div className="center">
+        <div className="center mainView">
           <CircularProgress size={80} />
         </div>
       );
@@ -30,8 +73,12 @@ export default class App extends Component {
 
     if (!successfulLoad || !tab) {
       return (
-        <div className="center">
-          <i className="icon icon-ic_play-circle_outline_black_24dp" /> Unable to load site data.
+        <div className="errorLoading">
+          <IconErrorOutline style={{ height: '48px', width: '48px' }} />
+          <h5>
+            Unable to load site data.
+          </h5>
+          <p>So sorry. Try refreshing the page.</p>
         </div>
       );
     }

@@ -46,13 +46,20 @@ export default function controllers(storage) {
     // Due to API restrictions, this is the only way to send this data
     let listener;
     const tabId = Number(port.name);
+    const initialData = storage.getTabData(tabId);
 
-    if (!storage.getTabData(tabId)) {
+    if (!initialData) {
       port.postMessage({ error: new Error('Tab data not found.') });
     }
 
     storage.addListener(tabId, (data, listenerId) => {
-      port.postMessage({ data });
+      const sentData = { data };
+      // Simple way to detect navigation changes
+      if (data.currentURL !== initialData.currentURL) {
+        sentData.navigationChange = true;
+      }
+
+      port.postMessage(sentData);
       listener = listenerId;
     });
     // Remove the listener when the connection closes

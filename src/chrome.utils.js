@@ -70,8 +70,20 @@ export function getActiveTabData(timestamp = null) {
 export function activeTabConnection(callback) {
   getActiveTab()
   .then((activeTabId) => {
-    const port = chrome.runtime.connect({ name: activeTabId.toString() });
+    const port = chrome.runtime.connect({ name: String(activeTabId) });
     port.onMessage.addListener(message => callback(message));
+  });
+}
+
+/**
+ * Requests data about the given tab from the Background page.
+ * This function uses a long-term stream rather than a one-time connection.
+ * @param {number} - tabId
+ */
+export function tabConnection(tabId, callback) {
+  const port = chrome.runtime.connect({ name: String(tabId) });
+  port.onMessage.addListener((message) => {
+    callback(message, () => port.disconnect());
   });
 }
 

@@ -6,13 +6,11 @@ import App from './components/App';
 // Import App CSS
 import '../styles/index.scss';
 
-// Data Layer Importers
 import * as util from '../chrome.utils';
 
 ReactDOM.render(
   <MuiThemeProvider>
     <App
-      getActiveTabData={util.getActiveTabData}
       activeTabConnection={util.activeTabConnection}
     />
   </MuiThemeProvider>,
