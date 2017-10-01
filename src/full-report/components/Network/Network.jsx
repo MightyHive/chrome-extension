@@ -4,7 +4,7 @@ import FlatButton from 'material-ui/FlatButton';
 import json2csv from 'json2csv';
 
 import NetworkCalls from './NetworkCalls';
-import * as chromeUtils from '../../chrome.utils';
+import * as chromeUtils from '../../../chrome.utils';
 
 export default class Network extends Component {
   static propTypes = {

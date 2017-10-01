@@ -5,9 +5,10 @@ import CircularProgress from 'material-ui/CircularProgress';
 import * as url from 'url';
 
 // Components
-import DataLayers from './DataLayers/DataLayers';
 import Trackers from './Trackers/Trackers';
-import Network from './Network';
+import Containers from './Containers/Containers';
+import DataLayers from './DataLayers/DataLayers';
+import Network from './Network/Network';
 
 export default class App extends Component {
   static propTypes = {
@@ -52,6 +53,11 @@ export default class App extends Component {
               trackers={tab.trackers}
               trackerCount={tab.trackerCount}
               network={tab.networkCalls}
+            />
+          </Tab>
+          <Tab label="Containers" className="reportTab">
+            <Containers
+              containers={tab.containers}
             />
           </Tab>
           <Tab label="Data Layers" className="reportTab">
