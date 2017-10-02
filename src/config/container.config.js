@@ -9,7 +9,7 @@ export default {
         matches: [
           '**googletagmanager.com/gtm.js',
         ],
-        parser: () => (
+        parser: networkCall => (
           {
             displayName: networkCall.parsedUrl.query.id,
           }
@@ -27,14 +27,14 @@ export default {
           const [account, profile, environment, filename] =
               pathedHost.replace('tags.tiqcdn.com/utag/', '').split('/');
           const splitFilename = filename.split('.');
-          let version = 'None. utag.js';
+          let version = 'None';
 
           if (splitFilename.length > 2) {
             version = splitFilename[1];
           }
 
           return {
-            displayName: 'Tealium Tag',
+            displayName: version !== 'None' ? `Tealium Tag (${version})` : 'Tealium Tag',
             data: {
               'Tealium Tag Version': version,
               Account: account,
