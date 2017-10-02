@@ -12,22 +12,22 @@ export default class Containers extends Component {
     const { containers } = this.props;
 
     return (
-      <div>
+      <div className="containers">
         <div className="tabHeader">
           <div style={{ height: '75px', lineHeight: '75px' }}>
             <h3 className="no-margin tabTitle">Containers</h3>
           </div>
         </div>
         <Paper zDepth={1} style={{ padding: '20px' }}>
-          <List>
+          <List className="containerList">
             {containers.map((container) => {
               let containerData;
 
               if (container.data) {
                 containerData = (
-                [<ul>
+                [<ul className="containerData">
                   {Object.keys(container.data).map(key => (
-                    <li>{`${key}: ${container.data[key]}`}</li>
+                    <li><span className="dataTitle">{key}</span>{`: ${container.data[key]}`}</li>
                   ))}
                 </ul>]
                 );

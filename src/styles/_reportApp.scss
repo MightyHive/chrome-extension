@@ -140,4 +140,22 @@ $mh-yellow: #ffc72a;
       border-top: 1px solid rgba(0, 0, 0, .06);
     }
   }
+
+  .containers {
+    .containerData {
+      margin: 0;
+      padding: 0 0 0 40px;
+      list-style: none;
+    }
+
+    .containerList {
+      > div > div {
+        padding: 0 !important;
+      }
+
+      .dataTitle {
+        font-family: 'Roboto Bold';
+      }
+    }
+  }
 }
