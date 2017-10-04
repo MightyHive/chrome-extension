@@ -42,10 +42,10 @@ export default class TrackerListItem extends Component {
                 nestedItems={[(
                   <TrackerCallDetails
                     trackerCall={tracker}
-                    key={`${tracker.data.requestId}-details`}
+                    key={`${tracker.data.requestId}-${tracker.data.timeStamp}-details`}
                   />
                 )]}
-                key={tracker.data.requestId}
+                key={`${tracker.data.requestId}-${tracker.data.timeStamp}`}
               />
               ))),
           ]}
