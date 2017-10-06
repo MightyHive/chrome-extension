@@ -26,9 +26,15 @@ function isTrackedHost(host, type) {
 export default class Tab {
   constructor(tabData) {
     this.id = tabData.tabId;
+    this._requestId = tabData.requestId;
     this._data = {
       tabId: tabData.tabId,
       currentURL: tabData.url,
+      navigationPath: {
+        initial: tabData,
+        redirects: [],
+        final: undefined,
+      },
       dataLayers: [],
       networkCalls: {
         all: [],
@@ -74,6 +80,20 @@ export default class Tab {
    */
   getTrackers() {
     return this._data.trackers;
+  }
+  /**
+   * Registers a redirect request for the main navigation path.
+   * @param {object} requestData - Web request data provided by Chrome.
+   */
+  putRedirect(requestData) {
+    this._data.navigationPath.redirects.push(requestData);
+  }
+  /**
+   * Registers navigation being complete.
+   * @param {object} dataLayers - Web request data provided by Chrome.
+   */
+  putNavigationComplete(requestData) {
+    this._data.navigationPath.final = requestData;
   }
   /**
    * Parses and stores network calls and checks for known tracking origins.

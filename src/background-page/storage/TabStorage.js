@@ -101,6 +101,49 @@ export default class TabStorage {
     return tab;
   }
   /**
+   * Registers a Tab navigation event and determines if the Tab needs to be recreated
+   * or if it needs to be updated (redirect not yet finished).
+   * @param {object} tabData - data object provided by Chrome's onBeforeNavigate event.
+   * @param {number} tabData.tabId - Unique Chrome Tab ID number. Not based on tab order.
+   */
+  tabNavigation(tabData) {
+    if (!this._storage[tabData.tabId]) {
+      return this.createTab(tabData);
+    }
+
+    if (this._storage[tabData.tabId]._requestId !== tabData.requestId) {
+      return this.createTab(tabData);
+    }
+
+    return false;
+  }
+  /**
+   * Registers a Tab navigation redirect event.
+   * @param {object} tabData - data object provided by Chrome's onBeforeNavigate event.
+   * @param {number} tabData.tabId - Unique Chrome Tab ID number. Not based on tab order.
+   */
+  tabRedirect(tabData) {
+    const tab = this._storage[tabData.tabId];
+    if (!tab) {
+      throw new Error(`Error with tabRedirect: Tab with ID ${tabData.tabId} not found!`);
+    }
+
+    tab.putRedirect(tabData);
+  }
+  /**
+   * Registers a Tab navigation redirect event.
+   * @param {object} tabData - data object provided by Chrome's onBeforeNavigate event.
+   * @param {number} tabData.tabId - Unique Chrome Tab ID number. Not based on tab order.
+   */
+  tabNavigationComplete(tabData) {
+    const tab = this._storage[tabData.tabId];
+    if (!tab) {
+      throw new Error(`Error with tabNavigationComplete: Tab with ID ${tabData.tabId} not found!`);
+    }
+
+    tab.putNavigationComplete(tabData);
+  }
+  /**
    * Deletes a Tab given a valid tabId.
    * @param {number} tabId - Unique Chrome Tab ID number.
    */

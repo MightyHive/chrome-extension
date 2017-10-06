@@ -30,7 +30,6 @@
     "downloads",
     "tabs",
     "webRequest",
-    "webNavigation",
     "storage",
     "*://*/*"
   ],

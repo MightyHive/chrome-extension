@@ -1,9 +1,26 @@
+function isNavigationRequest(details) {
+  return details.frameId === 0 && details.type === 'main_frame';
+}
+
 export default function initializeEventListeners(storage) {
   const events = {
     webRequest: {
+      onBeforeRequest: (details) => {
+        try {
+          if (isNavigationRequest(details)) {
+            storage.tabNavigation(details);
+          }
+        } catch (e) {
+          console.error('Request Listener Error', e);
+        }
+      },
       onBeforeRedirect: (details) => {
         try {
           storage.putNetworkCall(details);
+
+          if (isNavigationRequest(details)) {
+            storage.tabRedirect(details);
+          }
         } catch (e) {
           console.error('Request Listener Error', e);
         }
@@ -11,23 +28,11 @@ export default function initializeEventListeners(storage) {
       onCompleted: (details) => {
         try {
           storage.putNetworkCall(details);
-        } catch (e) {
-          console.error('Request Listener Error', e);
-        }
-      },
-    },
-    webNavigation: {
-      onBeforeNavigate: (details) => {
-        try {
-          // Determine if navigation event occured in the tab content window.
-          // This allows us to target user navigation events, rather than
-          // iframe events.
-          if (details.frameId === 0) {
-            console.info('USER NAVIGATION EVENT-> ', details);
-            storage.createTab(details);
+          if (isNavigationRequest(details)) {
+            storage.tabNavigationComplete(details);
           }
         } catch (e) {
-          console.error('Navigation Listener Error', e);
+          console.error('Request Listener Error', e);
         }
       },
     },
@@ -43,8 +48,8 @@ export default function initializeEventListeners(storage) {
     },
   };
 
-  chrome.webRequest.onCompleted.addListener(events.webRequest.onCompleted, { urls: ['*://*/*'] });
+  chrome.webRequest.onBeforeRequest.addListener(events.webRequest.onBeforeRequest, { urls: ['*://*/*'] });
   chrome.webRequest.onBeforeRedirect.addListener(events.webRequest.onBeforeRedirect, { urls: ['*://*/*'] });
-  chrome.webNavigation.onBeforeNavigate.addListener(events.webNavigation.onBeforeNavigate);
+  chrome.webRequest.onCompleted.addListener(events.webRequest.onCompleted, { urls: ['*://*/*'] });
   chrome.tabs.onRemoved.addListener(events.tabs.onRemoved);
 }
