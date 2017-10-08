@@ -55,7 +55,7 @@ export default function controllers(storage) {
     storage.addListener(tabId, (data, listenerId) => {
       const sentData = { data };
       // Simple way to detect navigation changes
-      if (data.currentURL !== initialData.currentURL) {
+      if (data._requestId !== initialData._requestId) {
         sentData.navigationChange = true;
       }
 

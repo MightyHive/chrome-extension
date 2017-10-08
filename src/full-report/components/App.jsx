@@ -33,7 +33,8 @@ export default class App extends Component {
     try {
       tabConnection(tabId, (message, disconnect) => {
         if (message.navigationChange) {
-          return disconnect();
+          disconnect();
+          return;
         }
 
         if (message.data && !message.error) {

@@ -30,6 +30,7 @@ export default class Tab {
     this._data = {
       tabId: tabData.tabId,
       currentURL: tabData.url,
+      _requestId: tabData.requestId,
       navigationPath: {
         initial: tabData,
         redirects: [],
