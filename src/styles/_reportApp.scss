@@ -57,6 +57,48 @@ $mh-yellow: #ffc72a;
       text-overflow: ellipsis;
     }
   }
+  .navigationPathContainer {
+    max-width: 1000px;
+    margin: 0 auto;
+    overflow-x: scroll;
+    padding: 20px 0;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(0, 0, 0, .06);
+    .navigationPath {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      li {
+        // min-width: 200px;
+      }
+      .statusCode {
+        width: 50px;
+        border-radius: 50%;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        margin: auto;
+        font-family: 'Roboto Bold';
+        margin-bottom: 10px;
+      }
+      .url {
+        text-align: center;
+      }
+      .redirect {
+        position: relative;
+        margin-right: 20px;
+        .statusCode {
+          border: 2px solid $mh-yellow;
+        }
+      }
+      .final {
+        .statusCode {
+          border: 2px solid $mh-blue;
+        }
+      }
+    }
+  }
   .dashboard {
     max-width: $page-width;
     margin: 0 auto;

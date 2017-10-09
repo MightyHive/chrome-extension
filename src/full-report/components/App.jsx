@@ -6,6 +6,7 @@ import IconErrorOutline from 'material-ui/svg-icons/alert/error-outline';
 import * as url from 'url';
 
 // Components
+import NavigationPath from './NavigationPath';
 import Trackers from './Trackers/Trackers';
 import Containers from './Containers/Containers';
 import DataLayers from './DataLayers/DataLayers';
@@ -84,7 +85,7 @@ export default class App extends Component {
       );
     }
 
-    const parsedUrl = url.parse(tab.currentURL);
+    const parsedUrl = url.parse(tab.navigationPath.final.url || tab.navigationPath.initial.url);
     const pathname = parsedUrl.pathname === '/' ? '' : parsedUrl.pathname;
 
     return (
@@ -95,6 +96,7 @@ export default class App extends Component {
             <h5 className="reportUrl">{parsedUrl.host + pathname}</h5>
           </div>
         </div>
+        <NavigationPath navigationPath={tab.navigationPath} />
         <Tabs className="dashboard">
           <Tab label="Trackers" className="reportTab">
             <Trackers
