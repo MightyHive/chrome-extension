@@ -69,9 +69,6 @@ $mh-yellow: #ffc72a;
       padding: 0;
       display: flex;
       justify-content: center;
-      li {
-        // min-width: 200px;
-      }
       .statusCode {
         width: 50px;
         border-radius: 50%;
@@ -81,6 +78,30 @@ $mh-yellow: #ffc72a;
         margin: auto;
         font-family: 'Roboto Bold';
         margin-bottom: 10px;
+      }
+      .navigationPathTooltip {
+        max-width: 400px;
+        word-wrap: break-word;
+        .tooltipTitle {
+          font-size: 20px;
+          margin-bottom: 10px;
+        }
+        .container-fluid {
+          padding: 0;
+        }
+        .queryRow {
+          border-top: 1px solid rgba(255, 255, 255, .06);
+          padding: 10px 0;
+        }
+        .queryKey {
+          margin: 0;
+          font-size: 12px;
+        }
+        .queryValue {
+          margin: 0;
+          font-family: 'Roboto';
+          font-size: 12px;
+        }
       }
       .url {
         text-align: center;
