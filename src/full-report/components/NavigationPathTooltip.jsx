@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-const NavigationPathTooltip = ({ redirect, parsedUrl }) => {
+const NavigationPathTooltip = ({ networkEvent, parsedUrl }) => {
   let queryParams = '';
 
   // Only include query parameter section if present
@@ -13,7 +13,7 @@ const NavigationPathTooltip = ({ redirect, parsedUrl }) => {
         <Grid fluid>
           {Object.keys(parsedUrl.query).map(queryKey => (
             <Row
-              key={`tooltip-${redirect.timeStamp}-queryKey-${queryKey}`}
+              key={`tooltip-${networkEvent.timeStamp}-queryKey-${queryKey}`}
               className="queryRow"
             >
               <Col xs={4}>
@@ -39,7 +39,7 @@ const NavigationPathTooltip = ({ redirect, parsedUrl }) => {
 };
 
 NavigationPathTooltip.propTypes = {
-  redirect: PropTypes.object.isRequired,
+  networkEvent: PropTypes.object.isRequired,
   parsedUrl: PropTypes.object.isRequired,
 };
 

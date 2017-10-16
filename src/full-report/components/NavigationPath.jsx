@@ -14,7 +14,7 @@ export default class NavigationPath extends Component {
 
   render() {
     const { navigationPath } = this.props;
-    const finalUrl = url.parse(navigationPath.final.url);
+    const finalUrl = url.parse(navigationPath.final.url, true);
 
     return (
       <div className="navigationPathContainer">
@@ -45,7 +45,7 @@ export default class NavigationPath extends Component {
                     id={tooltipId}
                   >
                     <NavigationPathTooltip
-                      redirect={redirect}
+                      networkEvent={redirect}
                       parsedUrl={parsedRedirect}
                     />
                   </ReactTooltip>
@@ -64,7 +64,24 @@ export default class NavigationPath extends Component {
             );
           })}
           <li className="final">
-            <div className="statusCode">{navigationPath.final.statusCode}</div>
+            <div
+              className="statusCode"
+              data-tip="Loading..."
+              data-for="finalTooltip"
+            >
+              {navigationPath.final.statusCode}
+            </div>
+            <ReactTooltip
+              place="bottom"
+              type="dark"
+              effect="solid"
+              id="finalTooltip"
+            >
+              <NavigationPathTooltip
+                networkEvent={navigationPath.final}
+                parsedUrl={finalUrl}
+              />
+            </ReactTooltip>
             <div className="url">{finalUrl.host + finalUrl.pathname}</div>
           </li>
         </ul>
