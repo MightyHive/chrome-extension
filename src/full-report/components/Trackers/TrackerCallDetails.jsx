@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import * as url from 'url';
 import JSONTree from 'react-json-tree';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
@@ -25,57 +24,55 @@ const theme = {
   base0F: '#cc6633',
 };
 
-export default class TrackerCallDetails extends Component {
-  static propTypes = {
-    trackerCall: PropTypes.object.isRequired,
+const TrackerCallDetails = ({ trackerCall }) => {
+  const tracker = trackerCall.data;
+  const query = trackerCall.parsedUrl.query;
+  let querySection = '';
+
+  if (Object.keys(query).length > 0) {
+    querySection = (
+      <div className="trackerQuery">
+        <h4>Query Parameters</h4>
+        <JSONTree
+          data={query}
+          theme={theme}
+          shouldExpandNode={() => false}
+          invertTheme
+        />
+      </div>
+    );
   }
 
-  render() {
-    const { trackerCall } = this.props;
-    const tracker = trackerCall.data;
-    const query = trackerCall.parsedUrl.query;
-    let querySection = '';
-
-    if (Object.keys(query).length !== 0 && query.constructor === Object) {
-      querySection = (
-        <div className="trackerQuery">
-          <h4>Query Parameters</h4>
-          <JSONTree
-            data={query}
-            theme={theme}
-            shouldExpandNode={() => false}
-            invertTheme
-          />
-        </div>
-      );
-    }
-
-    if (tracker) {
-      return (
-        <Grid fluid className="trackerCallDetails">
-          <Row className="trackerMeta">
-            <Col xs className="trackerMetaItem">
-              <h5 className="trackerMetaTitle">Method:</h5>
-              <span>{tracker.method}</span>
-            </Col>
-            <Col xs className="trackerMetaItem">
-              <h5 className="trackerMetaTitle">Status:</h5>
-              <span>{tracker.statusCode}</span>
-            </Col>
-            <Col xs className="trackerMetaItem">
-              <h5 className="trackerMetaTitle">Type:</h5>
-              <span>{tracker.type}</span>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs>
-              {querySection}
-            </Col>
-          </Row>
-        </Grid>
-      );
-    }
-    return (<span>No tracker details found.</span>);
+  if (tracker) {
+    return (
+      <Grid fluid className="trackerCallDetails">
+        <Row className="trackerMeta">
+          <Col xs className="trackerMetaItem">
+            <h5 className="trackerMetaTitle">Method:</h5>
+            <span>{tracker.method}</span>
+          </Col>
+          <Col xs className="trackerMetaItem">
+            <h5 className="trackerMetaTitle">Status:</h5>
+            <span>{tracker.statusCode}</span>
+          </Col>
+          <Col xs className="trackerMetaItem">
+            <h5 className="trackerMetaTitle">Type:</h5>
+            <span>{tracker.type}</span>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs>
+            {querySection}
+          </Col>
+        </Row>
+      </Grid>
+    );
   }
-}
+  return (<span>No tracker details found.</span>);
+};
 
+TrackerCallDetails.propTypes = {
+  trackerCall: PropTypes.object.isRequired,
+};
+
+export default TrackerCallDetails;

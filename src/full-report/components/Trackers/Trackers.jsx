@@ -5,7 +5,6 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import json2csv from 'json2csv';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 import TrackerList from './TrackerList';
 import * as chromeUtils from '../../../chrome.utils';
