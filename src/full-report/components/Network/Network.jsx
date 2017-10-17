@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import json2csv from 'json2csv';
+import Paper from 'material-ui/Paper';
 
 import NetworkCalls from './NetworkCalls';
+import NavigationCalls from './NavigationCalls';
 import * as chromeUtils from '../../../chrome.utils';
 
 export default class Network extends Component {
@@ -74,7 +76,13 @@ export default class Network extends Component {
             {downloadButton}
           </div>
         </div>
-        <h5 className="no-top-margin">Total Network Requests: {this.network.all.length}</h5>
+        <h5 className="no-top-margin">Navigation requests:</h5>
+        <Paper zDepth={1}>
+          <NavigationCalls
+            requests={this.network.tabContent.filter(call => call.data.type === 'main_frame')}
+          />
+        </Paper>
+        <h5>Total Network Requests: {this.network.all.length}</h5>
         <NetworkCalls
           network={this.network}
           currentURL={this.props.currentURL}
