@@ -1,13 +1,3 @@
-export function messageListener(response, callback) {
-  return chrome.runtime.onMessage.addListener(
-    (request, sender, sendResponse) => {
-      sendResponse({
-        farewell: 'goodbye',
-      });
-      callback(request.data);
-    });
-}
-
 /**
  * Get active tab ID.
  */
@@ -22,44 +12,29 @@ export function getActiveTab() {
   });
 }
 
+/**
+ * Sends a message to content scripts on the currently active tab.
+ * @param {any} message - data to be sent to active tab
+ * @param {function} callback - function to receive response from tab
+ */
 export function sendActiveTabMessage(message, callback) {
-  chrome.tabs.query({
-    active: true,
-    currentWindow: true,
-  }, (tabs) => {
-    chrome.tabs.sendMessage(tabs[0].id, message, (response) => {
+  getActiveTab()
+  .then((activeTabId) => {
+    chrome.tabs.sendMessage(activeTabId, message, (response) => {
       callback(response);
     });
   });
 }
 
 /**
- * Requests data from the current active tab from the Background page.
- * @param {function} callback - function called when listener is triggered.
+ * Requests data about the given tab from the Background page.
+ * This function uses a long-term stream rather than a one-time connection.
+ * @param {number} tabId
  */
-export function getActiveTabData(timestamp = null) {
-  return new Promise((resolve, reject) => {
-    chrome.tabs.query({
-      active: true,
-      currentWindow: true,
-    }, (tabs) => {
-      chrome.runtime.sendMessage({
-        endpoint: '/GET/tab',
-        body: {
-          tabId: tabs[0].id,
-          timestamp,
-        },
-      }, (response) => {
-        if (response.status === 200) {
-          resolve(response.data);
-        // 304 indicates data hasn't been modified since last request
-        } else if (response.status === 304) {
-          resolve(null, response.status);
-        } else {
-          reject(response);
-        }
-      });
-    });
+export function tabConnection(tabId, callback) {
+  const port = chrome.runtime.connect({ name: String(tabId) });
+  port.onMessage.addListener((message) => {
+    callback(message, () => port.disconnect());
   });
 }
 
@@ -69,22 +44,7 @@ export function getActiveTabData(timestamp = null) {
  */
 export function activeTabConnection(callback) {
   getActiveTab()
-  .then((activeTabId) => {
-    const port = chrome.runtime.connect({ name: String(activeTabId) });
-    port.onMessage.addListener(message => callback(message));
-  });
-}
-
-/**
- * Requests data about the given tab from the Background page.
- * This function uses a long-term stream rather than a one-time connection.
- * @param {number} - tabId
- */
-export function tabConnection(tabId, callback) {
-  const port = chrome.runtime.connect({ name: String(tabId) });
-  port.onMessage.addListener((message) => {
-    callback(message, () => port.disconnect());
-  });
+  .then(activeTabId => tabConnection(activeTabId, callback));
 }
 
 /**
@@ -103,6 +63,7 @@ export function getTabData(tabId) {
     });
   });
 }
+
 /**
  * Initiates a Chrome user download from data.
  * @param {function} callback - called with the id of the new DownloadItem.
@@ -118,17 +79,6 @@ export function downloadData(data, options = {}) {
       saveAs: options.saveAs || false,
     }, (response) => {
       resolve(response.data);
-    });
-  });
-}
-
-export function executeJSOnPage(script) {
-  chrome.tabs.query({
-    active: true,
-    currentWindow: true,
-  }, (tabs) => {
-    chrome.tabs.executeScript(tabs[0].id, {
-      file: script,
     });
   });
 }

@@ -23,6 +23,7 @@ export default function controllers(storage) {
     storage.putDataLayer(sender.tab.id, request.body);
     sendResponse({ status: 200 });
   }
+
   function getTab(request, sender, sendResponse) {
     const data = storage.getTabData(request.body.tabId);
     // Check if data has been modified

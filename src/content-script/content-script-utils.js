@@ -4,10 +4,14 @@
  * and access the page's Window object.
  * @param {string} url - URL source of the script to inject.
  */
-export function injectJS(url) {
+export function injectJS(url, className) {
   const script = document.createElement('script');
-  script.type = 'text/javascript';
   script.src = url;
+
+  if (className) {
+    script.classList.add();
+  }
+
   (document.head || document.body || document.documentElement).appendChild(script);
 }
 

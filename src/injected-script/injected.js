@@ -65,6 +65,8 @@ import dataLayerConfig from '../config/data-layers.config';
         }
         timesToCheck -= 1;
         checkForDataLayers();
+      } else {
+        sendDataLayers('complete');
       }
     }, 500);
   }

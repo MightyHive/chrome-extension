@@ -17,3 +17,5 @@ ReactDOM.render(
   document.getElementById('app'));
 
 injectTapEventPlugin();
+// Request data layers be updated if polling is finished
+util.sendActiveTabMessage({ type: 'updateDataLayers' });
