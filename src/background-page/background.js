@@ -7,5 +7,5 @@ const storage = new TabStorage();
 initializeEventListeners(storage);
 controllers(storage);
 
-// Debugging purposes
+// Debugging purposes. Only accessible within the BG Script debugger.
 window.bg_storage = storage;

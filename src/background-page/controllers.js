@@ -1,34 +1,25 @@
 import * as utils from '../chrome.utils';
 
-function runtimeListener(endpoint, callback) {
+/**
+ * Registers a new event listener for one-time requests from other parts of the Extension.
+ * @param {string} action - the action to check for on requests. "action" is a prop of the request.
+ * @param {function} callback - the function that handles the request.
+ * See: https://developer.chrome.com/extensions/messaging
+ */
+function messageListener(action, callback) {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (request.endpoint && request.endpoint === endpoint) {
+    if (request.action && request.action === action) {
       callback(request, sender, sendResponse);
     }
   });
 }
 
 /**
- * The Background script is designed to run like a web server,
- * since it essentially performs the same tasks. Thus, most of the data transfered
- * back and forth between services follows a server-like API. Not all aspects of HTTP
- * are followed, however. The most notable difference is the way that endpoints are structured.
- * There is not a fully separate "Headers" object as of yet, and thus the
- * different request methods are put into the endpoints themselves.
- *
- * This is another deviation, as there is no "endpoint" property in HTTP requests. However,
- * there is strictly speaking no real URI available so "endpoint" is the closest terminology
- * while avoiding complete conflation of the two.
+ * Long-term connection listener. Currently, long-term connections are only used for getting
+ * tab information. No other actions are available via the long-term connection.
+ * @param {TabStorage} storage - the storage API used by the BG Script to maintain state.
  */
-export default function controllers(storage) {
-  function addDataLayers(request, sender, sendResponse) {
-    storage.putDataLayer(sender.tab.id, request.body);
-    sendResponse({ status: 200 });
-  }
-
-  // Data Layers Controller
-  runtimeListener('/POST/data-layers', addDataLayers);
-
+function connectionListener(storage) {
   chrome.runtime.onConnect.addListener((port) => {
     // Due to API restrictions, this is the only way to send this data
     let listener;
@@ -55,13 +46,26 @@ export default function controllers(storage) {
     // Remove the listener when the connection closes
     port.onDisconnect.addListener((event) => {
       if (event.error) {
-        console.log(`Disconnected due to an error: ${event.error.message}`);
+        console.error(`Disconnected due to an error: ${event.error.message}`);
       }
       console.log(`Closing connection for Tab ${tabId}`);
       storage.removeListener(tabId, listener);
     });
-    port.onMessage.addListener((msg) => {
-      console.log('Message from port-->', msg);
-    });
   });
+}
+
+/**
+ * Listens for long-term connections and one-time messages sent from Content Scripts, Popup page,
+ * or other pages and resolves the various requests. This is the primary gateway through which the
+ * Background Script communicates with the rest of the Extension, similar to a server.
+ */
+export default function controllers(storage) {
+  function addDataLayers(request, sender, sendResponse) {
+    storage.putDataLayer(sender.tab.id, request.data);
+    sendResponse({ success: true });
+  }
+
+  // Data Layers Controller
+  messageListener('post-data-layers', addDataLayers);
+  connectionListener(storage);
 }

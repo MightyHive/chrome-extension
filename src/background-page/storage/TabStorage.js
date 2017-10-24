@@ -193,7 +193,7 @@ export default class TabStorage {
   putDataLayer(tabId, dataLayer) {
     const tab = this._storage[tabId];
 
-    if (tab) {
+    if (tab && dataLayer) {
       tab.putDataLayer(dataLayer);
       this.registerUpdate(tabId);
     }
