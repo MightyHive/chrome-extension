@@ -7,12 +7,13 @@ import IconErrorOutline from 'material-ui/svg-icons/alert/error-outline';
 import IconHome from 'material-ui/svg-icons/action/home';
 import IconTimeline from 'material-ui/svg-icons/action/timeline';
 import IconCode from 'material-ui/svg-icons/action/code';
+import IconHelpOutline from 'material-ui/svg-icons/action/help-outline';
 
 // Components
 import Home from './Home';
-import DataLayers from './DataLayers';
 import Containers from './Containers';
 import TrackersAndNetwork from './TrackersAndNetwork/TrackersAndNetwork';
+import Help from './Help';
 
 class App extends Component {
   static propTypes = {
@@ -92,6 +93,8 @@ class App extends Component {
       <Containers tab={tab} />,
       // Experience 3
       <TrackersAndNetwork tab={tab} />,
+      // Experience 4
+      <Help />,
     ];
 
     return (
@@ -123,6 +126,10 @@ class App extends Component {
           <BottomNavigationItem
             icon={<IconTimeline />}
             onClick={() => this.select(2)}
+          />
+          <BottomNavigationItem
+            icon={<IconHelpOutline />}
+            onClick={() => this.select(3)}
           />
         </BottomNavigation>
       </div>

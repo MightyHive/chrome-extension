@@ -52,6 +52,17 @@
       }
     }
   }
+  .helpList {
+    list-style: none;
+    padding-left: 10px;
+    li {
+      padding: 10px 0;
+      a {
+        color: #222;
+        font-size: 16px;
+      }
+    }
+  }
   .subData {
     text-align: center;
     h5 {

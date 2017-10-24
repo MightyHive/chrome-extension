@@ -9,7 +9,6 @@ document.body.addEventListener('mh-data-layer-loaded', (event) => {
   loadedDataLayers = JSON.parse(event.detail);
   // TODO: don't overwrite data type sent
   if (loadedDataLayers === 'complete') {
-    console.log('complete');
     loadComplete = true;
     return;
   }
