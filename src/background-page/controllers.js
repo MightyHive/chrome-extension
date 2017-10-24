@@ -26,24 +26,8 @@ export default function controllers(storage) {
     sendResponse({ status: 200 });
   }
 
-  function getTab(request, sender, sendResponse) {
-    const data = storage.getTabData(request.body.tabId);
-    // Check if data has been modified
-    const tabTimestamp = data._lastModified;
-    if (request.body.timestamp && request.body.timestamp === tabTimestamp) {
-      return sendResponse({ status: 304 });
-    }
-
-    if (data) {
-      return sendResponse({ data, status: 200 });
-    }
-
-    return sendResponse({ status: 404, error: 'Tab data not found.' });
-  }
-
   // Data Layers Controller
   runtimeListener('/POST/data-layers', addDataLayers);
-  runtimeListener('/GET/tab', getTab);
 
   chrome.runtime.onConnect.addListener((port) => {
     // Due to API restrictions, this is the only way to send this data
