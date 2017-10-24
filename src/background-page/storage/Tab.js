@@ -43,7 +43,7 @@ export default class Tab {
       },
       trackers: {},
       trackerCount: 0,
-      containers: [],
+      containers: {},
       _lastModified: new Date().getTime(),
     };
   }
@@ -173,10 +173,15 @@ export default class Tab {
       const trackedHost = ContainerConfig.containers[rootHost];
       // Iterate through them, attempting to match with the Call.
       trackedHost.forEach((container) => {
+        const metaId = container.metaId;
         container.matches.some((pattern) => {
           // Verify the network call is one that is a container
           if (networkCall.match(pattern)) {
-            this._data.containers.push(container.parser(networkCall));
+            if (this._data.containers[metaId]) {
+              this._data.containers[metaId].push(container.parser(networkCall));
+            } else {
+              this._data.containers[metaId] = [container.parser(networkCall)];
+            }
             return true;
           }
           return false;

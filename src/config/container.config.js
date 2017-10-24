@@ -1,4 +1,14 @@
 export default {
+  // Can be extended to offer a variety of metadata, such as
+  // tracker homepages, descriptions, ect.
+  containerMeta: {
+    tealium: {
+      displayName: 'Tealium',
+    },
+    gtm: {
+      displayName: 'Google Tag Manager',
+    },
+  },
   /**
    * For more information on configuration syntax, see the Network Call config,
    * which is set up in a very similar manner.
@@ -6,18 +16,16 @@ export default {
   containers: {
     'googletagmanager.com': [
       {
+        metaId: 'gtm',
         matches: [
           '**googletagmanager.com/gtm.js',
         ],
-        parser: networkCall => (
-          {
-            displayName: networkCall.parsedUrl.query.id,
-          }
-        ),
+        parser: networkCall => networkCall.parsedUrl.query.id,
       },
     ],
     'tiqcdn.com': [
       {
+        metaId: 'tealium',
         matches: [
           '**tags.tiqcdn.com/utag/**',
         ],

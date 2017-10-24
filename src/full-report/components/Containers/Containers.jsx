@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List, ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
+
+import ContainerList from './ContainerList';
 
 const Containers = ({ containers }) => (
   <div className="containers">
@@ -11,29 +12,9 @@ const Containers = ({ containers }) => (
       </div>
     </div>
     <Paper zDepth={1} style={{ padding: '20px' }}>
-      <List className="containerList">
-        {containers.map((container) => {
-          let containerData;
-
-          if (container.data) {
-            containerData = (
-            [<ul className="containerData">
-              {Object.keys(container.data).map(key => (
-                <li><span className="dataTitle">{key}</span>{`: ${container.data[key]}`}</li>
-              ))}
-            </ul>]
-            );
-          }
-
-          return (
-            <ListItem
-              primaryText={container.displayName}
-              primaryTogglesNestedList
-              nestedItems={containerData}
-            />
-          );
-        })}
-      </List>
+      <ContainerList
+        containers={containers}
+      />
     </Paper>
   </div>
 );
