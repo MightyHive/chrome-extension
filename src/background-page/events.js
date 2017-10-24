@@ -2,6 +2,9 @@ function isNavigationRequest(details) {
   return details.frameId === 0 && details.type === 'main_frame';
 }
 
+/**
+ * Initializes all Chrome API event listeners. This is the Extension's primary data collection.
+ */
 export default function initializeEventListeners(storage) {
   const events = {
     webRequest: {

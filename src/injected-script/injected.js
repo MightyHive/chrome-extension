@@ -12,12 +12,21 @@ import dataLayerConfig from '../config/data-layers.config';
       const result = [];
       layers.forEach((layer) => {
         if (layer.key in window) {
+          let data = window[layer.key];
+
+          // Not copying makes diffs impossible
+          if (Array.isArray(data)) {
+            data = data.slice();
+          } else if (typeof data === 'object') {
+            data = Object.assign({}, data);
+          }
+
           result.push({
             id: layer.id,
             key: layer.key,
             displayName: layer.displayName,
             type: layer.type,
-            data: window[layer.key],
+            data,
           });
         }
       });
@@ -63,6 +72,7 @@ import dataLayerConfig from '../config/data-layers.config';
           loadedDataLayers = tempDataLayers;
           sendDataLayers(loadedDataLayers);
         }
+
         timesToCheck -= 1;
         checkForDataLayers();
       } else {
