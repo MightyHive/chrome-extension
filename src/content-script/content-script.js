@@ -9,6 +9,7 @@ document.body.addEventListener('mh-data-layer-loaded', (event) => {
   loadedDataLayers = JSON.parse(event.detail);
   // TODO: don't overwrite data type sent
   if (loadedDataLayers === 'complete') {
+    console.log('complete');
     loadComplete = true;
     return;
   }
@@ -17,7 +18,6 @@ document.body.addEventListener('mh-data-layer-loaded', (event) => {
 
 function injectScript() {
   try {
-    console.log('running inject script');
     chromeUtils.getFromStorage('customLayerList')
     .then((data) => {
       if (data && data.customLayerList) {

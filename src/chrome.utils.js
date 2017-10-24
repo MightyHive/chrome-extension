@@ -1,5 +1,6 @@
 /**
  * Get active tab ID.
+ * @returns {Promise} - Promise resolving to the currently active tab's ID in Chrome.
  */
 export function getActiveTab() {
   return new Promise((resolve) => {
@@ -13,17 +14,27 @@ export function getActiveTab() {
 }
 
 /**
+ * Sends a message to content scripts on the given tab.
+ * @param {number} tabId - Chrome TabId
+ * @param {any} message - data to be sent to active tab
+ * @param {function} [callback] - function to receive response from tab
+ */
+export function sendTabMessage(tabId, message, callback) {
+  chrome.tabs.sendMessage(tabId, message, (response) => {
+    if (callback) {
+      callback(response);
+    }
+  });
+}
+
+/**
  * Sends a message to content scripts on the currently active tab.
  * @param {any} message - data to be sent to active tab
- * @param {function} callback - function to receive response from tab
+ * @param {function} [callback] - function to receive response from tab
  */
 export function sendActiveTabMessage(message, callback) {
   getActiveTab()
-  .then((activeTabId) => {
-    chrome.tabs.sendMessage(activeTabId, message, (response) => {
-      callback(response);
-    });
-  });
+  .then(activeTabId => sendTabMessage(activeTabId, message, callback));
 }
 
 /**
@@ -48,25 +59,10 @@ export function activeTabConnection(callback) {
 }
 
 /**
- * Requests data from the tab id passed in from the Background page.
- * @param {function} callback - function called when listener is triggered.
- */
-export function getTabData(tabId) {
-  return new Promise((resolve) => {
-    chrome.runtime.sendMessage({
-      endpoint: '/GET/tab',
-      body: {
-        tabId,
-      },
-    }, (response) => {
-      resolve(response.data);
-    });
-  });
-}
-
-/**
  * Initiates a Chrome user download from data.
  * @param {function} callback - called with the id of the new DownloadItem.
+ * @returns {Promise} - Promise resolving to return data from the Chrome download API.
+ *
  * See: https://developer.chrome.com/extensions/downloads#method-download
  */
 export function downloadData(data, options = {}) {

@@ -1,3 +1,5 @@
+import * as utils from '../chrome.utils';
+
 function runtimeListener(endpoint, callback) {
   chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.endpoint && request.endpoint === endpoint) {
@@ -52,6 +54,9 @@ export default function controllers(storage) {
     if (!initialData) {
       port.postMessage({ error: new Error('Tab data not found.') });
     }
+
+    // Request data layers be updated if polling is finished for any new connection
+    utils.sendTabMessage(tabId, { type: 'updateDataLayers' });
 
     storage.addListener(tabId, (data, listenerId) => {
       const sentData = { data };
