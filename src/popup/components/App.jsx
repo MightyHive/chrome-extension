@@ -117,18 +117,22 @@ class App extends Component {
         >
           <BottomNavigationItem
             icon={<IconHome />}
+            label="Home"
             onClick={() => this.select(0)}
           />
           <BottomNavigationItem
             icon={<IconCode />}
+            label="Containers"
             onClick={() => this.select(1)}
           />
           <BottomNavigationItem
             icon={<IconTimeline />}
+            label="Network"
             onClick={() => this.select(2)}
           />
           <BottomNavigationItem
             icon={<IconHelpOutline />}
+            label="Info"
             onClick={() => this.select(3)}
           />
         </BottomNavigation>
