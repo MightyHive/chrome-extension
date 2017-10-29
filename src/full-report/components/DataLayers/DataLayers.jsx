@@ -20,7 +20,7 @@ export default class DataLayers extends Component {
   }
 
   downloadJson() {
-    const layersString = JSON.stringify(this.layers);
+    const layersString = JSON.stringify(this.layers, null, 2);
     const layersB64 = new Buffer(layersString).toString('base64');
 
     chromeUtils.downloadData(

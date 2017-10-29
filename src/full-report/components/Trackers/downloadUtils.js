@@ -48,6 +48,5 @@ export function flattenForCSV(trackers) {
       });
     });
   });
-  console.log(result);
   return result;
 }

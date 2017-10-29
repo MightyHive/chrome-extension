@@ -25,7 +25,7 @@ export default class Trackers extends Component {
 
   downloadJson() {
     const parsedTrackerData = downloadUtils.parseTrackers(this.trackers);
-    const trackersString = JSON.stringify(parsedTrackerData);
+    const trackersString = JSON.stringify(parsedTrackerData, null, 2);
     const trackersB64 = new Buffer(trackersString).toString('base64');
 
     chromeUtils.downloadData(
