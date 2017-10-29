@@ -21,8 +21,8 @@ class Home extends Component {
         </div>
         <div className="clearfix">
           <div className="halfColumn subData">
-            <h5>Data Layers</h5>
-            <span className="data">{tab.dataLayers.length}</span>
+            <h5>Containers</h5>
+            <span className="data">{Object.keys(tab.containers).length}</span>
           </div>
           <div className="halfColumn subData">
             <h5>Network Calls</h5>
