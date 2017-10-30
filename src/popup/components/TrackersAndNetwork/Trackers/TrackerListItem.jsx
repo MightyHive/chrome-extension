@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { ListItem } from 'material-ui/List';
 
 import NetworkCallConfig from '../../../../config/network-call.config';
+import TrackerGroup from './TrackerGroup';
 
 const TrackerListItem = ({ trackerCalls, trackerId }) => {
   const trackerData = NetworkCallConfig.trackerData[trackerId];
@@ -10,11 +11,13 @@ const TrackerListItem = ({ trackerCalls, trackerId }) => {
   if (trackerData) {
     return (
       <ListItem
-        primaryText={(
-          <div className="trackerTitle">
-            {`${trackerData.displayName} (${trackerCalls.length})`}
-          </div>
-        )}
+        primaryText={`${trackerData.displayName} (${trackerCalls.length})`}
+        primaryTogglesNestedList
+        nestedItems={[(
+          <TrackerGroup
+            trackers={trackerCalls}
+          />
+        )]}
       />
     );
   }
