@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Tabs, Tab } from 'material-ui/Tabs';
 
 // Components
-import TrackerList from './TrackerList';
-import Network from './Network';
+import TrackerList from './Trackers/TrackerList';
+import Network from './Network/Network';
 
 const TrackersAndNetwork = ({ tab }) => {
   const { trackers, trackerCount, networkCalls } = tab;

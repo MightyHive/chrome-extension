@@ -52,6 +52,17 @@
       }
     }
   }
+  .networkCallGroup {
+    list-style-type: none;
+    margin-top: 0;
+    li {
+      color: $mh-blue;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
   .helpList {
     list-style: none;
     padding-left: 10px;

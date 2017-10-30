@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem } from 'material-ui/List';
 
+import NetworkCallGroup from './NetworkCallGroup';
+
 const Network = ({ network }) => {
   const callsByHost = {};
 
@@ -9,9 +11,9 @@ const Network = ({ network }) => {
     const { hostname } = call.parsedUrl;
 
     if (!callsByHost[hostname]) {
-      callsByHost[hostname] = 1;
+      callsByHost[hostname] = [call];
     } else {
-      callsByHost[hostname] += 1;
+      callsByHost[hostname].push(call);
     }
   });
 
@@ -23,7 +25,13 @@ const Network = ({ network }) => {
             const calls = callsByHost[hostname];
             return (
               <ListItem
-                primaryText={`${hostname} (${calls})`}
+                primaryText={`${hostname} (${calls.length})`}
+                primaryTogglesNestedList
+                nestedItems={[(
+                  <NetworkCallGroup
+                    calls={calls}
+                  />
+                )]}
               />
             );
           })}

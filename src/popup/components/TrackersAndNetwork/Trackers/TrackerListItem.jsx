@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListItem } from 'material-ui/List';
 
-import NetworkCallConfig from '../../../config/network-call.config';
+import NetworkCallConfig from '../../../../config/network-call.config';
 
 const TrackerListItem = ({ trackerCalls, trackerId }) => {
   const trackerData = NetworkCallConfig.trackerData[trackerId];
