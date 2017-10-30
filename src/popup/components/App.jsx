@@ -88,7 +88,7 @@ class App extends Component {
 
     const views = [
       // Experience 1
-      <Home tab={tab} />,
+      <Home tab={tab} select={this.select} />,
       // Experience 2
       <Containers tab={tab} />,
       // Experience 3
