@@ -2,6 +2,17 @@ export default {
   parsers: {
     'doubleclick.net': [
       {
+        pattern: '**ad.doubleclick.net/ddm/clk/**',
+        parser: (path) => {
+          const result = {};
+          const pattern = /;([a-z])\?(.+)/;
+          const [, query, value] = pattern.exec(path);
+
+          result[query] = value;
+          return result;
+        },
+      },
+      {
         pattern: '**fls.doubleclick.net/activity**',
         parser: (path) => {
           const result = {};

@@ -13,7 +13,7 @@ const NavigationPathTooltip = ({ networkEvent, parsedUrl }) => {
         <Grid fluid>
           {Object.keys(parsedUrl.query).map(queryKey => (
             <Row
-              key={`tooltip-${networkEvent.timeStamp}-queryKey-${queryKey}`}
+              key={`tooltip-${networkEvent.data.timeStamp}-queryKey-${queryKey}`}
               className="queryRow"
             >
               <Col xs={4}>

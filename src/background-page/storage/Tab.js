@@ -87,14 +87,14 @@ export default class Tab {
    * @param {object} requestData - Web request data provided by Chrome.
    */
   putRedirect(requestData) {
-    this._data.navigationPath.redirects.push(requestData);
+    this._data.navigationPath.redirects.push(new NetworkCall(requestData));
   }
   /**
    * Registers navigation being complete.
    * @param {object} dataLayers - Web request data provided by Chrome.
    */
   putNavigationComplete(requestData) {
-    this._data.navigationPath.final = requestData;
+    this._data.navigationPath.final = new NetworkCall(requestData);
   }
   /**
    * Parses and stores network calls and checks for known tracking origins.
