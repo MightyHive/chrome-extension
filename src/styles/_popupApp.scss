@@ -7,12 +7,16 @@
   .popupHeader {
     box-sizing: border-box;
     margin: 0;
-    padding: 10px 0;
+    // padding: 10px 0;
     position: relative;
     text-align: center;
     background: #FFFFFF;
+    .popupHeaderBar {
+      background-color: #FFFFFF;
+    }
     .logo {
       height: 40px;
+      margin-top: 10px;
     }
   }
   .errorLoading {
@@ -72,6 +76,14 @@
         color: #222;
         font-size: 16px;
       }
+    }
+  }
+  .leftMenu {
+    color: #222;
+    a {
+      color: #222;
+      display: block;
+      text-decoration: none;
     }
   }
   .subData {
