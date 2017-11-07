@@ -3,6 +3,8 @@
 ## Architecture
 Due to the isolated runtime design of Chrome's extensions, there are multiple services and apps produced by this repo.
 
+<img src="./docs/chrome-extension.jpg" width="600" />
+
 **manifest.json**
   - Provides information about the extension, requests permissions, and declares assets. [See more here.](https://developer.chrome.com/extensions/manifest)
 
