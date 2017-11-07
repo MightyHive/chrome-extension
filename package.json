@@ -4,6 +4,7 @@
   "description": "MightyHive Chrome Extension",
   "main": "index.js",
   "dependencies": {
+    "circular-json": "^0.4.0",
     "deep-equal": "^1.0.1",
     "json2csv": "^3.11.1",
     "material-ui": "^0.18.7",

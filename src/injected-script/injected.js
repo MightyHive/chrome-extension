@@ -1,4 +1,6 @@
 import equal from 'deep-equal';
+import CircularJSON from 'circular-json';
+
 import dataLayerConfig from '../config/data-layers.config';
 
 ((window) => {
@@ -50,7 +52,7 @@ import dataLayerConfig from '../config/data-layers.config';
     // Create a custom DOM event to allow passing of data between the
     // content script and the injected script.
     const event = new CustomEvent('mh-data-layer-loaded', {
-      detail: JSON.stringify(data),
+      detail: CircularJSON.stringify(data),
     });
 
     // Dispatch the event.

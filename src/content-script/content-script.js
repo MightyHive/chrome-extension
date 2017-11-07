@@ -1,3 +1,5 @@
+import CircularJSON from 'circular-json';
+
 import * as utils from './content-script-utils';
 import * as chromeUtils from '../chrome.utils';
 
@@ -6,7 +8,7 @@ let loadComplete = false;
 
 // Listen for custom DOM event
 document.body.addEventListener('mh-data-layer-loaded', (event) => {
-  loadedDataLayers = JSON.parse(event.detail);
+  loadedDataLayers = CircularJSON.parse(event.detail);
   // TODO: don't overwrite data type sent
   if (loadedDataLayers === 'complete') {
     loadComplete = true;
