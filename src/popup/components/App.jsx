@@ -174,7 +174,7 @@ class App extends Component {
                 />
                 <BottomNavigationItem
                   icon={<IconTimeline />}
-                  label="Network"
+                  label="Activity"
                   onClick={() => this.select(2)}
                 />
                 <BottomNavigationItem
