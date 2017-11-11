@@ -28,6 +28,10 @@ const popupAppTheme = {
     color: '#FFFFFF',
     textColor: '#000000',
   },
+  bottomNavigation: {
+    unselectedFontSize: 10,
+    selectedFontSize: 12,
+  },
   tabs: {
     backgroundColor: '#FFFFFF',
     textColor: '#000000',
