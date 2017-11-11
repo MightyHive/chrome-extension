@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "MightyHive Analytics Tracker",
-  "description": "Displays active trackers present on the page.",
+  "name": "MightyTracker",
+  "description": "Displays active trackers, tagging containers, and network activity present on the page.",
   "version": "0.0.0",
   "icons": {
     "16": "./assets/img/icon16.png",
