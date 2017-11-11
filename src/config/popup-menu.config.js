@@ -5,14 +5,14 @@ export default [
   },
   {
     title: 'Login to MightyDesk',
-    href: 'https://auth.mightyhive.net/login',
+    href: 'https://mightydesk.mightyhive.com',
   },
   {
     title: 'Community Articles',
-    href: 'https://mightyhive.com',
+    href: 'https://mightyhive.force.com/s/',
   },
   {
     title: 'Requests',
-    href: 'https://mightyhive.com',
+    href: 'https://goo.gl/forms/8L6m1ZjxIwfirZne2',
   },
 ];
