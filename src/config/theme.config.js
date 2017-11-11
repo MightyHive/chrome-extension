@@ -1,3 +1,6 @@
+const mhBlue = '#183063';
+const mhYellow = '#ffc72a';
+
 const monokaiTheme = {
   scheme: 'monokai',
   author: 'wimer hazenberg (http://www.monokai.nl)',
@@ -19,6 +22,27 @@ const monokaiTheme = {
   base0F: '#cc6633',
 };
 
+const popupAppTheme = {
+  appBar: {
+    height: 60,
+    color: '#FFFFFF',
+    textColor: '#000000',
+  },
+  bottomNavigation: {
+    unselectedFontSize: 10,
+    selectedFontSize: 12,
+  },
+  tabs: {
+    backgroundColor: '#FFFFFF',
+    textColor: '#000000',
+    selectedTextColor: '#000000',
+  },
+  inkBar: {
+    backgroundColor: mhYellow,
+  },
+};
+
 export {
   monokaiTheme,
+  popupAppTheme,
 };

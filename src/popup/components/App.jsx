@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import RaisedButton from 'material-ui/RaisedButton';
 import CircularProgress from 'material-ui/CircularProgress';
 import { BottomNavigation, BottomNavigationItem } from 'material-ui/BottomNavigation';
-import AppBar from 'material-ui/AppBar';
+import { Grid, Row, Col } from 'react-flexbox-grid';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
+import IconButton from 'material-ui/IconButton';
 
 // Icons
 import IconErrorOutline from 'material-ui/svg-icons/alert/error-outline';
@@ -14,6 +15,7 @@ import IconTimeline from 'material-ui/svg-icons/action/timeline';
 import IconCode from 'material-ui/svg-icons/action/code';
 import IconHelpOutline from 'material-ui/svg-icons/action/help-outline';
 import IconOpenInNew from 'material-ui/svg-icons/action/open-in-new';
+import IconMenu from 'material-ui/svg-icons/navigation/menu';
 
 // Components
 import Home from './Home';
@@ -113,12 +115,21 @@ class App extends Component {
     return (
       <div className="popupApp">
         <header className="popupHeader">
-          <AppBar
-            title={<img src="/assets/img/logo-v1.png" className="logo" alt="Mighty Hive" />}
-            onLeftIconButtonTouchTap={this.handleToggle}
-            className="popupHeaderBar"
-            zDepth={0}
-          />
+          <Grid fluid style={{ padding: 0 }}>
+            <Row between="xs">
+              <Col xs>
+                <IconButton style={{ paddingLeft: 0 }} onClick={this.handleToggle}>
+                  <IconMenu />
+                </IconButton>
+              </Col>
+              <Col xs className="logoContainer">
+                <img src="/assets/img/logo-v1.png" className="logo" alt="Mighty Hive" />
+              </Col>
+              <Col xs>
+                &nbsp;
+              </Col>
+            </Row>
+          </Grid>
         </header>
         <main>
           <div className="dashboard">
@@ -174,7 +185,7 @@ class App extends Component {
                 />
                 <BottomNavigationItem
                   icon={<IconTimeline />}
-                  label="Network"
+                  label="Activity"
                   onClick={() => this.select(2)}
                 />
                 <BottomNavigationItem

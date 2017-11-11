@@ -9,18 +9,21 @@ const Containers = ({ tab }) => {
 
   if (Object.keys(containers).length > 0) {
     return (
-      <List>
-        {Object.keys(containers).map((containerId) => {
-          const containerItems = containers[containerId];
-          return (
-            <ContainerItem
-              containerItems={containerItems}
-              containerId={containerId}
-              key={`container-${containerId}`}
-            />
-          );
-        })}
-      </List>
+      <div className="custom-container">
+        <h4 className="no-margin">Containers</h4>
+        <List>
+          {Object.keys(containers).map((containerId) => {
+            const containerItems = containers[containerId];
+            return (
+              <ContainerItem
+                containerItems={containerItems}
+                containerId={containerId}
+                key={`container-${containerId}`}
+              />
+            );
+          })}
+        </List>
+      </div>
     );
   }
 

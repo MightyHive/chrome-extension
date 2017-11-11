@@ -6,19 +6,12 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 // Import App CSS
 import '../styles/index.scss';
+import { popupAppTheme } from '../config/theme.config';
 
 import * as util from '../chrome.utils';
 
-const theme = {
-  appBar: {
-    height: 60,
-    color: '#FFFFFF',
-    textColor: '#000000',
-  },
-};
-
 ReactDOM.render(
-  <MuiThemeProvider muiTheme={getMuiTheme(theme)}>
+  <MuiThemeProvider muiTheme={getMuiTheme(popupAppTheme)}>
     <App
       activeTabConnection={util.activeTabConnection}
     />

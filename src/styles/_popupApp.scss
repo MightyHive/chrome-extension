@@ -7,16 +7,16 @@
   .popupHeader {
     box-sizing: border-box;
     margin: 0;
-    // padding: 10px 0;
+    padding: 10px 0;
     position: relative;
     text-align: center;
     background: #FFFFFF;
-    .popupHeaderBar {
-      background-color: #FFFFFF;
+    .logoContainer {
+      text-align: center;
     }
     .logo {
       height: 40px;
-      margin-top: 10px;
+      margin-top: 4px;
     }
   }
   .errorLoading {
