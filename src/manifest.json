@@ -3,7 +3,7 @@
 
   "name": "MightyTracker",
   "description": "Displays active trackers, tagging containers, and network activity present on the page.",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "icons": {
     "16": "./assets/img/icon16.png",
     "48": "./assets/img/icon48.png",
