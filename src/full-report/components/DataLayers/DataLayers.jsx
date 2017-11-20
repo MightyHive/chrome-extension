@@ -36,6 +36,7 @@ export default class DataLayers extends Component {
     const defaultLayers = this.layers.filter(layer => layer.type !== 'userDefined');
     const userLayers = this.layers.filter(layer => layer.type === 'userDefined');
     let downloadButton = '';
+    let content;
 
     if (this.layers.length > 0) {
       downloadButton = (
@@ -46,6 +47,27 @@ export default class DataLayers extends Component {
           hoverColor="#183063"
           className="yellowMhButton"
         />
+      );
+
+      content = (
+        <Paper zDepth={1} style={{ padding: '20px' }}>
+          <DefaultLayers layers={defaultLayers} theme={monokaiTheme} />
+          <CustomLayers layers={userLayers} theme={monokaiTheme} />
+        </Paper>
+      );
+    } else {
+      content = (
+        <Paper zDepth={1} style={{ padding: '20px' }}>
+          <div
+            style={{
+              textAlign: 'center',
+              padding: '20px',
+            }}
+          >
+            <h3>No data layers found.</h3>
+            Track custom data layers <a href="#" onClick={() => chrome.runtime.openOptionsPage()}>in the options.</a>
+          </div>
+        </Paper>
       );
     }
 
@@ -59,10 +81,7 @@ export default class DataLayers extends Component {
             {downloadButton}
           </div>
         </div>
-        <Paper zDepth={1} style={{ padding: '20px' }}>
-          <DefaultLayers layers={defaultLayers} theme={monokaiTheme} />
-          <CustomLayers layers={userLayers} theme={monokaiTheme} />
-        </Paper>
+        {content}
       </div>
     );
   }
