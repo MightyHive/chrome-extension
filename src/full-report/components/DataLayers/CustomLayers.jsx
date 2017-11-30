@@ -46,17 +46,7 @@ const CustomLayers = ({ layers, theme }) => {
     );
   }
 
-  return (
-    <div
-      style={{
-        textAlign: 'center',
-        padding: '20px',
-      }}
-    >
-      <h4>Custom data layers</h4>
-      No custom data layers found. Track custom data layers <a href="#" onClick={() => chrome.runtime.openOptionsPage()}>in the options.</a>
-    </div>
-  );
+  return <span />;
 };
 
 CustomLayers.propTypes = {

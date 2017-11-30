@@ -24,16 +24,7 @@ const LayersList = ({ layers, theme }) => {
     );
   }
 
-  return (
-    <div
-      style={{
-        textAlign: 'center',
-        padding: '20px',
-      }}
-    >
-      <h3>No data layers found.</h3>
-    </div>
-  );
+  return <span />;
 };
 
 LayersList.propTypes = {
