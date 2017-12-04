@@ -40,6 +40,15 @@ const popupAppTheme = {
   inkBar: {
     backgroundColor: mhYellow,
   },
+  ripple: {
+    color: 'transparent',
+  },
+};
+
+const fullReportTheme = {
+  ripple: {
+    color: 'transparent',
+  },
 };
 
 export {
