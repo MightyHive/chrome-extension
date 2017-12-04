@@ -12,6 +12,8 @@ const NavigationPath = ({ navigationPath }) => (
       {navigationPath.redirects.map((redirect) => {
         const requestKey = `navPath-${redirect.data.requestId}-${redirect.data.timeStamp}`;
         const tooltipId = `${requestKey}-tooltip`;
+        const { protocol, host, pathname } = redirect.parsedUrl;
+        const url = `${protocol}//${host + pathname}`;
         return (
           <li className="redirect clearfix" key={requestKey}>
             <div
@@ -38,7 +40,7 @@ const NavigationPath = ({ navigationPath }) => (
                   parsedUrl={redirect.parsedUrl}
                 />
               </ReactTooltip>
-              <div className="url">{redirect.parsedUrl.host + redirect.parsedUrl.pathname}</div>
+              <div className="url">{url}</div>
             </div>
             <div
               style={{
@@ -71,7 +73,9 @@ const NavigationPath = ({ navigationPath }) => (
             parsedUrl={navigationPath.final.parsedUrl}
           />
         </ReactTooltip>
-        <div className="url">{navigationPath.final.parsedUrl.host + navigationPath.final.parsedUrl.pathname}</div>
+        <div className="url">
+          {`${navigationPath.final.parsedUrl.protocol}//${navigationPath.final.parsedUrl.host + navigationPath.final.parsedUrl.pathname}`}
+        </div>
       </li>
     </ul>
   </div>
