@@ -192,7 +192,7 @@ class App extends Component {
                 />
                 <BottomNavigationItem
                   icon={<IconHelpOutline />}
-                  label="Info"
+                  label="Help"
                   onClick={() => this.select(3)}
                 />
               </BottomNavigation>
