@@ -53,6 +53,15 @@ export default class DataLayers extends Component {
         <Paper zDepth={1} style={{ padding: '20px' }}>
           <DefaultLayers layers={defaultLayers} theme={monokaiTheme} />
           <CustomLayers layers={userLayers} theme={monokaiTheme} />
+          <div
+            style={{
+              textAlign: 'center',
+              padding: '20px',
+            }}
+          >
+            <h3>Not finding a known data layer variable?</h3>
+            Track custom data layers by adding them <a href="#" onClick={() => chrome.runtime.openOptionsPage()}>in the options.</a>
+          </div>
         </Paper>
       );
     } else {
@@ -64,8 +73,8 @@ export default class DataLayers extends Component {
               padding: '20px',
             }}
           >
-            <h3>No data layers found.</h3>
-            Track custom data layers <a href="#" onClick={() => chrome.runtime.openOptionsPage()}>in the options.</a>
+            <h3>No standard data layers found.</h3>
+            Track custom data layers by adding them <a href="#" onClick={() => chrome.runtime.openOptionsPage()}>in the options.</a>
           </div>
         </Paper>
       );
