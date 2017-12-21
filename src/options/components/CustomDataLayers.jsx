@@ -85,8 +85,8 @@ export default class App extends Component {
     return (
       <div>
         <p>
-          &quot;Data Layers&quot; are global variables that are saved to your browser and can have different names depending on the container platform being used.
-          To track a custom named Data Layer variable, type in the name and hit the "Enter"/"Return" key to add it to the list. Then hit save, refresh the page and pull the Full Report to view the contents.
+          To track a custom named data layer variable, type in the name and hit the "Enter" or "Return" key to add it to the list. <br /><br />
+          Then, click "Save" and refresh the page you'd like to inspect. Pull the "Full Report" to view the contents of the newly added data layer. You're all set!
         </p>
         <ChipInput
           value={this.state.customDataLayers}
