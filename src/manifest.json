@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "MightyTracker",
+  "name": "MightyHive Site Tools",
   "description": "Displays active trackers, tagging containers, and network activity present on the page.",
   "version": "1.0.0",
   "icons": {
