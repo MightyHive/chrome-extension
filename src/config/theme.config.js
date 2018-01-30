@@ -1,4 +1,4 @@
-const mhBlue = '#183063';
+const mhBlue = '#4b4f54';
 const mhYellow = '#ffc72a';
 
 const monokaiTheme = {
@@ -26,7 +26,7 @@ const popupAppTheme = {
   appBar: {
     height: 60,
     color: '#FFFFFF',
-    textColor: '#000000',
+    textColor: '#2D2926',
   },
   bottomNavigation: {
     unselectedFontSize: 10,
@@ -34,8 +34,8 @@ const popupAppTheme = {
   },
   tabs: {
     backgroundColor: '#FFFFFF',
-    textColor: '#000000',
-    selectedTextColor: '#000000',
+    textColor: '#2D2926',
+    selectedTextColor: '#41b6e6',
   },
   inkBar: {
     backgroundColor: mhYellow,

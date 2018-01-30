@@ -124,7 +124,7 @@ class App extends Component {
               </Col>
               <Col xs className="logoContainer">
                 <a href="http://mightyhive.com/" target="_blank" rel="noopener noreferrer" alt="Open MightyHive.com in a new window">
-                  <img src="/assets/img/logo-v1.png" className="logo" alt="Mighty Hive" />
+                  <img src="/assets/img/logo-v2.png" className="logo" alt="Mighty Hive" />
                 </a>
               </Col>
               <Col xs>

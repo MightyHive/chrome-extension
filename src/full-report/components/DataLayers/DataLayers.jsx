@@ -44,7 +44,7 @@ export default class DataLayers extends Component {
           onClick={this.downloadJson}
           label="Download JSON"
           backgroundColor="#ffc72a"
-          hoverColor="#183063"
+          hoverColor="#4b4f54"
           className="yellowMhButton"
         />
       );

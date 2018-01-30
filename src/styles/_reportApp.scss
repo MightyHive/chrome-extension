@@ -33,7 +33,7 @@
     text-align: center;
 
     .reportTitle {
-      font-family: 'Roboto Bold';
+      font-family: 'proximanova-bold';
       font-size: 20px;
       border-top: 1px solid #FFFFFF;
       display: inline-block;
@@ -46,7 +46,7 @@
 
     .reportUrl {
       font-size: 26px;
-      font-family: 'Roboto Thin';
+      font-family: 'proximanova-thin';
       margin: 0;
       overflow: hidden;
       white-space: nowrap;
@@ -72,7 +72,7 @@
         line-height: 50px;
         text-align: center;
         margin: auto;
-        font-family: 'Roboto Bold';
+        font-family: 'proximanova-bold';
         margin-bottom: 10px;
       }
       .navigationPathTooltip {
@@ -95,7 +95,7 @@
         }
         .queryValue {
           margin: 0;
-          font-family: 'Roboto';
+          font-family: 'proximanova-regular';
           font-size: 12px;
         }
       }
