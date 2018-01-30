@@ -30,7 +30,7 @@ const Help = () => (
         primaryTogglesNestedList
         primaryText="Is this project open source?"
         nestedItems={[
-          <span>It is! Our code is available under open-source licenses that can be found on <a href="https://github.com/MightyHive/chrome-extension">GitHub</a>.</span>,
+          <span>It is! Our code is available under open-source licenses that can be found on <a href="https://github.com/MightyHive/chrome-extension" target="_blank">GitHub</a>.</span>,
         ]}
       />
     </List>

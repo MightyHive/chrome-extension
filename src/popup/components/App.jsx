@@ -164,11 +164,11 @@ class App extends Component {
               </div>
               <RaisedButton
                 label="View Full Report"
-                backgroundColor="#183063"
-                labelColor="#ffb50b"
+                backgroundColor="#4b4f54"
+                labelColor="#ffc72c"
                 fullWidth
                 onClick={this.openReport}
-                labelStyle={{ fontFamily: 'Roboto Bold' }}
+                labelStyle={{ fontFamily: 'proximanova-bold' }}
                 style={{ marginTop: '20px' }}
               />
               <BottomNavigation
