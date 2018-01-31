@@ -1,19 +1,19 @@
-@import 'fonts/material-icons', 'fonts/roboto-family';
+@import 'fonts/material-icons', 'fonts/roboto-family', 'fonts/proximanova-family';
 
 h1, h2, h3 {
-  font-family: 'Roboto Thin', Arial, sans-serif;
+  font-family: 'proximanova-light', Arial, sans-serif;
 }
 
 h4, h5, h6 {
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: 'proximanova-regular', Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
   &.bold {
-    font-family: 'Roboto Bold';
+    font-family: 'proximanova-bold';
   }
   &.thin {
-    font-family: 'Roboto Thin';
+    font-family: 'proximanova-thin';
   }
 }
 
@@ -39,4 +39,4 @@ h5 {
 
 h6 {
   font-size: 12px;
-} 
+}

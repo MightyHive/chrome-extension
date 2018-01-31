@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'proximanova-thin';
+  font-style: normal;
+  font-weight: 100;
+  src: local('proximanova-thin'), local('proximanova-thin'), url('/assets/font/proximanova-light-webfont.woff') format('woff');
+}
+@font-face {
+  font-family: 'proximanova-light';
+  font-style: normal;
+  font-weight: 300;
+  src: local('proximanova-light'), local('proximanova-light'), url('/assets/font/proximanova-light-webfont.woff') format('woff');
+}
+@font-face {
+  font-family: 'proximanova-regular';
+  font-style: normal;
+  font-weight: 400;
+  src: local('proximanova-regular'), local('proximanova-regular'), url('/assets/font/proximanova-regular-webfont.woff') format('woff');
+}
+@font-face {
+  font-family: 'proximanova-bold';
+  font-style: normal;
+  font-weight: 700;
+  src: local('proximanova-bold'), local('proximanova-bold'), url('/assets/font/proximanova-bold-webfont.woff') format('woff');
+}

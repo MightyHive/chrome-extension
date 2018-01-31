@@ -94,8 +94,8 @@ export default class Trackers extends Component {
         <IconMenu
           iconButtonElement={(
             <FlatButton
-              backgroundColor="#ffc72a"
-              hoverColor="#183063"
+              backgroundColor="#ffc72c"
+              hoverColor="#4b4f54"
               label={<span>Download as...</span>}
               className="yellowMhButton"
             />

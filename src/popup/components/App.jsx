@@ -124,7 +124,7 @@ class App extends Component {
               </Col>
               <Col xs className="logoContainer">
                 <a href="http://mightyhive.com/" target="_blank" rel="noopener noreferrer" alt="Open MightyHive.com in a new window">
-                  <img src="/assets/img/logo-v1.png" className="logo" alt="Mighty Hive" />
+                  <img src="/assets/img/logo-v2.png" className="logo" alt="Mighty Hive" />
                 </a>
               </Col>
               <Col xs>
@@ -164,11 +164,11 @@ class App extends Component {
               </div>
               <RaisedButton
                 label="View Full Report"
-                backgroundColor="#183063"
-                labelColor="#ffb50b"
+                backgroundColor="#4b4f54"
+                labelColor="#ffc72c"
                 fullWidth
                 onClick={this.openReport}
-                labelStyle={{ fontFamily: 'Roboto Bold' }}
+                labelStyle={{ fontFamily: 'proximanova-bold' }}
                 style={{ marginTop: '20px' }}
               />
               <BottomNavigation

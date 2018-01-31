@@ -59,8 +59,8 @@ export default class Network extends Component {
         <FlatButton
           onClick={this.downloadCsv}
           label="Download CSV"
-          backgroundColor="#ffc72a"
-          hoverColor="#183063"
+          backgroundColor="#ffc72c"
+          hoverColor="#4b4f54"
           className="yellowMhButton"
         />
       );

@@ -26,9 +26,15 @@ const Help = () => (
           <span>The redirect path can be seen by clicking on the View Full Report button. The redirect path is shown at the top of the Full Report page. The circles represent all of the domains that were hit on the way to the current page, and can be hovered over for more information.</span>,
         ]}
       />
+      <ListItem
+        primaryTogglesNestedList
+        primaryText="Is this project open source?"
+        nestedItems={[
+          <span>It is! Our code is available under open-source licenses that can be found on <a href="https://github.com/MightyHive/chrome-extension" target="_blank">GitHub</a>.</span>,
+        ]}
+      />
     </List>
   </div>
 );
 
 export default Help;
-
