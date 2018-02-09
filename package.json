@@ -16,6 +16,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-flexbox-grid": "^1.1.5",
+    "react-ga": "^2.4.1",
     "react-json-tree": "^0.10.9",
     "react-tap-event-plugin": "^2.0.1",
     "react-tooltip": "^3.3.1",
