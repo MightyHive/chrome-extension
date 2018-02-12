@@ -8,9 +8,6 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 
-// GA
-import ReactGA from 'react-ga';
-
 // Icons
 import IconErrorOutline from 'material-ui/svg-icons/alert/error-outline';
 import IconHome from 'material-ui/svg-icons/action/home';
@@ -55,12 +52,6 @@ class App extends Component {
             successfulLoad: true,
             loading: false,
           });
-          ReactGA.initialize('UA-37980828-6');
-          ReactGA.event({
-            category: 'Pop Up',
-            action: 'View App',
-            nonInteraction: true,
-          });
         }
         if (message.error) {
           this.setState({
@@ -82,7 +73,9 @@ class App extends Component {
     chrome.tabs.create({ url: `/full-report.html?id=${this.state.tab.tabId}` });
   }
 
-  select = index => this.setState({ menuSelectedIndex: index });
+  select = (index) => {
+    this.setState({ menuSelectedIndex: index });
+  };
 
   handleToggle = () => this.setState({ leftMenuOpen: !this.state.leftMenuOpen });
 
