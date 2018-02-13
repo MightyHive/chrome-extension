@@ -71,10 +71,34 @@ class App extends Component {
 
   openReport() {
     chrome.tabs.create({ url: `/full-report.html?id=${this.state.tab.tabId}` });
+    _gaq.push(['_trackEvent', 'Pop Up', 'Full Report Click']);
+  };
+
+  fireEvent(index) {
+    var action;
+    switch (index) {
+      case 0:
+        action = 'Home';
+        break;
+      case 1:
+        action = 'Containers';
+        break;
+      case 2:
+        action = 'Trackers and Network';
+        break;
+      case 3:
+        action = 'Help';
+        break;
+      default:
+        break;
+    }
+    _gaq.push(['_trackEvent', 'Pop Up', 'Viewed Tab', action]);
+    console.log(this.state);
   }
 
   select = (index) => {
     this.setState({ menuSelectedIndex: index });
+    this.fireEvent(index);
   };
 
   handleToggle = () => this.setState({ leftMenuOpen: !this.state.leftMenuOpen });

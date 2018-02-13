@@ -21,6 +21,7 @@ export default class Network extends Component {
   }
 
   downloadCsv() {
+    _gaq.push(['_trackEvent', 'Full Report Download', 'CSV', 'Network Activity']);
     const fields = [
       {
         label: 'URL',

@@ -20,6 +20,7 @@ export default class DataLayers extends Component {
   }
 
   downloadJson() {
+    _gaq.push(['_trackEvent', 'Full Report Download', 'JSON', 'DataLayers']);
     const layersString = JSON.stringify(this.layers, null, 2);
     const layersB64 = new Buffer(layersString).toString('base64');
 

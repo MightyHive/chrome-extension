@@ -24,6 +24,7 @@ export default class Trackers extends Component {
   }
 
   downloadJson() {
+     _gaq.push(['_trackEvent', 'Full Report Download', 'JSON', 'Trackers']);
     const parsedTrackerData = downloadUtils.parseTrackers(this.trackers);
     const trackersString = JSON.stringify(parsedTrackerData, null, 2);
     const trackersB64 = new Buffer(trackersString).toString('base64');
@@ -38,6 +39,7 @@ export default class Trackers extends Component {
   }
 
   downloadCsv() {
+    _gaq.push(['_trackEvent', 'Full Report Download', 'CSV', 'Trackers']);
     const fields = [
       {
         label: 'Tracker ID',
