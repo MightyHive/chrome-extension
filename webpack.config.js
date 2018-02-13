@@ -16,6 +16,7 @@ module.exports = {
     optionsScript: './src/options/options.jsx',
     contentScript: './src/content-script/content-script.js',
     injectedScript: './src/injected-script/injected.js',
+    analytics: './src/analytics.js',
   },
   output: {
     publicPath: './',
@@ -59,6 +60,11 @@ module.exports = {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
+      },
+      {
+        test: /\.js?$/,
+        exclude: /(node_modules|bower_components|public\/)/,
+        loader: 'babel-loader',
       },
     ],
   },
