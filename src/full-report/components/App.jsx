@@ -44,6 +44,7 @@ export default class App extends Component {
             successfulLoad: true,
             loading: false,
           });
+          _gaq.push(['_setAccount', 'UA-37980828-6']);
         }
 
         if (message.error) {
@@ -60,6 +61,14 @@ export default class App extends Component {
         loading: false,
       });
     }
+  }
+
+  fireTabClick(name) {
+    _gaq.push(['_trackEvent', 'Full Report', 'Viewed Tab', name]);
+  }
+
+  fireTrackerClick(name) {
+    _gaq.push(['_trackEvent', 'Full Report', 'Clicked Tracker', name]);
   }
 
   render() {
@@ -98,22 +107,40 @@ export default class App extends Component {
         </div>
         <NavigationPath navigationPath={tab.navigationPath} />
         <Tabs className="dashboard">
-          <Tab label="Trackers" className="reportTab">
+          <Tab
+            label="Trackers"
+            className="reportTab"
+            onClick={
+              () => this.fireTabClick('Trackers')
+            }
+          >
             <Trackers
               trackers={tab.trackers}
               trackerCount={tab.trackerCount}
               network={tab.networkCalls}
             />
           </Tab>
-          <Tab label="Containers" className="reportTab">
+          <Tab
+            label="Containers"
+            className="reportTab"
+            onClick={() => this.fireTabClick('Containers')}
+          >
             <Containers
               containers={tab.containers}
             />
           </Tab>
-          <Tab label="Data Layers" className="reportTab">
+          <Tab
+            label="Data Layers"
+            className="reportTab"
+            onClick={() => this.fireTabClick('Data Layers')}
+          >
             <DataLayers layers={tab.dataLayers} />
           </Tab>
-          <Tab label="Network Activity" className="reportTab">
+          <Tab
+            label="Network Activity"
+            className="reportTab"
+            onClick={() => this.fireTabClick('Network Activity')}
+          >
             <Network
               currentURL={tab.currentURL}
               network={tab.networkCalls}
