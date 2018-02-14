@@ -67,8 +67,8 @@ export default class App extends Component {
     _gaq.push(['_trackEvent', 'Full Report', 'Viewed Tab', name]);
   }
 
-  fireTrackerClick(name) {
-    _gaq.push(['_trackEvent', 'Full Report', 'Clicked Tracker', name]);
+  fireTrackerClick(action, name) {
+    _gaq.push(['_trackEvent', 'Full Report', `Clicked ${action}`, name]);
   }
 
   render() {
@@ -118,6 +118,7 @@ export default class App extends Component {
               trackers={tab.trackers}
               trackerCount={tab.trackerCount}
               network={tab.networkCalls}
+              trackClick={this.fireTrackerClick}
             />
           </Tab>
           <Tab

@@ -5,7 +5,7 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { monokaiTheme } from '../../../config/theme.config';
 
-const TrackerCallDetails = ({ trackerCall }) => {
+const TrackerCallDetails = ({ trackerCall, trackClick }) => {
   const tracker = trackerCall.data;
   const query = trackerCall.parsedUrl.query;
   let querySection = '';
@@ -26,7 +26,13 @@ const TrackerCallDetails = ({ trackerCall }) => {
 
   if (tracker) {
     return (
-      <Grid fluid className="trackerCallDetails">
+      <Grid
+        fluid
+        className="trackerCallDetails"
+        onClick={
+          () => trackClick('Tracker Detail Item', null)
+        }
+      >
         <Row className="trackerMeta">
           <Col xs className="trackerMetaItem">
             <h5 className="trackerMetaTitle">Method:</h5>
@@ -54,6 +60,7 @@ const TrackerCallDetails = ({ trackerCall }) => {
 
 TrackerCallDetails.propTypes = {
   trackerCall: PropTypes.object.isRequired,
+  trackClick: PropTypes.func.isRequired,
 };
 
 export default TrackerCallDetails;

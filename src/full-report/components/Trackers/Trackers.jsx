@@ -14,6 +14,7 @@ export default class Trackers extends Component {
   static propTypes = {
     trackers: PropTypes.object.isRequired,
     trackerCount: PropTypes.number.isRequired,
+    trackClick: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -21,6 +22,7 @@ export default class Trackers extends Component {
     this.downloadJson = this.downloadJson.bind(this);
     this.downloadCsv = this.downloadCsv.bind(this);
     this.trackers = this.props.trackers;
+    this.trackClick = this.props.trackClick;
   }
 
   downloadJson() {
@@ -123,6 +125,7 @@ export default class Trackers extends Component {
           <TrackerList
             trackers={trackers}
             trackerCount={trackerCount}
+            trackClick={this.trackClick}
           />
         </Paper>
       </div>

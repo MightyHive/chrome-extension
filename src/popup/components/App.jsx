@@ -76,7 +76,6 @@ class App extends Component {
   }
 
   fireEvent(index) {
-    console.log('INSIDE FIRE EVENT');
     var action;
     switch (index) {
       case 0:
@@ -95,13 +94,10 @@ class App extends Component {
         break;
     }
     _gaq.push(['_trackEvent', 'Pop Up', 'Viewed Tab', action]);
-    console.log(this.state);
   }
 
   trackerFire(name) {
-    console.log(name);
     _gaq.push(['_trackEvent', 'Pop Up', 'Tracker Click', name]);
-    console.log(this.state);
   }
 
   select = (index) => {
