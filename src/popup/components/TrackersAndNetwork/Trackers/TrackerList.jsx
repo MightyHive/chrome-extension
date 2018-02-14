@@ -4,7 +4,7 @@ import List from 'material-ui/List';
 
 import TrackerListItem from './TrackerListItem';
 
-const TrackerList = ({ trackers, trackerCount }) => {
+const TrackerList = ({ trackers, trackerCount, trackerFire }) => {
   if (trackerCount > 0) {
     return (
       <div>
@@ -16,6 +16,7 @@ const TrackerList = ({ trackers, trackerCount }) => {
                 trackerCalls={trackerCalls}
                 trackerId={trackerId}
                 key={trackerId}
+                trackerFire={trackerFire}
               />
             );
           })}
@@ -38,6 +39,7 @@ const TrackerList = ({ trackers, trackerCount }) => {
 TrackerList.propTypes = {
   trackers: PropTypes.object.isRequired,
   trackerCount: PropTypes.number.isRequired,
+  trackerFire: PropTypes.func.isRequired,
 };
 
 export default TrackerList;

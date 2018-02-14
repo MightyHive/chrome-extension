@@ -6,8 +6,8 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import TrackerList from './Trackers/TrackerList';
 import Network from './Network/Network';
 
-const TrackersAndNetwork = ({ tab }) => {
-  const { trackers, trackerCount, networkCalls } = tab;
+const TrackersAndNetwork = ({ tab, trackerFire }) => {
+  const { trackers, trackerCount, networkCalls, fire } = tab;
 
   return (
     <div>
@@ -17,6 +17,7 @@ const TrackersAndNetwork = ({ tab }) => {
             <TrackerList
               trackers={trackers}
               trackerCount={trackerCount}
+              trackerFire={trackerFire}
             />
           </div>
         </Tab>
@@ -32,6 +33,7 @@ const TrackersAndNetwork = ({ tab }) => {
 
 TrackersAndNetwork.propTypes = {
   tab: PropTypes.object.isRequired,
+  trackerFire: PropTypes.func.isRequired,
 };
 
 export default TrackersAndNetwork;

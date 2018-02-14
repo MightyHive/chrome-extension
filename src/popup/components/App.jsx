@@ -52,6 +52,7 @@ class App extends Component {
             successfulLoad: true,
             loading: false,
           });
+          _gaq.push(['_setAccount', 'UA-37980828-6']);
         }
         if (message.error) {
           this.setState({
@@ -72,9 +73,10 @@ class App extends Component {
   openReport() {
     chrome.tabs.create({ url: `/full-report.html?id=${this.state.tab.tabId}` });
     _gaq.push(['_trackEvent', 'Pop Up', 'Full Report Click']);
-  };
+  }
 
   fireEvent(index) {
+    console.log('INSIDE FIRE EVENT');
     var action;
     switch (index) {
       case 0:
@@ -93,6 +95,12 @@ class App extends Component {
         break;
     }
     _gaq.push(['_trackEvent', 'Pop Up', 'Viewed Tab', action]);
+    console.log(this.state);
+  }
+
+  trackerFire(name) {
+    console.log(name);
+    _gaq.push(['_trackEvent', 'Pop Up', 'Tracker Click', name]);
     console.log(this.state);
   }
 
@@ -133,7 +141,7 @@ class App extends Component {
       // Experience 2
       <Containers tab={tab} />,
       // Experience 3
-      <TrackersAndNetwork tab={tab} />,
+      <TrackersAndNetwork tab={tab} trackerFire={this.trackerFire} />,
       // Experience 4
       <Help />,
     ];
