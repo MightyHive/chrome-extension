@@ -33,11 +33,13 @@ const TrackerListItem = ({ trackerId, trackerCalls, trackClick }) => {
                 </div>
               )}
               primaryTogglesNestedList
+              onClick={
+                () => trackClick('Tracker Detail Item', null)
+              }
               nestedItems={[(
                 <TrackerCallDetails
                   trackerCall={tracker}
                   key={`${tracker.data.requestId}-${tracker.data.timeStamp}-details`}
-                  trackClick={trackClick}
                 />
               )]}
               key={`${tracker.data.requestId}-${tracker.data.timeStamp}`}

@@ -135,7 +135,7 @@ export default class App extends Component {
             className="reportTab"
             onClick={() => this.fireTabClick('Data Layers')}
           >
-            <DataLayers layers={tab.dataLayers} />
+            <DataLayers layers={tab.dataLayers} trackClick={this.fireTrackerClick} />
           </Tab>
           <Tab
             label="Network Activity"
