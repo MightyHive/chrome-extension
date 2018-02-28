@@ -26,7 +26,7 @@ const TrackerCallDetails = ({ trackerCall }) => {
 
   if (tracker) {
     return (
-      <Grid fluid className="trackerCallDetails">
+      <Grid fluid className="trackerCallDetails" >
         <Row className="trackerMeta">
           <Col xs className="trackerMetaItem">
             <h5 className="trackerMetaTitle">Method:</h5>

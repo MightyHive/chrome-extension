@@ -5,7 +5,7 @@ import { ListItem } from 'material-ui/List';
 import NetworkCallConfig from '../../../config/network-call.config';
 import TrackerCallDetails from './TrackerCallDetails';
 
-const TrackerListItem = ({ trackerId, trackerCalls }) => {
+const TrackerListItem = ({ trackerId, trackerCalls, trackClick }) => {
   const trackerData = NetworkCallConfig.trackerData[trackerId];
 
   if (trackerData) {
@@ -17,6 +17,7 @@ const TrackerListItem = ({ trackerId, trackerCalls }) => {
           </div>
         )}
         primaryTogglesNestedList
+        onClick={() => trackClick('Tracker', trackerData.displayName)}
         nestedItems={[
           (trackerCalls.map(tracker => (
             <ListItem
@@ -32,6 +33,9 @@ const TrackerListItem = ({ trackerId, trackerCalls }) => {
                 </div>
               )}
               primaryTogglesNestedList
+              onClick={
+                () => trackClick('Tracker Detail Item', null)
+              }
               nestedItems={[(
                 <TrackerCallDetails
                   trackerCall={tracker}
@@ -51,6 +55,7 @@ const TrackerListItem = ({ trackerId, trackerCalls }) => {
 TrackerListItem.propTypes = {
   trackerCalls: PropTypes.array.isRequired,
   trackerId: PropTypes.string.isRequired,
+  trackClick: PropTypes.func.isRequired,
 };
 
 export default TrackerListItem;

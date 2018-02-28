@@ -25,6 +25,7 @@ import Help from './Help';
 
 import PopupMenuConfig from '../../config/popup-menu.config';
 
+
 class App extends Component {
   static propTypes = {
     activeTabConnection: PropTypes.func.isRequired,
@@ -51,8 +52,8 @@ class App extends Component {
             successfulLoad: true,
             loading: false,
           });
+          _gaq.push(['_setAccount', 'UA-37980828-6']);
         }
-
         if (message.error) {
           this.setState({
             successfulLoad: false,
@@ -71,9 +72,38 @@ class App extends Component {
 
   openReport() {
     chrome.tabs.create({ url: `/full-report.html?id=${this.state.tab.tabId}` });
+    _gaq.push(['_trackEvent', 'Pop Up', 'Full Report Click']);
   }
 
-  select = index => this.setState({ menuSelectedIndex: index });
+  fireEvent(index) {
+    var action;
+    switch (index) {
+      case 0:
+        action = 'Home';
+        break;
+      case 1:
+        action = 'Containers';
+        break;
+      case 2:
+        action = 'Trackers and Network';
+        break;
+      case 3:
+        action = 'Help';
+        break;
+      default:
+        break;
+    }
+    _gaq.push(['_trackEvent', 'Pop Up', 'Viewed Tab', action]);
+  }
+
+  trackerFire(name) {
+    _gaq.push(['_trackEvent', 'Pop Up', 'Tracker Click', name]);
+  }
+
+  select = (index) => {
+    this.setState({ menuSelectedIndex: index });
+    this.fireEvent(index);
+  };
 
   handleToggle = () => this.setState({ leftMenuOpen: !this.state.leftMenuOpen });
 
@@ -107,7 +137,7 @@ class App extends Component {
       // Experience 2
       <Containers tab={tab} />,
       // Experience 3
-      <TrackersAndNetwork tab={tab} />,
+      <TrackersAndNetwork tab={tab} trackerFire={this.trackerFire} />,
       // Experience 4
       <Help />,
     ];

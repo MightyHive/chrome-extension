@@ -11,15 +11,18 @@ import { monokaiTheme } from '../../../config/theme.config';
 export default class DataLayers extends Component {
   static propTypes = {
     layers: PropTypes.array.isRequired,
+    trackClick: PropTypes.func.isRequired,
   }
 
   constructor(props) {
     super(props);
     this.downloadJson = this.downloadJson.bind(this);
     this.layers = this.props.layers;
+    this.trackClick = this.props.trackClick;
   }
 
   downloadJson() {
+    _gaq.push(['_trackEvent', 'Full Report Download', 'JSON', 'DataLayers']);
     const layersString = JSON.stringify(this.layers, null, 2);
     const layersB64 = new Buffer(layersString).toString('base64');
 
@@ -52,7 +55,11 @@ export default class DataLayers extends Component {
       content = (
         <Paper zDepth={1} style={{ padding: '20px' }}>
           <DefaultLayers layers={defaultLayers} theme={monokaiTheme} />
-          <CustomLayers layers={userLayers} theme={monokaiTheme} />
+          <CustomLayers
+            layers={userLayers}
+            theme={monokaiTheme}
+            trackClick={this.trackClick}
+          />
           <div
             style={{
               textAlign: 'center',
@@ -60,7 +67,12 @@ export default class DataLayers extends Component {
             }}
           >
             <h3>Not finding a known data layer variable?</h3>
-            Track custom data layers by adding them <a href="#" onClick={() => chrome.runtime.openOptionsPage()}>in the options.</a>
+            Track custom data layers by adding them <a
+              href="#"
+              onClick={
+                () => { chrome.runtime.openOptionsPage(); this.trackClick('Custom dataLayer', null); }
+              }
+            >in the options.</a>
           </div>
         </Paper>
       );
@@ -74,7 +86,12 @@ export default class DataLayers extends Component {
             }}
           >
             <h3>No standard data layers found.</h3>
-            Track custom data layers by adding them <a href="#" onClick={() => chrome.runtime.openOptionsPage()}>in the options.</a>
+            Track custom data layers by adding them <a
+              href="#"
+              onClick={
+                () => { chrome.runtime.openOptionsPage(); this.trackClick('Custom dataLayer', null); }
+              }
+            >in the options.</a>
           </div>
         </Paper>
       );

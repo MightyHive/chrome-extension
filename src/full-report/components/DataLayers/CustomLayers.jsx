@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import JSONTree from 'react-json-tree';
 import FlatButton from 'material-ui/FlatButton';
 
-const CustomLayers = ({ layers, theme }) => {
+const CustomLayers = ({ layers, theme, trackClick }) => {
   if (layers.length > 0) {
     return (
       <div>
@@ -25,7 +25,9 @@ const CustomLayers = ({ layers, theme }) => {
           >
             <FlatButton
               label="Options"
-              onClick={() => chrome.runtime.openOptionsPage()}
+              onClick={
+                () => { chrome.runtime.openOptionsPage(); trackClick('Custom dataLayer', null); }
+              }
             />
           </div>
         </div>
@@ -52,6 +54,7 @@ const CustomLayers = ({ layers, theme }) => {
 CustomLayers.propTypes = {
   layers: PropTypes.array.isRequired,
   theme: PropTypes.object.isRequired,
+  trackClick: PropTypes.func.isRequired,
 };
 
 export default CustomLayers;
