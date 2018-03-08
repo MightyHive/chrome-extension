@@ -42,7 +42,7 @@ export default {
           }
 
           return {
-            displayName: version !== 'None' ? `Tealium Tag (${version})` : 'Tealium Tag',
+            displayName: version !== 'None' ? `Tealium Tag - v${version}` : 'Tealium Tag',
             data: {
               'Tealium Tag Version': version,
               Account: account,
@@ -55,4 +55,3 @@ export default {
     ],
   },
 };
-
