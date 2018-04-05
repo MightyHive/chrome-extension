@@ -3318,7 +3318,7 @@ export default {
         }],
         "doubleclick.net": [{
             "trackerId": "doubleclick",
-            "matches": ["**doubleclick.net/r/collect", "**doubleclick.net/*.js", "**doubleclick.net/*.gif", "**fls.doubleclick.net/**", "**ad.doublclick.net/**"]
+            "matches": ["**doubleclick.net/r/collect", "**doubleclick.net/*.js", "**doubleclick.net/*.gif", "**fls.doubleclick.net/**", "**ad.doubleclick.net/**"]
         }],
         "facebook.com": [{
             "trackerId": "facebook",
