@@ -32,7 +32,7 @@ Due to the isolated runtime design of Chrome's extensions, there are multiple se
 
 ## Setup
 **Requirements:**
- - NodeJS `v4.4.3`.
+ - NodeJS `v8.17.0`.
    - `nvm` users can automatically switch to the correct version by running `$ nvm use`.
 
 **Recommended:**
