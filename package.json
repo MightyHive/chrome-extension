@@ -6,7 +6,7 @@
   "dependencies": {
     "circular-json": "^0.4.0",
     "deep-equal": "^1.0.1",
-    "json2csv": "^3.11.1",
+    "json2csv": "^5.0.7",
     "material-ui": "^0.20.0",
     "material-ui-chip-input": "^0.17.2",
     "minimatch": "^3.0.4",
